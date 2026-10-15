@@ -1,0 +1,29 @@
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #233c32;
+  background: #e8e9df;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --green-950: #112d24;
+  --green-900: #17382d;
+  --green-800: #254b3b;
+  --green-600: #447059;
+  --gold: #d4b56c;
+  --paper: #f5f4ec;
+  --panel: #fcfbf5;
+  --line: #d6d9cb;
+  --muted: #68766b;
+  --ink: #233c32;
+}
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 360px; }
+button, input, select { font: inherit; }
+button, select { cursor: pointer; }
+button { color: inherit; }
+button:disabled { cursor: not-allowed; }
+button, a, input, select { -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 3px solid #bc8f30; outline-offset: 3px; }
+a { color: #315e45; }
+button { touch-action: manipulation; }
+::selection { background: #d5dfc3; color: #17382d; }

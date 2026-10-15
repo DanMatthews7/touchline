@@ -1,0 +1,1316 @@
+{
+  "schemaVersion": 1,
+  "id": "openfootball-reference-2026-10-15-v1",
+  "name": "Openfootball identity reference",
+  "season": "2026/27",
+  "createdAt": "2026-10-15T14:59:37.487Z",
+  "sources": [
+    {
+      "sourceId": "openfootball-players",
+      "sourceName": "openfootball/players",
+      "url": "https://github.com/openfootball/players",
+      "accessedAt": "2026-10-15T14:59:37.487Z",
+      "sourceDate": null,
+      "externalId": null,
+      "license": {
+        "name": "CC0-1.0",
+        "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/LICENSE.md",
+        "usageRestrictions": []
+      }
+    },
+    {
+      "sourceId": "openfootball-clubs",
+      "sourceName": "openfootball/clubs",
+      "url": "https://github.com/openfootball/clubs",
+      "accessedAt": "2026-10-15T14:59:37.487Z",
+      "sourceDate": null,
+      "externalId": null,
+      "license": {
+        "name": "CC0-1.0",
+        "url": "https://github.com/openfootball/clubs/blob/ae3800227c449447b3a337fc0aac79a8f02f4c8b/LICENSE.md",
+        "usageRestrictions": []
+      }
+    }
+  ],
+  "players": [
+    {
+      "id": "player-bukayo-saka",
+      "name": "Bukayo Saka",
+      "dateOfBirth": "2001-09-05",
+      "nationality": [],
+      "positions": [],
+      "preferredFoot": "unknown",
+      "clubId": null,
+      "attributes": {
+        "technical": {
+          "corners": null,
+          "crossing": null,
+          "dribbling": null,
+          "finishing": null,
+          "firstTouch": null,
+          "freeKicks": null,
+          "heading": null,
+          "longShots": null,
+          "longThrows": null,
+          "marking": null,
+          "passing": null,
+          "penalties": null,
+          "tackling": null,
+          "technique": null
+        },
+        "mental": {
+          "aggression": null,
+          "anticipation": null,
+          "bravery": null,
+          "composure": null,
+          "concentration": null,
+          "decisions": null,
+          "determination": null,
+          "flair": null,
+          "leadership": null,
+          "offTheBall": null,
+          "positioning": null,
+          "teamwork": null,
+          "vision": null,
+          "workRate": null
+        },
+        "physical": {
+          "acceleration": null,
+          "agility": null,
+          "balance": null,
+          "jumpingReach": null,
+          "naturalFitness": null,
+          "pace": null,
+          "stamina": null,
+          "strength": null
+        },
+        "goalkeeping": {
+          "aerialReach": null,
+          "commandOfArea": null,
+          "communication": null,
+          "handling": null,
+          "kicking": null,
+          "oneOnOnes": null,
+          "reflexes": null,
+          "rushingOut": null,
+          "throwing": null
+        }
+      },
+      "attributeAssessments": {},
+      "hidden": {
+        "personality": {},
+        "currentDevelopmentLevel": null,
+        "potential": null
+      },
+      "dataStatus": {
+        "validation": "needs-review",
+        "completeness": "partial",
+        "notes": [
+          "Archival source identity, not a verified 2026/27 player record.",
+          "Source country group: England; citizenship has not been verified.",
+          "Broad source position: M (G=goalkeeper, D=defender, M=midfielder, F=forward). Only G maps directly to a detailed game position.",
+          "No current club assignment, detailed positional familiarity or game ratings inferred."
+        ]
+      },
+      "provenance": [
+        {
+          "sourceId": "openfootball-players",
+          "sourceName": "openfootball/players",
+          "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L1490",
+          "accessedAt": "2026-10-15T14:59:37.487Z",
+          "sourceDate": null,
+          "externalId": "europe/england/eng.players.txt#L1490",
+          "license": {
+            "name": "CC0-1.0",
+            "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/LICENSE.md",
+            "usageRestrictions": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "player-harry-kane",
+      "name": "Harry Kane",
+      "dateOfBirth": "1993-07-28",
+      "nationality": [],
+      "positions": [],
+      "preferredFoot": "unknown",
+      "clubId": null,
+      "attributes": {
+        "technical": {
+          "corners": null,
+          "crossing": null,
+          "dribbling": null,
+          "finishing": null,
+          "firstTouch": null,
+          "freeKicks": null,
+          "heading": null,
+          "longShots": null,
+          "longThrows": null,
+          "marking": null,
+          "passing": null,
+          "penalties": null,
+          "tackling": null,
+          "technique": null
+        },
+        "mental": {
+          "aggression": null,
+          "anticipation": null,
+          "bravery": null,
+          "composure": null,
+          "concentration": null,
+          "decisions": null,
+          "determination": null,
+          "flair": null,
+          "leadership": null,
+          "offTheBall": null,
+          "positioning": null,
+          "teamwork": null,
+          "vision": null,
+          "workRate": null
+        },
+        "physical": {
+          "acceleration": null,
+          "agility": null,
+          "balance": null,
+          "jumpingReach": null,
+          "naturalFitness": null,
+          "pace": null,
+          "stamina": null,
+          "strength": null
+        },
+        "goalkeeping": {
+          "aerialReach": null,
+          "commandOfArea": null,
+          "communication": null,
+          "handling": null,
+          "kicking": null,
+          "oneOnOnes": null,
+          "reflexes": null,
+          "rushingOut": null,
+          "throwing": null
+        }
+      },
+      "attributeAssessments": {},
+      "hidden": {
+        "personality": {},
+        "currentDevelopmentLevel": null,
+        "potential": null
+      },
+      "dataStatus": {
+        "validation": "needs-review",
+        "completeness": "partial",
+        "notes": [
+          "Archival source identity, not a verified 2026/27 player record.",
+          "Source country group: England; citizenship has not been verified.",
+          "Broad source position: F (G=goalkeeper, D=defender, M=midfielder, F=forward). Only G maps directly to a detailed game position.",
+          "No current club assignment, detailed positional familiarity or game ratings inferred."
+        ]
+      },
+      "provenance": [
+        {
+          "sourceId": "openfootball-players",
+          "sourceName": "openfootball/players",
+          "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2992",
+          "accessedAt": "2026-10-15T14:59:37.487Z",
+          "sourceDate": null,
+          "externalId": "europe/england/eng.players.txt#L2992",
+          "license": {
+            "name": "CC0-1.0",
+            "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/LICENSE.md",
+            "usageRestrictions": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "player-declan-rice",
+      "name": "Declan Rice",
+      "dateOfBirth": "1999-01-14",
+      "nationality": [],
+      "positions": [],
+      "preferredFoot": "unknown",
+      "clubId": null,
+      "attributes": {
+        "technical": {
+          "corners": null,
+          "crossing": null,
+          "dribbling": null,
+          "finishing": null,
+          "firstTouch": null,
+          "freeKicks": null,
+          "heading": null,
+          "longShots": null,
+          "longThrows": null,
+          "marking": null,
+          "passing": null,
+          "penalties": null,
+          "tackling": null,
+          "technique": null
+        },
+        "mental": {
+          "aggression": null,
+          "anticipation": null,
+          "bravery": null,
+          "composure": null,
+          "concentration": null,
+          "decisions": null,
+          "determination": null,
+          "flair": null,
+          "leadership": null,
+          "offTheBall": null,
+          "positioning": null,
+          "teamwork": null,
+          "vision": null,
+          "workRate": null
+        },
+        "physical": {
+          "acceleration": null,
+          "agility": null,
+          "balance": null,
+          "jumpingReach": null,
+          "naturalFitness": null,
+          "pace": null,
+          "stamina": null,
+          "strength": null
+        },
+        "goalkeeping": {
+          "aerialReach": null,
+          "commandOfArea": null,
+          "communication": null,
+          "handling": null,
+          "kicking": null,
+          "oneOnOnes": null,
+          "reflexes": null,
+          "rushingOut": null,
+          "throwing": null
+        }
+      },
+      "attributeAssessments": {},
+      "hidden": {
+        "personality": {},
+        "currentDevelopmentLevel": null,
+        "potential": null
+      },
+      "dataStatus": {
+        "validation": "needs-review",
+        "completeness": "partial",
+        "notes": [
+          "Archival source identity, not a verified 2026/27 player record.",
+          "Source country group: England; citizenship has not been verified.",
+          "Broad source position: M (G=goalkeeper, D=defender, M=midfielder, F=forward). Only G maps directly to a detailed game position.",
+          "No current club assignment, detailed positional familiarity or game ratings inferred."
+        ]
+      },
+      "provenance": [
+        {
+          "sourceId": "openfootball-players",
+          "sourceName": "openfootball/players",
+          "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2120",
+          "accessedAt": "2026-10-15T14:59:37.487Z",
+          "sourceDate": null,
+          "externalId": "europe/england/eng.players.txt#L2120",
+          "license": {
+            "name": "CC0-1.0",
+            "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/LICENSE.md",
+            "usageRestrictions": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "player-jude-bellingham",
+      "name": "Jude Bellingham",
+      "dateOfBirth": "2003-06-29",
+      "nationality": [],
+      "positions": [],
+      "preferredFoot": "unknown",
+      "clubId": null,
+      "attributes": {
+        "technical": {
+          "corners": null,
+          "crossing": null,
+          "dribbling": null,
+          "finishing": null,
+          "firstTouch": null,
+          "freeKicks": null,
+          "heading": null,
+          "longShots": null,
+          "longThrows": null,
+          "marking": null,
+          "passing": null,
+          "penalties": null,
+          "tackling": null,
+          "technique": null
+        },
+        "mental": {
+          "aggression": null,
+          "anticipation": null,
+          "bravery": null,
+          "composure": null,
+          "concentration": null,
+          "decisions": null,
+          "determination": null,
+          "flair": null,
+          "leadership": null,
+          "offTheBall": null,
+          "positioning": null,
+          "teamwork": null,
+          "vision": null,
+          "workRate": null
+        },
+        "physical": {
+          "acceleration": null,
+          "agility": null,
+          "balance": null,
+          "jumpingReach": null,
+          "naturalFitness": null,
+          "pace": null,
+          "stamina": null,
+          "strength": null
+        },
+        "goalkeeping": {
+          "aerialReach": null,
+          "commandOfArea": null,
+          "communication": null,
+          "handling": null,
+          "kicking": null,
+          "oneOnOnes": null,
+          "reflexes": null,
+          "rushingOut": null,
+          "throwing": null
+        }
+      },
+      "attributeAssessments": {},
+      "hidden": {
+        "personality": {},
+        "currentDevelopmentLevel": null,
+        "potential": null
+      },
+      "dataStatus": {
+        "validation": "needs-review",
+        "completeness": "partial",
+        "notes": [
+          "Archival source identity, not a verified 2026/27 player record.",
+          "Source country group: England; citizenship has not been verified.",
+          "Broad source position: M (G=goalkeeper, D=defender, M=midfielder, F=forward). Only G maps directly to a detailed game position.",
+          "No current club assignment, detailed positional familiarity or game ratings inferred."
+        ]
+      },
+      "provenance": [
+        {
+          "sourceId": "openfootball-players",
+          "sourceName": "openfootball/players",
+          "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L901",
+          "accessedAt": "2026-10-15T14:59:37.487Z",
+          "sourceDate": null,
+          "externalId": "europe/england/eng.players.txt#L901",
+          "license": {
+            "name": "CC0-1.0",
+            "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/LICENSE.md",
+            "usageRestrictions": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "player-john-stones",
+      "name": "John Stones",
+      "dateOfBirth": "1994-05-28",
+      "nationality": [],
+      "positions": [],
+      "preferredFoot": "unknown",
+      "clubId": null,
+      "attributes": {
+        "technical": {
+          "corners": null,
+          "crossing": null,
+          "dribbling": null,
+          "finishing": null,
+          "firstTouch": null,
+          "freeKicks": null,
+          "heading": null,
+          "longShots": null,
+          "longThrows": null,
+          "marking": null,
+          "passing": null,
+          "penalties": null,
+          "tackling": null,
+          "technique": null
+        },
+        "mental": {
+          "aggression": null,
+          "anticipation": null,
+          "bravery": null,
+          "composure": null,
+          "concentration": null,
+          "decisions": null,
+          "determination": null,
+          "flair": null,
+          "leadership": null,
+          "offTheBall": null,
+          "positioning": null,
+          "teamwork": null,
+          "vision": null,
+          "workRate": null
+        },
+        "physical": {
+          "acceleration": null,
+          "agility": null,
+          "balance": null,
+          "jumpingReach": null,
+          "naturalFitness": null,
+          "pace": null,
+          "stamina": null,
+          "strength": null
+        },
+        "goalkeeping": {
+          "aerialReach": null,
+          "commandOfArea": null,
+          "communication": null,
+          "handling": null,
+          "kicking": null,
+          "oneOnOnes": null,
+          "reflexes": null,
+          "rushingOut": null,
+          "throwing": null
+        }
+      },
+      "attributeAssessments": {},
+      "hidden": {
+        "personality": {},
+        "currentDevelopmentLevel": null,
+        "potential": null
+      },
+      "dataStatus": {
+        "validation": "needs-review",
+        "completeness": "partial",
+        "notes": [
+          "Archival source identity, not a verified 2026/27 player record.",
+          "Source country group: England; citizenship has not been verified.",
+          "Broad source position: D (G=goalkeeper, D=defender, M=midfielder, F=forward). Only G maps directly to a detailed game position.",
+          "No current club assignment, detailed positional familiarity or game ratings inferred."
+        ]
+      },
+      "provenance": [
+        {
+          "sourceId": "openfootball-players",
+          "sourceName": "openfootball/players",
+          "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2897",
+          "accessedAt": "2026-10-15T14:59:37.487Z",
+          "sourceDate": null,
+          "externalId": "europe/england/eng.players.txt#L2897",
+          "license": {
+            "name": "CC0-1.0",
+            "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/LICENSE.md",
+            "usageRestrictions": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "player-jordan-pickford",
+      "name": "Jordan Pickford",
+      "dateOfBirth": "1994-03-07",
+      "nationality": [],
+      "positions": [
+        "GK"
+      ],
+      "preferredFoot": "unknown",
+      "clubId": null,
+      "attributes": {
+        "technical": {
+          "corners": null,
+          "crossing": null,
+          "dribbling": null,
+          "finishing": null,
+          "firstTouch": null,
+          "freeKicks": null,
+          "heading": null,
+          "longShots": null,
+          "longThrows": null,
+          "marking": null,
+          "passing": null,
+          "penalties": null,
+          "tackling": null,
+          "technique": null
+        },
+        "mental": {
+          "aggression": null,
+          "anticipation": null,
+          "bravery": null,
+          "composure": null,
+          "concentration": null,
+          "decisions": null,
+          "determination": null,
+          "flair": null,
+          "leadership": null,
+          "offTheBall": null,
+          "positioning": null,
+          "teamwork": null,
+          "vision": null,
+          "workRate": null
+        },
+        "physical": {
+          "acceleration": null,
+          "agility": null,
+          "balance": null,
+          "jumpingReach": null,
+          "naturalFitness": null,
+          "pace": null,
+          "stamina": null,
+          "strength": null
+        },
+        "goalkeeping": {
+          "aerialReach": null,
+          "commandOfArea": null,
+          "communication": null,
+          "handling": null,
+          "kicking": null,
+          "oneOnOnes": null,
+          "reflexes": null,
+          "rushingOut": null,
+          "throwing": null
+        }
+      },
+      "attributeAssessments": {},
+      "hidden": {
+        "personality": {},
+        "currentDevelopmentLevel": null,
+        "potential": null
+      },
+      "dataStatus": {
+        "validation": "needs-review",
+        "completeness": "partial",
+        "notes": [
+          "Archival source identity, not a verified 2026/27 player record.",
+          "Source country group: England; citizenship has not been verified.",
+          "Broad source position: G (G=goalkeeper, D=defender, M=midfielder, F=forward). Only G maps directly to a detailed game position.",
+          "No current club assignment, detailed positional familiarity or game ratings inferred."
+        ]
+      },
+      "provenance": [
+        {
+          "sourceId": "openfootball-players",
+          "sourceName": "openfootball/players",
+          "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2916",
+          "accessedAt": "2026-10-15T14:59:37.487Z",
+          "sourceDate": null,
+          "externalId": "europe/england/eng.players.txt#L2916",
+          "license": {
+            "name": "CC0-1.0",
+            "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/LICENSE.md",
+            "usageRestrictions": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "player-kylian-mbappe",
+      "name": "Kylian Mbappé",
+      "dateOfBirth": "1998-12-20",
+      "nationality": [],
+      "positions": [],
+      "preferredFoot": "unknown",
+      "clubId": null,
+      "attributes": {
+        "technical": {
+          "corners": null,
+          "crossing": null,
+          "dribbling": null,
+          "finishing": null,
+          "firstTouch": null,
+          "freeKicks": null,
+          "heading": null,
+          "longShots": null,
+          "longThrows": null,
+          "marking": null,
+          "passing": null,
+          "penalties": null,
+          "tackling": null,
+          "technique": null
+        },
+        "mental": {
+          "aggression": null,
+          "anticipation": null,
+          "bravery": null,
+          "composure": null,
+          "concentration": null,
+          "decisions": null,
+          "determination": null,
+          "flair": null,
+          "leadership": null,
+          "offTheBall": null,
+          "positioning": null,
+          "teamwork": null,
+          "vision": null,
+          "workRate": null
+        },
+        "physical": {
+          "acceleration": null,
+          "agility": null,
+          "balance": null,
+          "jumpingReach": null,
+          "naturalFitness": null,
+          "pace": null,
+          "stamina": null,
+          "strength": null
+        },
+        "goalkeeping": {
+          "aerialReach": null,
+          "commandOfArea": null,
+          "communication": null,
+          "handling": null,
+          "kicking": null,
+          "oneOnOnes": null,
+          "reflexes": null,
+          "rushingOut": null,
+          "throwing": null
+        }
+      },
+      "attributeAssessments": {},
+      "hidden": {
+        "personality": {},
+        "currentDevelopmentLevel": null,
+        "potential": null
+      },
+      "dataStatus": {
+        "validation": "needs-review",
+        "completeness": "partial",
+        "notes": [
+          "Archival source identity, not a verified 2026/27 player record.",
+          "Source country group: France; citizenship has not been verified.",
+          "Broad source position: F (G=goalkeeper, D=defender, M=midfielder, F=forward). Only G maps directly to a detailed game position.",
+          "No current club assignment, detailed positional familiarity or game ratings inferred."
+        ]
+      },
+      "provenance": [
+        {
+          "sourceId": "openfootball-players",
+          "sourceName": "openfootball/players",
+          "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L863",
+          "accessedAt": "2026-10-15T14:59:37.487Z",
+          "sourceDate": null,
+          "externalId": "europe/france/fr.players.txt#L863",
+          "license": {
+            "name": "CC0-1.0",
+            "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/LICENSE.md",
+            "usageRestrictions": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "player-william-saliba",
+      "name": "William Saliba",
+      "dateOfBirth": "2001-03-24",
+      "nationality": [],
+      "positions": [],
+      "preferredFoot": "unknown",
+      "clubId": null,
+      "attributes": {
+        "technical": {
+          "corners": null,
+          "crossing": null,
+          "dribbling": null,
+          "finishing": null,
+          "firstTouch": null,
+          "freeKicks": null,
+          "heading": null,
+          "longShots": null,
+          "longThrows": null,
+          "marking": null,
+          "passing": null,
+          "penalties": null,
+          "tackling": null,
+          "technique": null
+        },
+        "mental": {
+          "aggression": null,
+          "anticipation": null,
+          "bravery": null,
+          "composure": null,
+          "concentration": null,
+          "decisions": null,
+          "determination": null,
+          "flair": null,
+          "leadership": null,
+          "offTheBall": null,
+          "positioning": null,
+          "teamwork": null,
+          "vision": null,
+          "workRate": null
+        },
+        "physical": {
+          "acceleration": null,
+          "agility": null,
+          "balance": null,
+          "jumpingReach": null,
+          "naturalFitness": null,
+          "pace": null,
+          "stamina": null,
+          "strength": null
+        },
+        "goalkeeping": {
+          "aerialReach": null,
+          "commandOfArea": null,
+          "communication": null,
+          "handling": null,
+          "kicking": null,
+          "oneOnOnes": null,
+          "reflexes": null,
+          "rushingOut": null,
+          "throwing": null
+        }
+      },
+      "attributeAssessments": {},
+      "hidden": {
+        "personality": {},
+        "currentDevelopmentLevel": null,
+        "potential": null
+      },
+      "dataStatus": {
+        "validation": "needs-review",
+        "completeness": "partial",
+        "notes": [
+          "Archival source identity, not a verified 2026/27 player record.",
+          "Source country group: France; citizenship has not been verified.",
+          "Broad source position: D (G=goalkeeper, D=defender, M=midfielder, F=forward). Only G maps directly to a detailed game position.",
+          "No current club assignment, detailed positional familiarity or game ratings inferred."
+        ]
+      },
+      "provenance": [
+        {
+          "sourceId": "openfootball-players",
+          "sourceName": "openfootball/players",
+          "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L530",
+          "accessedAt": "2026-10-15T14:59:37.487Z",
+          "sourceDate": null,
+          "externalId": "europe/france/fr.players.txt#L530",
+          "license": {
+            "name": "CC0-1.0",
+            "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/LICENSE.md",
+            "usageRestrictions": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "player-eduardo-camavinga",
+      "name": "Eduardo Camavinga",
+      "dateOfBirth": "2002-11-10",
+      "nationality": [],
+      "positions": [],
+      "preferredFoot": "unknown",
+      "clubId": null,
+      "attributes": {
+        "technical": {
+          "corners": null,
+          "crossing": null,
+          "dribbling": null,
+          "finishing": null,
+          "firstTouch": null,
+          "freeKicks": null,
+          "heading": null,
+          "longShots": null,
+          "longThrows": null,
+          "marking": null,
+          "passing": null,
+          "penalties": null,
+          "tackling": null,
+          "technique": null
+        },
+        "mental": {
+          "aggression": null,
+          "anticipation": null,
+          "bravery": null,
+          "composure": null,
+          "concentration": null,
+          "decisions": null,
+          "determination": null,
+          "flair": null,
+          "leadership": null,
+          "offTheBall": null,
+          "positioning": null,
+          "teamwork": null,
+          "vision": null,
+          "workRate": null
+        },
+        "physical": {
+          "acceleration": null,
+          "agility": null,
+          "balance": null,
+          "jumpingReach": null,
+          "naturalFitness": null,
+          "pace": null,
+          "stamina": null,
+          "strength": null
+        },
+        "goalkeeping": {
+          "aerialReach": null,
+          "commandOfArea": null,
+          "communication": null,
+          "handling": null,
+          "kicking": null,
+          "oneOnOnes": null,
+          "reflexes": null,
+          "rushingOut": null,
+          "throwing": null
+        }
+      },
+      "attributeAssessments": {},
+      "hidden": {
+        "personality": {},
+        "currentDevelopmentLevel": null,
+        "potential": null
+      },
+      "dataStatus": {
+        "validation": "needs-review",
+        "completeness": "partial",
+        "notes": [
+          "Archival source identity, not a verified 2026/27 player record.",
+          "Source country group: France; citizenship has not been verified.",
+          "Broad source position: M (G=goalkeeper, D=defender, M=midfielder, F=forward). Only G maps directly to a detailed game position.",
+          "No current club assignment, detailed positional familiarity or game ratings inferred."
+        ]
+      },
+      "provenance": [
+        {
+          "sourceId": "openfootball-players",
+          "sourceName": "openfootball/players",
+          "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L309",
+          "accessedAt": "2026-10-15T14:59:37.487Z",
+          "sourceDate": null,
+          "externalId": "europe/france/fr.players.txt#L309",
+          "license": {
+            "name": "CC0-1.0",
+            "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/LICENSE.md",
+            "usageRestrictions": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "player-antoine-griezmann",
+      "name": "Antoine Griezmann",
+      "dateOfBirth": "1991-03-21",
+      "nationality": [],
+      "positions": [],
+      "preferredFoot": "unknown",
+      "clubId": null,
+      "attributes": {
+        "technical": {
+          "corners": null,
+          "crossing": null,
+          "dribbling": null,
+          "finishing": null,
+          "firstTouch": null,
+          "freeKicks": null,
+          "heading": null,
+          "longShots": null,
+          "longThrows": null,
+          "marking": null,
+          "passing": null,
+          "penalties": null,
+          "tackling": null,
+          "technique": null
+        },
+        "mental": {
+          "aggression": null,
+          "anticipation": null,
+          "bravery": null,
+          "composure": null,
+          "concentration": null,
+          "decisions": null,
+          "determination": null,
+          "flair": null,
+          "leadership": null,
+          "offTheBall": null,
+          "positioning": null,
+          "teamwork": null,
+          "vision": null,
+          "workRate": null
+        },
+        "physical": {
+          "acceleration": null,
+          "agility": null,
+          "balance": null,
+          "jumpingReach": null,
+          "naturalFitness": null,
+          "pace": null,
+          "stamina": null,
+          "strength": null
+        },
+        "goalkeeping": {
+          "aerialReach": null,
+          "commandOfArea": null,
+          "communication": null,
+          "handling": null,
+          "kicking": null,
+          "oneOnOnes": null,
+          "reflexes": null,
+          "rushingOut": null,
+          "throwing": null
+        }
+      },
+      "attributeAssessments": {},
+      "hidden": {
+        "personality": {},
+        "currentDevelopmentLevel": null,
+        "potential": null
+      },
+      "dataStatus": {
+        "validation": "needs-review",
+        "completeness": "partial",
+        "notes": [
+          "Archival source identity, not a verified 2026/27 player record.",
+          "Source country group: France; citizenship has not been verified.",
+          "Broad source position: F (G=goalkeeper, D=defender, M=midfielder, F=forward). Only G maps directly to a detailed game position.",
+          "No current club assignment, detailed positional familiarity or game ratings inferred."
+        ]
+      },
+      "provenance": [
+        {
+          "sourceId": "openfootball-players",
+          "sourceName": "openfootball/players",
+          "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L1563",
+          "accessedAt": "2026-10-15T14:59:37.487Z",
+          "sourceDate": null,
+          "externalId": "europe/france/fr.players.txt#L1563",
+          "license": {
+            "name": "CC0-1.0",
+            "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/LICENSE.md",
+            "usageRestrictions": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "player-mohamed-salah",
+      "name": "Mohamed Salah",
+      "dateOfBirth": "1992-06-15",
+      "nationality": [],
+      "positions": [],
+      "preferredFoot": "unknown",
+      "clubId": null,
+      "attributes": {
+        "technical": {
+          "corners": null,
+          "crossing": null,
+          "dribbling": null,
+          "finishing": null,
+          "firstTouch": null,
+          "freeKicks": null,
+          "heading": null,
+          "longShots": null,
+          "longThrows": null,
+          "marking": null,
+          "passing": null,
+          "penalties": null,
+          "tackling": null,
+          "technique": null
+        },
+        "mental": {
+          "aggression": null,
+          "anticipation": null,
+          "bravery": null,
+          "composure": null,
+          "concentration": null,
+          "decisions": null,
+          "determination": null,
+          "flair": null,
+          "leadership": null,
+          "offTheBall": null,
+          "positioning": null,
+          "teamwork": null,
+          "vision": null,
+          "workRate": null
+        },
+        "physical": {
+          "acceleration": null,
+          "agility": null,
+          "balance": null,
+          "jumpingReach": null,
+          "naturalFitness": null,
+          "pace": null,
+          "stamina": null,
+          "strength": null
+        },
+        "goalkeeping": {
+          "aerialReach": null,
+          "commandOfArea": null,
+          "communication": null,
+          "handling": null,
+          "kicking": null,
+          "oneOnOnes": null,
+          "reflexes": null,
+          "rushingOut": null,
+          "throwing": null
+        }
+      },
+      "attributeAssessments": {},
+      "hidden": {
+        "personality": {},
+        "currentDevelopmentLevel": null,
+        "potential": null
+      },
+      "dataStatus": {
+        "validation": "needs-review",
+        "completeness": "partial",
+        "notes": [
+          "Archival source identity, not a verified 2026/27 player record.",
+          "Source country group: Egypt; citizenship has not been verified.",
+          "Broad source position: M, F (G=goalkeeper, D=defender, M=midfielder, F=forward). Only G maps directly to a detailed game position.",
+          "No current club assignment, detailed positional familiarity or game ratings inferred."
+        ]
+      },
+      "provenance": [
+        {
+          "sourceId": "openfootball-players",
+          "sourceName": "openfootball/players",
+          "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/africa/egypt/eg.players.txt#L54",
+          "accessedAt": "2026-10-15T14:59:37.487Z",
+          "sourceDate": null,
+          "externalId": "africa/egypt/eg.players.txt#L54",
+          "license": {
+            "name": "CC0-1.0",
+            "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/LICENSE.md",
+            "usageRestrictions": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "player-son-heung-min",
+      "name": "Son Heung-Min",
+      "dateOfBirth": "1992-07-08",
+      "nationality": [],
+      "positions": [],
+      "preferredFoot": "unknown",
+      "clubId": null,
+      "attributes": {
+        "technical": {
+          "corners": null,
+          "crossing": null,
+          "dribbling": null,
+          "finishing": null,
+          "firstTouch": null,
+          "freeKicks": null,
+          "heading": null,
+          "longShots": null,
+          "longThrows": null,
+          "marking": null,
+          "passing": null,
+          "penalties": null,
+          "tackling": null,
+          "technique": null
+        },
+        "mental": {
+          "aggression": null,
+          "anticipation": null,
+          "bravery": null,
+          "composure": null,
+          "concentration": null,
+          "decisions": null,
+          "determination": null,
+          "flair": null,
+          "leadership": null,
+          "offTheBall": null,
+          "positioning": null,
+          "teamwork": null,
+          "vision": null,
+          "workRate": null
+        },
+        "physical": {
+          "acceleration": null,
+          "agility": null,
+          "balance": null,
+          "jumpingReach": null,
+          "naturalFitness": null,
+          "pace": null,
+          "stamina": null,
+          "strength": null
+        },
+        "goalkeeping": {
+          "aerialReach": null,
+          "commandOfArea": null,
+          "communication": null,
+          "handling": null,
+          "kicking": null,
+          "oneOnOnes": null,
+          "reflexes": null,
+          "rushingOut": null,
+          "throwing": null
+        }
+      },
+      "attributeAssessments": {},
+      "hidden": {
+        "personality": {},
+        "currentDevelopmentLevel": null,
+        "potential": null
+      },
+      "dataStatus": {
+        "validation": "needs-review",
+        "completeness": "partial",
+        "notes": [
+          "Archival source identity, not a verified 2026/27 player record.",
+          "Source country group: South Korea; citizenship has not been verified.",
+          "Broad source position: F (G=goalkeeper, D=defender, M=midfielder, F=forward). Only G maps directly to a detailed game position.",
+          "No current club assignment, detailed positional familiarity or game ratings inferred."
+        ]
+      },
+      "provenance": [
+        {
+          "sourceId": "openfootball-players",
+          "sourceName": "openfootball/players",
+          "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/asia/south-korea/kr.players.txt#L67",
+          "accessedAt": "2026-10-15T14:59:37.487Z",
+          "sourceDate": null,
+          "externalId": "asia/south-korea/kr.players.txt#L67",
+          "license": {
+            "name": "CC0-1.0",
+            "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/LICENSE.md",
+            "usageRestrictions": []
+          }
+        }
+      ]
+    }
+  ],
+  "clubs": [
+    {
+      "id": "club-arsenal-fc",
+      "name": "Arsenal FC",
+      "shortName": "Arsenal",
+      "country": "England",
+      "stadium": null,
+      "primaryColor": null,
+      "finances": null,
+      "dataStatus": {
+        "validation": "needs-review",
+        "completeness": "partial",
+        "notes": [
+          "Sourced reference identity only; no verified 2026/27 roster, competition or financial data."
+        ]
+      },
+      "provenance": [
+        {
+          "sourceId": "openfootball-clubs",
+          "sourceName": "openfootball/clubs",
+          "url": "https://github.com/openfootball/clubs/blob/ae3800227c449447b3a337fc0aac79a8f02f4c8b/europe/england/eng.clubs.txt#L8",
+          "accessedAt": "2026-10-15T14:59:37.487Z",
+          "sourceDate": null,
+          "externalId": "europe/england/eng.clubs.txt#L8",
+          "license": {
+            "name": "CC0-1.0",
+            "url": "https://github.com/openfootball/clubs/blob/ae3800227c449447b3a337fc0aac79a8f02f4c8b/LICENSE.md",
+            "usageRestrictions": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "club-chelsea-fc",
+      "name": "Chelsea FC",
+      "shortName": "Chelsea",
+      "country": "England",
+      "stadium": null,
+      "primaryColor": null,
+      "finances": null,
+      "dataStatus": {
+        "validation": "needs-review",
+        "completeness": "partial",
+        "notes": [
+          "Sourced reference identity only; no verified 2026/27 roster, competition or financial data."
+        ]
+      },
+      "provenance": [
+        {
+          "sourceId": "openfootball-clubs",
+          "sourceName": "openfootball/clubs",
+          "url": "https://github.com/openfootball/clubs/blob/ae3800227c449447b3a337fc0aac79a8f02f4c8b/europe/england/eng.clubs.txt#L14",
+          "accessedAt": "2026-10-15T14:59:37.487Z",
+          "sourceDate": null,
+          "externalId": "europe/england/eng.clubs.txt#L14",
+          "license": {
+            "name": "CC0-1.0",
+            "url": "https://github.com/openfootball/clubs/blob/ae3800227c449447b3a337fc0aac79a8f02f4c8b/LICENSE.md",
+            "usageRestrictions": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "club-liverpool-fc",
+      "name": "Liverpool FC",
+      "shortName": "Liverpool",
+      "country": "England",
+      "stadium": null,
+      "primaryColor": null,
+      "finances": null,
+      "dataStatus": {
+        "validation": "needs-review",
+        "completeness": "partial",
+        "notes": [
+          "Sourced reference identity only; no verified 2026/27 roster, competition or financial data."
+        ]
+      },
+      "provenance": [
+        {
+          "sourceId": "openfootball-clubs",
+          "sourceName": "openfootball/clubs",
+          "url": "https://github.com/openfootball/clubs/blob/ae3800227c449447b3a337fc0aac79a8f02f4c8b/europe/england/eng.clubs.txt#L96",
+          "accessedAt": "2026-10-15T14:59:37.487Z",
+          "sourceDate": null,
+          "externalId": "europe/england/eng.clubs.txt#L96",
+          "license": {
+            "name": "CC0-1.0",
+            "url": "https://github.com/openfootball/clubs/blob/ae3800227c449447b3a337fc0aac79a8f02f4c8b/LICENSE.md",
+            "usageRestrictions": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "club-manchester-united-fc",
+      "name": "Manchester United FC",
+      "shortName": "Manchester United",
+      "country": "England",
+      "stadium": null,
+      "primaryColor": null,
+      "finances": null,
+      "dataStatus": {
+        "validation": "needs-review",
+        "completeness": "partial",
+        "notes": [
+          "Sourced reference identity only; no verified 2026/27 roster, competition or financial data."
+        ]
+      },
+      "provenance": [
+        {
+          "sourceId": "openfootball-clubs",
+          "sourceName": "openfootball/clubs",
+          "url": "https://github.com/openfootball/clubs/blob/ae3800227c449447b3a337fc0aac79a8f02f4c8b/europe/england/eng.clubs.txt#L124",
+          "accessedAt": "2026-10-15T14:59:37.487Z",
+          "sourceDate": null,
+          "externalId": "europe/england/eng.clubs.txt#L124",
+          "license": {
+            "name": "CC0-1.0",
+            "url": "https://github.com/openfootball/clubs/blob/ae3800227c449447b3a337fc0aac79a8f02f4c8b/LICENSE.md",
+            "usageRestrictions": []
+          }
+        }
+      ]
+    }
+  ],
+  "competitions": [],
+  "validation": {
+    "status": "reference-only",
+    "notes": [
+      "2026/27 is the game target, not the effective season of these records.",
+      "12 archival real-player identities and 4 club identities, from pinned CC0 Openfootball sources.",
+      "No current squad assignments, nationalities, precise outfield positions, budgets or ratings have been inferred.",
+      "Upstream source snapshot dates unknown; retrieval dates and pinned commit identifiers retained.",
+      "Use a sourced import for a playable squad. Original game attribute assessments may be entered locally."
+    ]
+  }
+}

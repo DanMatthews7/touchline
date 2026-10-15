@@ -1,0 +1,395 @@
+{
+  "purpose": "Archival biographic reference directory, not current squads or player ratings.",
+  "retrievedOn": "2026-10-15",
+  "sourceSnapshotDate": null,
+  "notes": [
+    "Upstream commit timestamps are publication evidence, not assertions of an effective squad season or currency.",
+    "Country groups follow the source heading; these are not verified citizenship records.",
+    "Broad source positions are copied without inventing role-specific or current playing positions.",
+    "All current club assignments, contracts, ratings and hidden attributes remain unknown.",
+    "No source height is mapped: several archived heights may differ from present-day measurements.",
+    "Clubs are reference identities only; founded years copied from source; no current league, stadium, staff or finance assertion."
+  ],
+  "licenses": [
+    {
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/LICENSE.md"
+    },
+    {
+      "source": "openfootball/clubs",
+      "license": "CC0-1.0",
+      "url": "https://github.com/openfootball/clubs/blob/ae3800227c449447b3a337fc0aac79a8f02f4c8b/LICENSE.md"
+    }
+  ],
+  "sourceFileChecksums": {
+    "clubs/LICENSE.md": "36ffd9dc085d529a7e60e1276d73ae5a030b020313e6c5408593a6ae2af39673",
+    "clubs/eng.clubs.txt": "272bf00c7cc8991a0dc98493d0963fab18f07435098637a968f700015e83e93e",
+    "players/LICENSE.md": "36ffd9dc085d529a7e60e1276d73ae5a030b020313e6c5408593a6ae2af39673",
+    "players/eg.players.txt": "dd2e1064c2412457542c191d306d91c69884bc4fd80f39af42376eb467fa1bef",
+    "players/eng.players.txt": "76c0a0f11ce2de684375676cc923a04cd1c392cc3a907c788ecc1c7ae5efdfac",
+    "players/fr.players.txt": "6c1466843058d0435633a3c80e8b8b8933395300a57b071f959abd6efaf63030",
+    "players/kr.players.txt": "7b21cfa95b94eb434b4457c03052cd9ae647c519abfacb6da392cfe4029447da"
+  },
+  "players": [
+    {
+      "displayName": "Bukayo Saka",
+      "dateOfBirth": "2001-09-05",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "M"
+      ],
+      "birthplace": "Ealing",
+      "clubId": null,
+      "contract": null,
+      "attributes": null,
+      "provenance": {
+        "source": "openfootball/players",
+        "license": "CC0-1.0",
+        "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+        "sourcePath": "europe/england/eng.players.txt",
+        "sourceLineNumber": 1490,
+        "exactSourceLine": "Bukayo Saka,                  M,  1.78 m,  b. 5 Sep 2001 @ Ealing",
+        "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L1490",
+        "retrievedOn": "2026-10-15",
+        "sourceSnapshotDate": null,
+        "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00"
+      }
+    },
+    {
+      "displayName": "Harry Kane",
+      "dateOfBirth": "1993-07-28",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "F"
+      ],
+      "birthplace": "Walthamstow",
+      "clubId": null,
+      "contract": null,
+      "attributes": null,
+      "provenance": {
+        "source": "openfootball/players",
+        "license": "CC0-1.0",
+        "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+        "sourcePath": "europe/england/eng.players.txt",
+        "sourceLineNumber": 2992,
+        "exactSourceLine": "Harry Kane,                   F,  1.88 m,  b. 28 Jul 1993 @ Walthamstow",
+        "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2992",
+        "retrievedOn": "2026-10-15",
+        "sourceSnapshotDate": null,
+        "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00"
+      }
+    },
+    {
+      "displayName": "Declan Rice",
+      "dateOfBirth": "1999-01-14",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "M"
+      ],
+      "birthplace": "Kingston upon Thames",
+      "clubId": null,
+      "contract": null,
+      "attributes": null,
+      "provenance": {
+        "source": "openfootball/players",
+        "license": "CC0-1.0",
+        "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+        "sourcePath": "europe/england/eng.players.txt",
+        "sourceLineNumber": 2120,
+        "exactSourceLine": "Declan Rice,                  M,  1.85 m,  b. 14 Jan 1999 @ Kingston upon Thames",
+        "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2120",
+        "retrievedOn": "2026-10-15",
+        "sourceSnapshotDate": null,
+        "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00"
+      }
+    },
+    {
+      "displayName": "Jude Bellingham",
+      "dateOfBirth": "2003-06-29",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "M"
+      ],
+      "birthplace": "Stourbridge",
+      "clubId": null,
+      "contract": null,
+      "attributes": null,
+      "provenance": {
+        "source": "openfootball/players",
+        "license": "CC0-1.0",
+        "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+        "sourcePath": "europe/england/eng.players.txt",
+        "sourceLineNumber": 901,
+        "exactSourceLine": "Jude Bellingham,              M,  1.80 m,  b. 29 Jun 2003 @ Stourbridge",
+        "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L901",
+        "retrievedOn": "2026-10-15",
+        "sourceSnapshotDate": null,
+        "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00"
+      }
+    },
+    {
+      "displayName": "John Stones",
+      "dateOfBirth": "1994-05-28",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "D"
+      ],
+      "birthplace": "Barnsley",
+      "clubId": null,
+      "contract": null,
+      "attributes": null,
+      "provenance": {
+        "source": "openfootball/players",
+        "license": "CC0-1.0",
+        "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+        "sourcePath": "europe/england/eng.players.txt",
+        "sourceLineNumber": 2897,
+        "exactSourceLine": "John Stones,                  D,  1.88 m,  b. 28 May 1994 @ Barnsley",
+        "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2897",
+        "retrievedOn": "2026-10-15",
+        "sourceSnapshotDate": null,
+        "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00"
+      }
+    },
+    {
+      "displayName": "Jordan Pickford",
+      "dateOfBirth": "1994-03-07",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "G"
+      ],
+      "birthplace": "Washington",
+      "clubId": null,
+      "contract": null,
+      "attributes": null,
+      "provenance": {
+        "source": "openfootball/players",
+        "license": "CC0-1.0",
+        "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+        "sourcePath": "europe/england/eng.players.txt",
+        "sourceLineNumber": 2916,
+        "exactSourceLine": "Jordan Pickford,              G,  1.85 m,  b. 7 Mar 1994 @ Washington",
+        "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2916",
+        "retrievedOn": "2026-10-15",
+        "sourceSnapshotDate": null,
+        "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00"
+      }
+    },
+    {
+      "displayName": "Kylian Mbappé",
+      "dateOfBirth": "1998-12-20",
+      "sourceCountryGroup": "France",
+      "positionCodes": [
+        "F"
+      ],
+      "birthplace": "Paris",
+      "clubId": null,
+      "contract": null,
+      "attributes": null,
+      "provenance": {
+        "source": "openfootball/players",
+        "license": "CC0-1.0",
+        "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+        "sourcePath": "europe/france/fr.players.txt",
+        "sourceLineNumber": 863,
+        "exactSourceLine": "Kylian Mbappé,                F,  1.78 m,  b. 20 Dec 1998 @ Paris",
+        "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L863",
+        "retrievedOn": "2026-10-15",
+        "sourceSnapshotDate": null,
+        "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00"
+      }
+    },
+    {
+      "displayName": "William Saliba",
+      "dateOfBirth": "2001-03-24",
+      "sourceCountryGroup": "France",
+      "positionCodes": [
+        "D"
+      ],
+      "birthplace": "Bondy",
+      "clubId": null,
+      "contract": null,
+      "attributes": null,
+      "provenance": {
+        "source": "openfootball/players",
+        "license": "CC0-1.0",
+        "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+        "sourcePath": "europe/france/fr.players.txt",
+        "sourceLineNumber": 530,
+        "exactSourceLine": "William Saliba,               D,  1.93 m,  b. 24 Mar 2001 @ Bondy",
+        "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L530",
+        "retrievedOn": "2026-10-15",
+        "sourceSnapshotDate": null,
+        "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00"
+      }
+    },
+    {
+      "displayName": "Eduardo Camavinga",
+      "dateOfBirth": "2002-11-10",
+      "sourceCountryGroup": "France",
+      "positionCodes": [
+        "M"
+      ],
+      "birthplace": "Miconje",
+      "clubId": null,
+      "contract": null,
+      "attributes": null,
+      "provenance": {
+        "source": "openfootball/players",
+        "license": "CC0-1.0",
+        "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+        "sourcePath": "europe/france/fr.players.txt",
+        "sourceLineNumber": 309,
+        "exactSourceLine": "Eduardo Camavinga,            M,  1.82 m,  b. 10 Nov 2002 @ Miconje",
+        "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L309",
+        "retrievedOn": "2026-10-15",
+        "sourceSnapshotDate": null,
+        "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00"
+      }
+    },
+    {
+      "displayName": "Antoine Griezmann",
+      "dateOfBirth": "1991-03-21",
+      "sourceCountryGroup": "France",
+      "positionCodes": [
+        "F"
+      ],
+      "birthplace": "Mâcon",
+      "clubId": null,
+      "contract": null,
+      "attributes": null,
+      "provenance": {
+        "source": "openfootball/players",
+        "license": "CC0-1.0",
+        "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+        "sourcePath": "europe/france/fr.players.txt",
+        "sourceLineNumber": 1563,
+        "exactSourceLine": "Antoine Griezmann,            F,  1.75 m,  b. 21 Mar 1991 @ Mâcon",
+        "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L1563",
+        "retrievedOn": "2026-10-15",
+        "sourceSnapshotDate": null,
+        "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00"
+      }
+    },
+    {
+      "displayName": "Mohamed Salah",
+      "dateOfBirth": "1992-06-15",
+      "sourceCountryGroup": "Egypt",
+      "positionCodes": [
+        "M",
+        "F"
+      ],
+      "birthplace": "Basyoun",
+      "clubId": null,
+      "contract": null,
+      "attributes": null,
+      "provenance": {
+        "source": "openfootball/players",
+        "license": "CC0-1.0",
+        "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+        "sourcePath": "africa/egypt/eg.players.txt",
+        "sourceLineNumber": 54,
+        "exactSourceLine": "Mohamed Salah,                M|F,1.75 m,  b. 15 Jun 1992 @ Basyoun",
+        "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/africa/egypt/eg.players.txt#L54",
+        "retrievedOn": "2026-10-15",
+        "sourceSnapshotDate": null,
+        "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00"
+      }
+    },
+    {
+      "displayName": "Son Heung-Min",
+      "dateOfBirth": "1992-07-08",
+      "sourceCountryGroup": "South Korea",
+      "positionCodes": [
+        "F"
+      ],
+      "birthplace": "Chuncheon",
+      "clubId": null,
+      "contract": null,
+      "attributes": null,
+      "provenance": {
+        "source": "openfootball/players",
+        "license": "CC0-1.0",
+        "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+        "sourcePath": "asia/south-korea/kr.players.txt",
+        "sourceLineNumber": 67,
+        "exactSourceLine": "Son Heung-Min,                F,  1.83 m,  b. 8 Jul 1992 @ Chuncheon",
+        "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/asia/south-korea/kr.players.txt#L67",
+        "retrievedOn": "2026-10-15",
+        "sourceSnapshotDate": null,
+        "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00"
+      }
+    }
+  ],
+  "clubs": [
+    {
+      "displayName": "Arsenal FC",
+      "country": "England",
+      "foundedYear": 1886,
+      "provenance": {
+        "source": "openfootball/clubs",
+        "license": "CC0-1.0",
+        "sourceCommit": "ae3800227c449447b3a337fc0aac79a8f02f4c8b",
+        "sourcePath": "europe/england/eng.clubs.txt",
+        "sourceLineNumber": 8,
+        "exactSourceLine": "Arsenal FC, 1886, @ Emirates Stadium, London (Highbury)   ## Greater London",
+        "sourceUrl": "https://github.com/openfootball/clubs/blob/ae3800227c449447b3a337fc0aac79a8f02f4c8b/europe/england/eng.clubs.txt#L8",
+        "retrievedOn": "2026-10-15",
+        "sourceSnapshotDate": null,
+        "sourceCommitTimestamp": "2025-01-03T19:08:39+01:00"
+      }
+    },
+    {
+      "displayName": "Chelsea FC",
+      "country": "England",
+      "foundedYear": 1905,
+      "provenance": {
+        "source": "openfootball/clubs",
+        "license": "CC0-1.0",
+        "sourceCommit": "ae3800227c449447b3a337fc0aac79a8f02f4c8b",
+        "sourcePath": "europe/england/eng.clubs.txt",
+        "sourceLineNumber": 14,
+        "exactSourceLine": "Chelsea FC, 1905, @ Stamford Bridge, London (Fulham)    ## Greater London",
+        "sourceUrl": "https://github.com/openfootball/clubs/blob/ae3800227c449447b3a337fc0aac79a8f02f4c8b/europe/england/eng.clubs.txt#L14",
+        "retrievedOn": "2026-10-15",
+        "sourceSnapshotDate": null,
+        "sourceCommitTimestamp": "2025-01-03T19:08:39+01:00"
+      }
+    },
+    {
+      "displayName": "Liverpool FC",
+      "country": "England",
+      "foundedYear": 1892,
+      "provenance": {
+        "source": "openfootball/clubs",
+        "license": "CC0-1.0",
+        "sourceCommit": "ae3800227c449447b3a337fc0aac79a8f02f4c8b",
+        "sourcePath": "europe/england/eng.clubs.txt",
+        "sourceLineNumber": 96,
+        "exactSourceLine": "Liverpool FC, 1892, @ Anfield, Liverpool (Anfield) › Lancashire",
+        "sourceUrl": "https://github.com/openfootball/clubs/blob/ae3800227c449447b3a337fc0aac79a8f02f4c8b/europe/england/eng.clubs.txt#L96",
+        "retrievedOn": "2026-10-15",
+        "sourceSnapshotDate": null,
+        "sourceCommitTimestamp": "2025-01-03T19:08:39+01:00"
+      }
+    },
+    {
+      "displayName": "Manchester United FC",
+      "country": "England",
+      "foundedYear": 1878,
+      "provenance": {
+        "source": "openfootball/clubs",
+        "license": "CC0-1.0",
+        "sourceCommit": "ae3800227c449447b3a337fc0aac79a8f02f4c8b",
+        "sourcePath": "europe/england/eng.clubs.txt",
+        "sourceLineNumber": 124,
+        "exactSourceLine": "Manchester United FC, 1878, @ Old Trafford, Manchester (Old Trafford)     ## North West England",
+        "sourceUrl": "https://github.com/openfootball/clubs/blob/ae3800227c449447b3a337fc0aac79a8f02f4c8b/europe/england/eng.clubs.txt#L124",
+        "retrievedOn": "2026-10-15",
+        "sourceSnapshotDate": null,
+        "sourceCommitTimestamp": "2025-01-03T19:08:39+01:00"
+      }
+    }
+  ]
+}
