@@ -18,7 +18,9 @@ Use an audited real-identity exhibition pool without guessing current club roste
 
 Acceptance includes reproducibility from initial configuration, seed, engine version and commands; stronger synthetic teams gaining a measurable advantage; documented scoring and discipline design targets; and tested home effects, fatigue, substitutions and tactical trade-offs. A synthetic batch report is not empirical calibration to a real league. Keep presentation to decisions, an event log and basic statistics. Record actual checks and remaining limitations in [the Milestone 2 review](docs/MILESTONE_2_REVIEW.md) before calling the milestone complete.
 
-No competition progression, season loop, transfer AI or 2D animation is authorized by this milestone. Actual Milestone 2 macOS/browser acceptance remains a separate user review step.
+The user reported successful Mac workflow checks on 16 October 2026, confirming match progression, tactical changes, substitutions, match archive import and completion to 90 minutes. The browser was unspecified; broader platform checks remain distinct from these observations. See the review for exact evidence and limits.
+
+No competition progression, season loop, transfer AI or 2D animation is authorized by this milestone. Milestone 3 remains the next proposed development step and requires specific authorization.
 
 ## Milestone 3 — Competition and season loop
 

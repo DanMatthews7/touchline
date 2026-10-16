@@ -23,7 +23,9 @@ Match sessions are stored separately from careers. Portable match files contain 
 5. Export the match, reload and restore it. Confirm the same checkpoint, score, events, decisions and assessment mode. Export current progress before restoring an older file with the same ID.
 6. Export and restore a career separately. Invalid match imports must show an error without changing career data or the last valid match. Check keyboard focus, dense tables and controls in the intended Mac browser.
 
-The earlier font/skin review does not establish that this workflow has run on macOS, Safari or Apple Silicon. Record the actual browser and observations when that review happens.
+On 16 October 2026, the user confirmed that match progression, tactical changes and substitutions worked on their Mac. They then confirmed that a match archive imported successfully and the match completed to 90 minutes. These observations confirm the reported exhibition workflows on the user's machine.
+
+The browser name/version was not reported. Separate reload persistence, invalid-import handling, career backup restoration and accessibility checks were not individually confirmed on the Mac; their automated cloud evidence remains below. This review does not establish compatibility across all macOS browsers.
 
 ## Verification evidence
 
@@ -42,7 +44,7 @@ Verified on 16 October 2026 in the Linux cloud environment:
 | `npm test` | 131 tests across 14 files passed in 79.40 seconds |
 | Batch coverage inside the test run | 6,400 matches: 400 in each of 16 scenarios; all 14 design targets passed |
 | Standalone synthetic batch report | 7,680 matches: 480 in each of 16 scenarios; all 14 design targets passed |
-| New Matchday workflow on macOS/M2 | Not yet reviewed |
+| User's Mac review | Progression, tactics, substitutions, match archive import and completion to 90 minutes confirmed on 16 October 2026; browser unspecified |
 
 The browser checks use the final production build, not a development-only implementation. They cover the existing foundation alongside match decisions, displayed events/statistics, reload and portable archives. These observations establish only the tested surfaces and workflows; they do not establish universal accessibility or Mac compatibility.
 

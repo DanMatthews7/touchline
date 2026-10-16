@@ -58,7 +58,7 @@ The base skin is also defined in that token file. Its matte texture is drawn wit
 
 ## Scope and honest limitations
 
-Milestone 1 implemented the application shell, club selection, player and squad inspection, typed models, validated data import and versioned career saves. The user reviewed the font and skin on their Mac and authorized the exhibition match foundation on 16 October 2026. Milestone 2 acceptance is separate; actual checks and outstanding Mac review are recorded in [its review](docs/MILESTONE_2_REVIEW.md).
+Milestone 1 implemented the application shell, club selection, player and squad inspection, typed models, validated data import and versioned career saves. The user reviewed the font and skin on their Mac and authorized the exhibition match foundation on 16 October 2026. The user's subsequent Mac workflow review and automated Milestone 2 checks are recorded in [its review](docs/MILESTONE_2_REVIEW.md).
 
 The bundled snapshot contains 12 archival real-player identities and four club identities from pinned CC0 Openfootball sources. It is not a verified 2026/27 roster. No player has a current club assignment, so a newly selected club has an empty squad. The reference directory remains available for inspection. Nationalities are unknown: a source country grouping does not establish citizenship. Only the source's goalkeeper code maps directly to `GK`; broad defender, midfielder and forward codes remain notes rather than guessed detailed positions.
 
@@ -82,7 +82,7 @@ The new [exhibition source audit](docs/data/exhibition-source-extract.json) reco
 
 On 16 October 2026, cloud type checking, the production build, all 131 tests across 14 files and all nine production browser tests passed. The unit run included 6,400 synthetic matches across 16 scenarios, meeting all 14 internal design targets. A separate [7,680-match report](docs/calibration/milestone-2-engine-v1.json), using 480 spread seeds per scenario, also passed all 14 targets. Fifteen accessibility scans found no serious or critical issues on the tested surfaces; the tested workflows had no uncaught browser errors or external HTTP requests.
 
-These are Linux/browser and synthetic-model checks. The new Matchday workflow still needs review on the user's Mac; its results do not establish empirically calibrated real-player ratings. [The Milestone 2 review](docs/MILESTONE_2_REVIEW.md) retains the detailed evidence and outstanding platform review.
+These automated results are Linux/browser and synthetic-model checks. The user separately confirmed match progression, tactical changes, substitutions, match archive import and completion to 90 minutes on their Mac on 16 October 2026. The browser was unspecified. [The Milestone 2 review](docs/MILESTONE_2_REVIEW.md) retains the exact evidence and remaining platform limits. These checks do not establish empirically calibrated real-player ratings.
 
 ## Earlier verification
 
@@ -95,7 +95,7 @@ On 15 October 2026, Linux x86-64 with Node 24.19.0 and Chromium 154 passed:
 
 The 16 October 2026 matte charcoal/navy/silver skin refresh also passed type checking, all 57 foundational tests, the production build and all four browser tests. Fourteen accessibility scans, including assessed attributes, expanded assessment notes, the inbox and error states, reported no serious or critical issues. Cloud visual checks use the fallback font; the installed Humanist face was confirmed loading by the user on their Mac.
 
-See [the original milestone review](docs/MILESTONE_1_REVIEW.md) for the historical review boundary. These cloud results and the user's local font/skin review do not establish full Safari/M2 compatibility or verification of the new match workflow. Milestone 2 completion must be supported by the results in [its review](docs/MILESTONE_2_REVIEW.md).
+See [the original milestone review](docs/MILESTONE_1_REVIEW.md) for the historical review boundary. The cloud results and user reviews do not establish compatibility across all macOS browsers. The user's confirmed Matchday checks and automated Milestone 2 evidence are recorded in [its review](docs/MILESTONE_2_REVIEW.md).
 
 ## Project documents
 
