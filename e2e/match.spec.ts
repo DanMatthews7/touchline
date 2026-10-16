@@ -1,4 +1,4 @@
-import { mkdir, readFile } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test as base, type Locator, type Page } from '@playwright/test';
 import type { MatchArchive } from '../src/persistence/match';
@@ -155,7 +155,7 @@ test('explicit exhibition assumptions use real identities without changing the c
   expect(careerAfter.snapshot).toEqual(careerBefore.snapshot);
 });
 
-test('checkpoint play produces statistics, fatigue, authoritative tactics and a fresh substitute', async ({ page }) => {
+test('checkpoint play produces statistics, fatigue, authoritative tactics and a fresh substitute', async ({ page }, testInfo) => {
   await beginCareer(page);
   await prepareMatch(page);
   const match = centre(page);
@@ -206,9 +206,8 @@ test('checkpoint play produces statistics, fatigue, authoritative tactics and a 
   expect(Number(await incoming.locator('td').nth(2).innerText())).toBeLessThan(100);
   await expect(outgoing.locator('td').nth(2)).toHaveText(outgoingCondition);
   await expect(match.getByText('Missing attributes: uniform 10/20', { exact: true })).toBeVisible();
-  await mkdir('/workspace/artifacts', { recursive: true });
   await match.getByRole('button', { name: 'Advance to 45′', exact: true }).scrollIntoViewIfNeeded();
-  await page.screenshot({ path: '/workspace/artifacts/touchline-milestone-2.png', fullPage: false });
+  await page.screenshot({ path: testInfo.outputPath('touchline-milestone-2.png'), fullPage: false });
 });
 
 test('match archives replay exactly after reload and in a clean browser, then resume to full time', async ({ page, browser, observe }) => {

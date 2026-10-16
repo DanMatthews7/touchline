@@ -89,7 +89,7 @@ async function expectAccessible(page: Page) {
   expect.soft(violations, 'No serious or critical axe accessibility violations.').toEqual([]);
 }
 
-test('club selection, every primary screen, sortable reference directory and all unknown attributes', async ({ page }) => {
+test('club selection, every primary screen, sortable reference directory and all unknown attributes', async ({ page }, testInfo) => {
   await beginCareer(page);
   await expect(page.getByRole('status')).toContainText('Career created and saved locally');
   for (const name of ['Inbox', 'Squad', 'Player Profiles', 'Tactics', 'Fixtures', 'Competitions', 'Transfers', 'Finances', 'Dashboard']) {
@@ -138,7 +138,7 @@ test('club selection, every primary screen, sortable reference directory and all
   await expect(page.getByText('Unknown · no current squad assignment', { exact: true })).toBeVisible();
   await expect(page.getByLabel(/^(Potential|Professionalism|Current development level)$/i)).toHaveCount(0);
   await expectNoHorizontalOverflow(page);
-  await page.screenshot({ path: '/tmp/touchline-review.png', fullPage: false });
+  await page.screenshot({ path: testInfo.outputPath('touchline-review.png'), fullPage: false });
 });
 
 test('manual original GK assessment calculates 74, survives reload and exports/restores in a clean context', async ({ page, browser, observe }) => {

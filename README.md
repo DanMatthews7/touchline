@@ -24,7 +24,7 @@ npm run build
 npm run preview
 ```
 
-Browser checks use Playwright. Install its Chromium browser once with `npx playwright install chromium`, then run `npm run test:browser`. Linux may also require the browser's documented system dependencies; macOS uses its native Chromium bundle.
+Browser checks use Playwright against the production build. Install its Chromium browser once with `npx playwright install chromium`, then run `npm run build` followed by `npm run test:browser`. Playwright starts the preview server itself. Linux may also require the browser's documented system dependencies; macOS uses its native Chromium bundle. Reports and per-test screenshots are written inside `playwright-report/` and `test-results/`; failed tests also retain traces. GitHub Actions uploads these directories for diagnosis and uses Ubuntu 24.04 with Node 24-compatible actions.
 
 Use the exact URL printed by each command. Browser storage is scoped to its origin: a development URL and a preview URL can have separate saves. Export before changing origin, browser or profile, or clearing website data.
 

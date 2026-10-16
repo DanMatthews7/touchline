@@ -60,6 +60,14 @@ All four formation scenarios passed their predeclared benefit and cost targets. 
 
 Synthetic scenarios assess internal behavior, not empirical football calibration. Their intervals quantify these model batches and comparisons, not predictive accuracy for real matches. A passing report does not validate real-player ratings. The moderate and large skill-gap results, tactical constants and discipline rates remain design choices for review before broader gameplay.
 
+## CI portability follow-up — 16 October 2026
+
+The reported GitHub Actions run passed all 131 unit tests but failed a later step. Review found a browser-test defect: creating `/workspace/artifacts` assumes this cloud environment's filesystem and can fail with `EACCES` on a hosted runner. An unprivileged protected-parent check reproduced that permission failure. The original private run log was unavailable here, so its exact failure remains unconfirmed.
+
+Both review screenshots now use Playwright's per-test output paths. Browser checks start the production preview, retain failure traces and generate an HTML report. The workflow uploads reports and test output, uses Node 24-compatible actions and selects Ubuntu 24.04 explicitly.
+
+The repair passed TypeScript checking, all 131 tests across 14 files (82.13 seconds), the production build and all nine browser tests (41.8 seconds). The browser run used `CI=true`, a fresh preview server and the available Chromium 154; both screenshots appeared under `test-results/` and the HTML report was generated. This environment could not download Playwright's pinned Chromium 156 or read the private Actions log, so the hosted rerun still needs confirmation. Application and simulation behavior are unchanged.
+
 ## Boundary after review
 
 Not included: current-season roster completion, empirically calibrated ability, competition/season play, career progression, transfers/AI management, injuries, detailed set pieces, offsides, penalties, added time, extra time, shootouts or 2D matches. The next proposed milestone is scheduling, league tables and calendar integration after this foundation is reviewed and specifically authorized.
