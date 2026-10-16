@@ -26,6 +26,12 @@ Browser checks use Playwright. Install its Chromium browser once with `npx playw
 
 Use the exact URL printed by each command. Browser storage is scoped to its origin: a development URL and a preview URL can have separate saves. Export before changing origin, browser or profile, or clearing website data.
 
+## Game font
+
+The whole interface uses **Humanist 777 Black BT**, including headings, navigation, tables, attributes and form controls. Install your licensed copy on your Mac with Font Book, then restart the browser so it can discover the font. The application recognises common full and PostScript names for the Black face.
+
+No font binary is bundled or fetched. If the face is unavailable, the interface uses a system sans-serif fallback. The single Black face is used throughout; lighter font cuts are not supplied. Typography is controlled by `--font-game` in [src/ui/tokens.css](src/ui/tokens.css).
+
 ## Scope and honest limitations
 
 Milestone 1 implements the application shell, club selection, player and squad inspection, typed domain models, explicit simulation interfaces, validated data import, local persistence and portable save infrastructure. A local attribute editor records original game assessments separately from sourced biography. The implementation is ready for foundation review; actual macOS/M2 acceptance remains outstanding.

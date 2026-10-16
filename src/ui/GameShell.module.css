@@ -1,6 +1,6 @@
 .shell { min-height: 100vh; background: var(--paper); display: grid; grid-template-columns: 202px minmax(0, 1fr); grid-template-rows: 64px minmax(calc(100vh - 94px), auto) 30px; }
 .brand { padding: 15px 20px; color: #f5f1df; background: var(--green-950); border-bottom: 1px solid #345043; display: flex; gap: 10px; align-items: center; }
-.brandMark { width: 28px; height: 31px; border: 1.5px solid var(--gold); display: grid; place-items: center; color: var(--gold); font-family: Georgia, serif; font-size: 22px; font-weight: 700; }
+.brandMark { width: 28px; height: 31px; border: 1.5px solid var(--gold); display: grid; place-items: center; color: var(--gold); font-family: var(--font-game); font-size: 22px; font-weight: 700; }
 .brandTitle { font-size: 17px; font-weight: 750; letter-spacing: 1.8px; line-height: 1.1; }
 .brandSub { display: block; font-size: 10px; margin-top: 5px; color: #a9b9ab; letter-spacing: 1.6px; }
 .topbar { display: flex; align-items: center; justify-content: space-between; padding: 0 28px; gap: 20px; background: var(--green-900); color: #eef0df; border-bottom: 1px solid #345043; }
@@ -21,7 +21,7 @@
 .navCount { margin-left: auto; color: #e5d69c; background: #486044; padding: 2px 5px; font-size: 10px; }
 .sidebarBottom { margin-top: auto; padding-top: 32px; }
 .clubMini { border-top: 1px solid #365044; padding: 19px 9px 0; display: flex; gap: 10px; align-items: center; }
-.miniCrest { flex-shrink: 0; width: 31px; height: 35px; display: grid; place-items: center; border: 1px solid #70836b; color: #e3d5a8; font: 15px Georgia, serif; }
+.miniCrest { flex-shrink: 0; width: 31px; height: 35px; display: grid; place-items: center; border: 1px solid #70836b; color: #e3d5a8; font: 15px var(--font-game); }
 .miniTitle { font-size: 12px; color: #e6eadb; line-height: 1.5; }
 .miniSub { display: block; font-size: 10px; color: #91a38f; }
 .content { min-width: 0; padding: 23px 28px 30px; }
@@ -30,7 +30,7 @@
 .statusDot { width: 5px; height: 5px; background: #58825b; border-radius: 50%; }
 .pageHeader { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 19px; }
 .eyebrow { display: block; font-size: 10px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; color: #5f6d55; margin-bottom: 7px; }
-.pageTitle { margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 31px; font-weight: 500; letter-spacing: -.7px; line-height: 1.13; color: #213f30; }
+.pageTitle { margin: 0; font-family: var(--font-game); font-size: 31px; font-weight: 500; letter-spacing: -.7px; line-height: 1.13; color: #213f30; }
 .pageSubtitle { color: #687363; font-size: 12px; margin: 8px 0 0; line-height: 1.55; }
 .pageActions { display: flex; gap: 7px; flex-wrap: wrap; justify-content: flex-end; }
 .button { min-height: 33px; background: #faf9f0; border: 1px solid #bfc8b5; padding: 8px 11px; border-radius: 2px; font-size: 10px; font-weight: 600; color: #38513e; display: inline-flex; align-items: center; gap: 7px; justify-content: center; white-space: nowrap; }
@@ -48,9 +48,9 @@
 .hero { background: var(--green-900); color: #eff0df; padding: 25px 28px; min-height: 145px; border: 1px solid var(--green-950); position: relative; overflow: hidden; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .hero::after { content: ''; position: absolute; width: 230px; height: 230px; right: -50px; top: -95px; border: 1px solid #537152; border-radius: 50%; opacity: .4; pointer-events: none; }
 .hero .eyebrow { color: #bcba83; font-size: 10px; }
-.hero h2 { margin: 7px 0 11px; font-family: Georgia, 'Times New Roman', serif; font-size: 29px; font-weight: 500; letter-spacing: -.4px; }
+.hero h2 { margin: 7px 0 11px; font-family: var(--font-game); font-size: 29px; font-weight: 500; letter-spacing: -.4px; }
 .hero p { margin: 0; color: #b5c4ad; font-size: 12px; line-height: 1.6; max-width: 500px; }
-.heroCrest { display: grid; place-items: center; width: 68px; height: 77px; border: 1px solid #84936c; font: 34px Georgia, serif; color: #d7c38b; flex: 0 0 68px; z-index: 1; margin-right: 10px; }
+.heroCrest { display: grid; place-items: center; width: 68px; height: 77px; border: 1px solid #84936c; font: 34px var(--font-game); color: #d7c38b; flex: 0 0 68px; z-index: 1; margin-right: 10px; }
 .heroMeta { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #adbd9c; border: 1px solid #577050; padding: 7px 9px; align-self: flex-start; z-index: 1; white-space: nowrap; }
 .grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(250px, 1fr); gap: 18px; }
 .panel { background: var(--panel); border: 1px solid var(--line); min-width: 0; }
@@ -63,7 +63,7 @@
 .metric { padding: 16px 18px; border-right: 1px solid var(--line); }
 .metric:last-child { border-right: 0; }
 .metricLabel { font-size: 10px; text-transform: uppercase; letter-spacing: .8px; color: #52634c; }
-.metricValue { display: block; font: 26px Georgia, serif; color: #294833; margin: 7px 0 4px; }
+.metricValue { display: block; font: 26px var(--font-game); color: #294833; margin: 7px 0 4px; }
 .metricDetail { font-size: 10px; color: #5f6d55; line-height: 1.4; }
 .activity { padding: 13px 15px; display: flex; gap: 12px; border-bottom: 1px solid #e3e5d8; }
 .activity:last-child { border-bottom: 0; }
@@ -83,7 +83,7 @@
 .clubOption { width: 100%; border: 1px solid #d8ddcd; background: #f7f8ef; padding: 8px 14px; display: flex; align-items: center; gap: 14px; text-align: left; color: #34523b; }
 .clubOption:hover { background: #edf0e1; border-color: #9eae8f; }
 .clubOptionSelected { background: #e9efdd; border-color: #6f8b58; box-shadow: inset 3px 0 #4d713c; }
-.clubOptionCrest { width: 38px; height: 43px; flex: 0 0 38px; border: 1px solid #b2bc9b; display: grid; place-items: center; font: 18px Georgia, serif; }
+.clubOptionCrest { width: 38px; height: 43px; flex: 0 0 38px; border: 1px solid #b2bc9b; display: grid; place-items: center; font: 18px var(--font-game); }
 .clubOptionName { display: block; font-size: 13px; font-weight: 650; }
 .clubOptionMeta { display: block; margin-top: 5px; font-size: 10px; color: #5f6d55; }
 .clubOptionCheck { margin-left: auto; width: 16px; height: 16px; border: 1px solid #a7b399; border-radius: 50%; display: grid; place-items: center; font-size: 10px; color: #f6f3e5; }
@@ -119,18 +119,18 @@
 .tableFooter { display: flex; justify-content: space-between; gap: 15px; padding: 11px 13px; border-top: 1px solid var(--line); background: #f0f1e5; font-size: 10px; color: #5f6d55; }
 .rating { font-size: 12px; font-weight: 750; color: #3f683d; border-left: 2px solid #9aa86b; padding-left: 7px; }
 .empty { padding: 35px 20px; text-align: center; color: #5f6d55; font-size: 12px; line-height: 1.7; }
-.empty h3 { color: #3b5b3e; font: 22px Georgia, serif; margin: 10px 0; }
+.empty h3 { color: #3b5b3e; font: 22px var(--font-game); margin: 10px 0; }
 .empty p { max-width: 480px; margin: 0 auto 15px; }
 .emptyIcon { width: 38px; height: 38px; margin: 0 auto 15px; border: 1px solid #c5cfb6; display: grid; place-items: center; color: #718562; }
 .profileIdentity { display: flex; gap: 20px; align-items: center; }
-.playerPortrait { width: 61px; height: 68px; flex: 0 0 61px; background: #dfe6d4; border: 1px solid #bdcaaa; display: grid; place-items: center; font: 27px Georgia, serif; color: #687c54; }
+.playerPortrait { width: 61px; height: 68px; flex: 0 0 61px; background: #dfe6d4; border: 1px solid #bdcaaa; display: grid; place-items: center; font: 27px var(--font-game); color: #687c54; }
 .profileFacts { margin-top: 11px; display: flex; gap: 19px; flex-wrap: wrap; color: #5f6d55; font-size: 10px; }
 .profileFacts strong { color: #405d40; font-weight: 600; margin-left: 5px; }
 .profileStrip { display: flex; align-items: center; gap: 16px; padding: 12px 15px; background: #e9eddd; border: 1px solid #cbd5bb; margin-bottom: 18px; }
 .profileStripText { font-size: 10px; color: #5f6d55; flex: 1; line-height: 1.6; }
 .profileStripText strong { color: #46643e; font-weight: 650; }
-.profileRating { font: 30px Georgia, serif; color: #345934; min-width: 45px; text-align: center; }
-.profileRating small { font: 10px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #5f6d55; margin-left: 3px; }
+.profileRating { font: 30px var(--font-game); color: #345934; min-width: 45px; text-align: center; }
+.profileRating small { font: 10px var(--font-game); color: #5f6d55; margin-left: 3px; }
 .attributeGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 13px; }
 .attributePanel .panelHead { padding: 12px 11px; }
 .attributePanel .panelTitle { font-size: 10px; letter-spacing: .8px; }
@@ -153,13 +153,13 @@
 .inboxSender { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: .8px; color: #5f6d55; margin-bottom: 7px; }
 .inboxSubject { display: block; font-size: 12px; color: #3a583b; font-weight: 600; line-height: 1.5; }
 .inboxMessage { padding: 27px; min-height: 300px; }
-.inboxMessage h2 { font: 23px Georgia, serif; color: #345538; margin: 0 0 15px; }
+.inboxMessage h2 { font: 23px var(--font-game); color: #345538; margin: 0 0 15px; }
 .inboxMessage p { font-size: 12px; color: #5f6d55; line-height: 1.9; max-width: 560px; }
 .messageTag { font-size: 10px; color: #5f6d55; border-bottom: 1px solid #d8deca; padding-bottom: 13px; margin-bottom: 23px; display: block; text-transform: uppercase; letter-spacing: 1px; }
-.placeholderTitle { margin: 0 0 10px; font: 28px Georgia, serif; color: #33523a; }
+.placeholderTitle { margin: 0 0 10px; font: 28px var(--font-game); color: #33523a; }
 .placeholderPanel { padding: 40px 32px; max-width: 790px; }
 .placeholderPanel p { font-size: 12px; line-height: 1.9; color: #5f6d55; max-width: 580px; }
-.placeholderNumber { font: 56px Georgia, serif; color: #c4ceb5; margin-bottom: 20px; }
+.placeholderNumber { font: 56px var(--font-game); color: #c4ceb5; margin-bottom: 20px; }
 .placeholderFooter { margin-top: 28px; padding-top: 15px; border-top: 1px solid #d9dfcd; display: flex; gap: 10px; flex-wrap: wrap; }
 .mobileNavLabel { display: none; }
 @media (min-width: 1500px) { .content { padding-left: 40px; padding-right: 40px; } }

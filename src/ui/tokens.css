@@ -1,5 +1,15 @@
+/* Use the user's installed Black face; no font download is required at runtime. */
+@font-face {
+  font-family: 'Humanist 777 Black BT';
+  src: local('Humanist 777 Black BT'), local('Humanist777 Blk BT'), local('Humanist777BT-BlackB'), local('Humanist777BT-Black');
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
+
 :root {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-game: 'Humanist 777 Black BT', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-game);
   color: #233c32;
   background: #e8e9df;
   font-synthesis: none;
@@ -18,7 +28,7 @@
 }
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 360px; }
-button, input, select { font: inherit; }
+button, input, select, textarea { font: inherit; }
 button, select { cursor: pointer; }
 button { color: inherit; }
 button:disabled { cursor: not-allowed; }
