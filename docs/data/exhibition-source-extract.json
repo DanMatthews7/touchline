@@ -1,0 +1,766 @@
+{
+  "purpose": "Auditable source extraction for the 32-player archival exhibition identity pool; not a current roster or game ratings database.",
+  "snapshotId": "openfootball-exhibition-reference-2026-10-16-v1",
+  "retrievedAt": "2026-10-16T08:18:19.299Z",
+  "sourceSnapshotDate": null,
+  "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+  "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+  "license": {
+    "name": "CC0-1.0",
+    "url": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/LICENSE.md",
+    "localReviewedLicense": "docs/data/openfootball-players-LICENSE.md",
+    "sha256": "36ffd9dc085d529a7e60e1276d73ae5a030b020313e6c5408593a6ae2af39673"
+  },
+  "notes": [
+    "Names and dates of birth below are copied from exact pinned source lines. Heights and birthplaces are audit-only and are not mapped to game records.",
+    "Country headings are retained as source groups, not interpreted as citizenship. Nationality arrays remain empty.",
+    "Broad G maps to GK. D, M and F do not establish specific outfield positional familiarity; those detailed position arrays remain empty.",
+    "Upstream commit time is publication evidence, not a claim of a dated effective player snapshot. Source snapshot dates remain unknown.",
+    "All player club assignments, preferred feet, visible ratings and hidden values remain unknown in shipped source records.",
+    "An explicitly accepted uniform exhibition baseline is original match-workspace input only and does not change this source snapshot.",
+    "The original 12 stable IDs are reused for merge purposes. No previous snapshot or career record is modified by this new pool.",
+    "Exact source spelling Ngolo Kanté is retained without inventing a normalization as a sourced fact."
+  ],
+  "sourceFiles": [
+    {
+      "sourcePath": "europe/england/eng.players.txt",
+      "rawUrl": "https://raw.githubusercontent.com/openfootball/players/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt",
+      "sha256": "76c0a0f11ce2de684375676cc923a04cd1c392cc3a907c788ecc1c7ae5efdfac"
+    },
+    {
+      "sourcePath": "europe/france/fr.players.txt",
+      "rawUrl": "https://raw.githubusercontent.com/openfootball/players/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt",
+      "sha256": "6c1466843058d0435633a3c80e8b8b8933395300a57b071f959abd6efaf63030"
+    },
+    {
+      "sourcePath": "africa/egypt/eg.players.txt",
+      "rawUrl": "https://raw.githubusercontent.com/openfootball/players/125d20f7cc06cac7e758b40df535a7695632680a/africa/egypt/eg.players.txt",
+      "sha256": "dd2e1064c2412457542c191d306d91c69884bc4fd80f39af42376eb467fa1bef"
+    },
+    {
+      "sourcePath": "asia/south-korea/kr.players.txt",
+      "rawUrl": "https://raw.githubusercontent.com/openfootball/players/125d20f7cc06cac7e758b40df535a7695632680a/asia/south-korea/kr.players.txt",
+      "sha256": "7b21cfa95b94eb434b4457c03052cd9ae647c519abfacb6da392cfe4029447da"
+    }
+  ],
+  "players": [
+    {
+      "playerId": "player-bukayo-saka",
+      "displayName": "Bukayo Saka",
+      "dateOfBirth": "2001-09-05",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "M"
+      ],
+      "birthplace": "Ealing",
+      "sourceHeightText": "1.78 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 1490,
+      "exactSourceLine": "Bukayo Saka,                  M,  1.78 m,  b. 5 Sep 2001 @ Ealing",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L1490",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-harry-kane",
+      "displayName": "Harry Kane",
+      "dateOfBirth": "1993-07-28",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "F"
+      ],
+      "birthplace": "Walthamstow",
+      "sourceHeightText": "1.88 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 2992,
+      "exactSourceLine": "Harry Kane,                   F,  1.88 m,  b. 28 Jul 1993 @ Walthamstow",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2992",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-declan-rice",
+      "displayName": "Declan Rice",
+      "dateOfBirth": "1999-01-14",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "M"
+      ],
+      "birthplace": "Kingston upon Thames",
+      "sourceHeightText": "1.85 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 2120,
+      "exactSourceLine": "Declan Rice,                  M,  1.85 m,  b. 14 Jan 1999 @ Kingston upon Thames",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2120",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-jude-bellingham",
+      "displayName": "Jude Bellingham",
+      "dateOfBirth": "2003-06-29",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "M"
+      ],
+      "birthplace": "Stourbridge",
+      "sourceHeightText": "1.80 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 901,
+      "exactSourceLine": "Jude Bellingham,              M,  1.80 m,  b. 29 Jun 2003 @ Stourbridge",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L901",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-john-stones",
+      "displayName": "John Stones",
+      "dateOfBirth": "1994-05-28",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "D"
+      ],
+      "birthplace": "Barnsley",
+      "sourceHeightText": "1.88 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 2897,
+      "exactSourceLine": "John Stones,                  D,  1.88 m,  b. 28 May 1994 @ Barnsley",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2897",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-jordan-pickford",
+      "displayName": "Jordan Pickford",
+      "dateOfBirth": "1994-03-07",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "G"
+      ],
+      "birthplace": "Washington",
+      "sourceHeightText": "1.85 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 2916,
+      "exactSourceLine": "Jordan Pickford,              G,  1.85 m,  b. 7 Mar 1994 @ Washington",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2916",
+      "mappedDetailedPositions": [
+        "GK"
+      ],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-kylian-mbappe",
+      "displayName": "Kylian Mbappé",
+      "dateOfBirth": "1998-12-20",
+      "sourceCountryGroup": "France",
+      "positionCodes": [
+        "F"
+      ],
+      "birthplace": "Paris",
+      "sourceHeightText": "1.78 m",
+      "sourcePath": "europe/france/fr.players.txt",
+      "sourceLineNumber": 863,
+      "exactSourceLine": "Kylian Mbappé,                F,  1.78 m,  b. 20 Dec 1998 @ Paris",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L863",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-william-saliba",
+      "displayName": "William Saliba",
+      "dateOfBirth": "2001-03-24",
+      "sourceCountryGroup": "France",
+      "positionCodes": [
+        "D"
+      ],
+      "birthplace": "Bondy",
+      "sourceHeightText": "1.93 m",
+      "sourcePath": "europe/france/fr.players.txt",
+      "sourceLineNumber": 530,
+      "exactSourceLine": "William Saliba,               D,  1.93 m,  b. 24 Mar 2001 @ Bondy",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L530",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-eduardo-camavinga",
+      "displayName": "Eduardo Camavinga",
+      "dateOfBirth": "2002-11-10",
+      "sourceCountryGroup": "France",
+      "positionCodes": [
+        "M"
+      ],
+      "birthplace": "Miconje",
+      "sourceHeightText": "1.82 m",
+      "sourcePath": "europe/france/fr.players.txt",
+      "sourceLineNumber": 309,
+      "exactSourceLine": "Eduardo Camavinga,            M,  1.82 m,  b. 10 Nov 2002 @ Miconje",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L309",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-antoine-griezmann",
+      "displayName": "Antoine Griezmann",
+      "dateOfBirth": "1991-03-21",
+      "sourceCountryGroup": "France",
+      "positionCodes": [
+        "F"
+      ],
+      "birthplace": "Mâcon",
+      "sourceHeightText": "1.75 m",
+      "sourcePath": "europe/france/fr.players.txt",
+      "sourceLineNumber": 1563,
+      "exactSourceLine": "Antoine Griezmann,            F,  1.75 m,  b. 21 Mar 1991 @ Mâcon",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L1563",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-mohamed-salah",
+      "displayName": "Mohamed Salah",
+      "dateOfBirth": "1992-06-15",
+      "sourceCountryGroup": "Egypt",
+      "positionCodes": [
+        "M",
+        "F"
+      ],
+      "birthplace": "Basyoun",
+      "sourceHeightText": "1.75 m",
+      "sourcePath": "africa/egypt/eg.players.txt",
+      "sourceLineNumber": 54,
+      "exactSourceLine": "Mohamed Salah,                M|F,1.75 m,  b. 15 Jun 1992 @ Basyoun",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/africa/egypt/eg.players.txt#L54",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-son-heung-min",
+      "displayName": "Son Heung-Min",
+      "dateOfBirth": "1992-07-08",
+      "sourceCountryGroup": "South Korea",
+      "positionCodes": [
+        "F"
+      ],
+      "birthplace": "Chuncheon",
+      "sourceHeightText": "1.83 m",
+      "sourcePath": "asia/south-korea/kr.players.txt",
+      "sourceLineNumber": 67,
+      "exactSourceLine": "Son Heung-Min,                F,  1.83 m,  b. 8 Jul 1992 @ Chuncheon",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/asia/south-korea/kr.players.txt#L67",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-aaron-ramsdale",
+      "displayName": "Aaron Ramsdale",
+      "dateOfBirth": "1998-05-14",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "G"
+      ],
+      "birthplace": "Stoke-on-Trent",
+      "sourceHeightText": "1.88 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 2255,
+      "exactSourceLine": "Aaron Ramsdale,               G,  1.88 m,  b. 14 May 1998 @ Stoke-on-Trent",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2255",
+      "mappedDetailedPositions": [
+        "GK"
+      ],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-nick-pope",
+      "displayName": "Nick Pope",
+      "dateOfBirth": "1992-04-19",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "G"
+      ],
+      "birthplace": "Cambridge",
+      "sourceHeightText": "1.91 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 3101,
+      "exactSourceLine": "Nick Pope,                    G,  1.91 m,  b. 19 Apr 1992 @ Cambridge",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L3101",
+      "mappedDetailedPositions": [
+        "GK"
+      ],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-kyle-walker",
+      "displayName": "Kyle Walker",
+      "dateOfBirth": "1990-05-28",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "D"
+      ],
+      "birthplace": "Sheffield",
+      "sourceHeightText": "1.83 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 3229,
+      "exactSourceLine": "Kyle Walker,                  D,  1.83 m,  b. 28 May 1990 @ Sheffield",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L3229",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-harry-maguire",
+      "displayName": "Harry Maguire",
+      "dateOfBirth": "1993-03-05",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "D"
+      ],
+      "birthplace": "Sheffield",
+      "sourceHeightText": "1.88 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 3026,
+      "exactSourceLine": "Harry Maguire,                D,  1.88 m,  b. 5 Mar 1993 @ Sheffield",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L3026",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-luke-shaw",
+      "displayName": "Luke Shaw",
+      "dateOfBirth": "1995-07-12",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "D"
+      ],
+      "birthplace": "Kingston upon Thames",
+      "sourceHeightText": "1.85 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 2767,
+      "exactSourceLine": "Luke Shaw,                    D,  1.85 m,  b. 12 Jul 1995 @ Kingston upon Thames",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2767",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-kieran-trippier",
+      "displayName": "Kieran Trippier",
+      "dateOfBirth": "1990-09-19",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "D"
+      ],
+      "birthplace": "Bury",
+      "sourceHeightText": "1.78 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 3213,
+      "exactSourceLine": "Kieran Trippier,              D,  1.78 m,  b. 19 Sep 1990 @ Bury",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L3213",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-trent-alexander-arnold",
+      "displayName": "Trent Alexander-Arnold",
+      "dateOfBirth": "1998-10-07",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "D",
+        "M"
+      ],
+      "birthplace": "Liverpool",
+      "sourceHeightText": "1.75 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 2189,
+      "exactSourceLine": "Trent Alexander-Arnold,       D|M,1.75 m,  b. 7 Oct 1998 @ Liverpool",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2189",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-phil-foden",
+      "displayName": "Phil Foden",
+      "dateOfBirth": "2000-05-28",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "M"
+      ],
+      "birthplace": "Stockport",
+      "sourceHeightText": "1.71 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 1809,
+      "exactSourceLine": "Phil Foden,                   M,  1.71 m,  b. 28 May 2000 @ Stockport",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L1809",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-marcus-rashford",
+      "displayName": "Marcus Rashford",
+      "dateOfBirth": "1997-10-31",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "F"
+      ],
+      "birthplace": "Manchester",
+      "sourceHeightText": "1.80 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 2371,
+      "exactSourceLine": "Marcus Rashford,              F,  1.80 m,  b. 31 Oct 1997 @ Manchester",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2371",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-jack-grealish",
+      "displayName": "Jack Grealish",
+      "dateOfBirth": "1995-09-10",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "M"
+      ],
+      "birthplace": "Birmingham",
+      "sourceHeightText": "1.75 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 2752,
+      "exactSourceLine": "Jack Grealish,                M,  1.75 m,  b. 10 Sep 1995 @ Birmingham",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2752",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-raheem-sterling",
+      "displayName": "Raheem Sterling",
+      "dateOfBirth": "1994-12-08",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "M",
+        "F"
+      ],
+      "birthplace": "Kingston",
+      "sourceHeightText": "1.70 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 2847,
+      "exactSourceLine": "Raheem Sterling,              M|F,1.70 m,  b. 8 Dec 1994 @ Kingston",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2847",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-cole-palmer",
+      "displayName": "Cole Palmer",
+      "dateOfBirth": "2002-05-06",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "M",
+        "F"
+      ],
+      "birthplace": "Wythenshawe",
+      "sourceHeightText": "1.89 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 1272,
+      "exactSourceLine": "Cole Palmer,                  M|F,1.89 m,  b. 6 May 2002 @ Wythenshawe",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L1272",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-james-maddison",
+      "displayName": "James Maddison",
+      "dateOfBirth": "1996-11-23",
+      "sourceCountryGroup": "England",
+      "positionCodes": [
+        "M"
+      ],
+      "birthplace": "Coventry",
+      "sourceHeightText": "1.79 m",
+      "sourcePath": "europe/england/eng.players.txt",
+      "sourceLineNumber": 2551,
+      "exactSourceLine": "James Maddison,               M,  1.79 m,  b. 23 Nov 1996 @ Coventry",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/england/eng.players.txt#L2551",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-hugo-lloris",
+      "displayName": "Hugo Lloris",
+      "dateOfBirth": "1986-12-26",
+      "sourceCountryGroup": "France",
+      "positionCodes": [
+        "G"
+      ],
+      "birthplace": "Nice",
+      "sourceHeightText": "1.88 m",
+      "sourcePath": "europe/france/fr.players.txt",
+      "sourceLineNumber": 1758,
+      "exactSourceLine": "Hugo Lloris,                  G,  1.88 m,  b. 26 Dec 1986 @ Nice",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L1758",
+      "mappedDetailedPositions": [
+        "GK"
+      ],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-mike-maignan",
+      "displayName": "Mike Maignan",
+      "dateOfBirth": "1995-07-03",
+      "sourceCountryGroup": "France",
+      "positionCodes": [
+        "G"
+      ],
+      "birthplace": "Cayenne",
+      "sourceHeightText": "1.91 m",
+      "sourcePath": "europe/france/fr.players.txt",
+      "sourceLineNumber": 1241,
+      "exactSourceLine": "Mike Maignan,                 G,  1.91 m,  b. 3 Jul 1995 @ Cayenne",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L1241",
+      "mappedDetailedPositions": [
+        "GK"
+      ],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-benjamin-pavard",
+      "displayName": "Benjamin Pavard",
+      "dateOfBirth": "1996-03-28",
+      "sourceCountryGroup": "France",
+      "positionCodes": [
+        "D"
+      ],
+      "birthplace": "Maubeuge",
+      "sourceHeightText": "1.82 m",
+      "sourcePath": "europe/france/fr.players.txt",
+      "sourceLineNumber": 1178,
+      "exactSourceLine": "Benjamin Pavard,              D,  1.82 m,  b. 28 Mar 1996 @ Maubeuge",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L1178",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-ngolo-kante",
+      "displayName": "Ngolo Kanté",
+      "dateOfBirth": "1991-03-29",
+      "sourceCountryGroup": "France",
+      "positionCodes": [
+        "M"
+      ],
+      "birthplace": "Paris",
+      "sourceHeightText": "1.68 m",
+      "sourcePath": "europe/france/fr.players.txt",
+      "sourceLineNumber": 1562,
+      "exactSourceLine": "Ngolo Kanté,                  M,  1.68 m,  b. 29 Mar 1991 @ Paris",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L1562",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-paul-pogba",
+      "displayName": "Paul Pogba",
+      "dateOfBirth": "1993-03-15",
+      "sourceCountryGroup": "France",
+      "positionCodes": [
+        "M"
+      ],
+      "birthplace": "Lagny-sur-Marne",
+      "sourceHeightText": "1.91 m",
+      "sourcePath": "europe/france/fr.players.txt",
+      "sourceLineNumber": 1428,
+      "exactSourceLine": "Paul Pogba,                   M,  1.91 m,  b. 15 Mar 1993 @ Lagny-sur-Marne",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L1428",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-ousmane-dembele",
+      "displayName": "Ousmane Dembélé",
+      "dateOfBirth": "1997-05-15",
+      "sourceCountryGroup": "France",
+      "positionCodes": [
+        "F"
+      ],
+      "birthplace": "Vernon",
+      "sourceHeightText": "1.78 m",
+      "sourcePath": "europe/france/fr.players.txt",
+      "sourceLineNumber": 1050,
+      "exactSourceLine": "Ousmane Dembélé,              F,  1.78 m,  b. 15 May 1997 @ Vernon",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L1050",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    },
+    {
+      "playerId": "player-olivier-giroud",
+      "displayName": "Olivier Giroud",
+      "dateOfBirth": "1986-09-30",
+      "sourceCountryGroup": "France",
+      "positionCodes": [
+        "F"
+      ],
+      "birthplace": "Chambéry",
+      "sourceHeightText": "1.92 m",
+      "sourcePath": "europe/france/fr.players.txt",
+      "sourceLineNumber": 1763,
+      "exactSourceLine": "Olivier Giroud,               F,  1.92 m,  b. 30 Sep 1986 @ Chambéry",
+      "sourceUrl": "https://github.com/openfootball/players/blob/125d20f7cc06cac7e758b40df535a7695632680a/europe/france/fr.players.txt#L1763",
+      "mappedDetailedPositions": [],
+      "source": "openfootball/players",
+      "license": "CC0-1.0",
+      "sourceCommit": "125d20f7cc06cac7e758b40df535a7695632680a",
+      "sourceCommitTimestamp": "2024-06-17T12:39:42+02:00",
+      "retrievedAt": "2026-10-16T08:18:19.299Z",
+      "sourceSnapshotDate": null
+    }
+  ]
+}

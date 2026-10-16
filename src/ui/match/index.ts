@@ -1,0 +1,1 @@
+export { MatchCentre } from './MatchCentre';

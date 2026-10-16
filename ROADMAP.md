@@ -1,20 +1,24 @@
 # Roadmap
 
-Work is limited to Milestone 1 until its implementation and data approach have been reviewed. The full game specification is the destination, not a claim that every listed system is already implemented.
+The user reviewed Milestone 1 on their Mac, approved the font and skin, and authorized Milestone 2 on 16 October 2026. Work is now limited to the attribute-driven match foundation. The full game specification is the destination, not a claim that every listed system is already implemented.
 
 ## Milestone 1 — Application foundation
 
 Deliver a running React/TypeScript/Vite application, an original compact management shell, club selection, sortable squads, reusable player profiles and complete attribute components. Include a clearly labelled local original-assessment editor and configurable calibration utility without fabricating ratings. Establish typed domain models, explicit deterministic command interfaces, sourced real-identity reference data, a provider-independent validated importer, Dexie persistence and portable versioned saves. Create foundational tests and developer documentation.
 
-Acceptance requires type checks, meaningful tests and a production build; manual review must cover navigation, unknown data, role calculations, invalid imports and export/restore behavior. Run the local application on macOS to close the platform acceptance criterion. A successful Linux build is useful evidence but does not replace that run.
+The foundation and subsequent skin/font changes passed the recorded cloud checks. The user reviewed the interface on their Mac and confirmed the local Humanist face and charcoal/navy/silver skin. This is separate from full browser compatibility testing; retain the exact evidence and limits in [the Milestone 1 review](docs/MILESTONE_1_REVIEW.md).
 
-Current implementation and checks are recorded in [README.md](README.md). No match engine, transfer AI or 2D presentation is part of this milestone. A sourced reference snapshot is not a verified current squad database.
+Milestone 1 did not include a match engine, transfer AI or 2D presentation. Its original review remains historical documentation. A sourced reference snapshot is not a verified current squad database.
 
 ## Milestone 2 — Attribute-driven match foundation
 
-After foundation review, build the first pure TypeScript event-driven match model. Define how attributes, condition, tactics and controlled randomness affect football actions. Derive score, commentary and statistics from the same events. Add lineup validation, substitutions at defined checkpoints and a batch calibration harness.
+Authorized on 16 October 2026 after the foundation review. Build the first pure TypeScript event-driven exhibition match model: a 90-minute match in 15-minute decision segments, with attribute-driven actions, explicit tactics, condition, morale, home effects, discipline, substitutions and seeded randomness. Derive score, commentary and statistics from the same events.
 
-Acceptance includes reproducibility from initial state, seed and commands; stronger teams gaining a measurable advantage; plausible scoring and discipline distributions; tested home advantage, fatigue and tactical trade-offs. Keep visual presentation to an event log and basic statistics.
+Use an audited real-identity exhibition pool without guessing current club rosters or ability. Any uniform 10/20 baseline is explicitly accepted temporary comparison input for missing attributes, preserving known assessments and source records. Keep the Matchday workspace and its replay-validated archives separate from career saves.
+
+Acceptance includes reproducibility from initial configuration, seed, engine version and commands; stronger synthetic teams gaining a measurable advantage; documented scoring and discipline design targets; and tested home effects, fatigue, substitutions and tactical trade-offs. A synthetic batch report is not empirical calibration to a real league. Keep presentation to decisions, an event log and basic statistics. Record actual checks and remaining limitations in [the Milestone 2 review](docs/MILESTONE_2_REVIEW.md) before calling the milestone complete.
+
+No competition progression, season loop, transfer AI or 2D animation is authorized by this milestone. Actual Milestone 2 macOS/browser acceptance remains a separate user review step.
 
 ## Milestone 3 — Competition and season loop
 

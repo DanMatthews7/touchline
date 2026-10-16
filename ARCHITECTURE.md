@@ -1,15 +1,15 @@
 # Architecture
 
-Touchline is a local-first, single-player browser application targeting modern macOS on Apple Silicon. Milestone 1 establishes typed data, an inspectable management interface and reliable saves. The full product requirements remain in [GAME_SPEC.md](GAME_SPEC.md).
+Touchline is a local-first, single-player browser application targeting modern macOS on Apple Silicon. Milestone 1 established typed data, an inspectable management interface and reliable saves. Following the user's foundation review, Milestone 2 adds a standalone attribute-driven exhibition match model. The full product requirements remain in [GAME_SPEC.md](GAME_SPEC.md).
 
-## Implementation plan
+## Current implementation plan
 
-1. Establish React, strict TypeScript, Vite, CSS Modules, Vitest and shared design tokens.
-2. Implement domain types, complete nullable 1–20 attribute vocabulary, documented role scores and deterministic command interfaces.
-3. Validate provider-independent real-data imports, retain provenance and keep verified facts separate from original game assessments.
-4. Add separate source snapshots and career records in IndexedDB through Dexie, with versioned export and restore.
-5. Build club selection, a compact management shell, sortable squad tables, reusable player profiles and an original-assessment editor.
-6. Verify domain behavior, hostile imports, persistence round trips, type checking and production output. Review the foundation before building a match engine.
+1. Preserve the reviewed React/TypeScript/Vite shell, source data, profile assessments and version-1 career saves.
+2. Build a pure TypeScript event-driven match with explicit lineup and tactics validation, seeded randomness, fatigue, discipline and decision checkpoints.
+3. Add a Matchday workspace using real sourced identities in temporary coach selections, with a clearly labelled opt-in comparison baseline where ratings are unknown.
+4. Persist exhibition configuration and commands in a separate replay-validated match archive without advancing or modifying a career.
+5. Test action and tactical sensitivity, stronger-team advantage, home effects, substitutions, discipline and batch distributions against documented design targets.
+6. Review the first match foundation before adding competition and season play. Transfer AI and 2D presentation remain outside scope.
 
 ## Boundaries
 
@@ -17,11 +17,11 @@ Touchline is a local-first, single-player browser application targeting modern m
 | --- | --- | --- |
 | Presentation | Navigation, accessible controls, sortable tables, player profiles, data completeness and user feedback | Football calculations embedded in components |
 | Domain | Typed players, clubs, competitions, tactics, finances and career state; attribute and role rules | React, IndexedDB, browser globals |
-| Simulation interface | Seeded randomness, explicit commands and reproducible state transitions | React, persistence, wall-clock time, implicit randomness |
+| Simulation | Seeded randomness, explicit commands, attribute-driven match events and reproducible state transitions | React, persistence, wall-clock time, implicit randomness |
 | Data boundary | Untrusted JSON validation, provenance, reference snapshots and format compatibility | Unvalidated assertions about source rights or real player ability |
 | Persistence | IndexedDB stores, atomic save operations, portable export and import | Hidden state changes in the simulation |
 
-Presentation consumes validated domain objects. Data adapters and storage sit outside the deterministic core. A future match engine will return authoritative events and state changes to presentation; UI code must not invent separate scores, commentary or statistics.
+Presentation consumes validated domain objects. Data adapters and storage sit outside the deterministic core. The match engine returns authoritative events and state changes; UI code derives scores, commentary and statistics from those events rather than generating independent football outcomes. [MATCH_ENGINE.md](docs/MATCH_ENGINE.md) documents the versioned model and its limits.
 
 ## Domain decisions
 
@@ -31,7 +31,7 @@ Presentation consumes validated domain objects. Data adapters and storage sit ou
 - Attributes retain the specification's technical, mental, physical and goalkeeping vocabulary. A known rating is an integer from 1 to 20; missing evidence is represented explicitly, not filled with an average value.
 - Verified biographical facts and original game assessments are different records. Assessment provenance and uncertainty remain visible to tooling; an attribute score is never presented as an objective biographical fact.
 - Potential, development and personality models can exist without being exposed on player screens. Local save files are user-owned data, not a security boundary against their owner.
-- Role suitability version 1 summarises attributes using position-specific weights, provided the player has a compatible known position. It is unavailable where required evidence is missing. Fitness and tactical role effects are future engine work; this summary does not currently simulate either and does not replace action-level attributes.
+- Role suitability version 1 summarises attributes using position-specific weights, provided the player has a compatible known position. It is unavailable where required evidence is missing. The profile summary does not include match condition or tactics; the separate match engine applies its own action-level effects. Neither replaces individual attributes.
 
 ### Role score version 1
 
@@ -51,9 +51,9 @@ The source of truth is `src/domain/ratings.ts`, exported as `ROLE_DEFINITIONS`:
 | Winger | RW, LW | Dribbling 4; Crossing 4; First Touch 2; Off the Ball 3; Flair 2; Acceleration 4; Pace 4; Agility 2 |
 | Striker | ST | Finishing 5; First Touch 3; Heading 2; Composure 4; Off the Ball 4; Anticipation 3; Acceleration 2; Strength 2 |
 
-The initial deterministic command surface selects a managed club and advances the date. Command counts and seeded random state are explicit. Date progression does not produce matches, football development or financial transactions in Milestone 1.
+The career command surface selects a managed club and advances the date. Command counts and seeded random state are explicit. Career date progression does not automatically produce fixtures, match results, development or financial transactions. Milestone 2 exhibition commands belong to a separate match state and cannot advance the career calendar.
 
-The generator is xorshift32 with explicit persisted state; a zero seed maps deterministically to a nonzero state. The current commands do not consume random numbers. Initial IDs, wall-clock creation times and entropy enter through runtime adapters, not the deterministic transition function.
+The generator is xorshift32 with explicit persisted state; a zero seed maps deterministically to a nonzero state. Career commands do not consume random numbers; match advancement does. Initial IDs, wall-clock creation times and entropy enter through runtime adapters, not deterministic transitions.
 
 ### Original assessments and calibration
 
@@ -68,6 +68,18 @@ Database snapshots and save envelopes begin at schema version 1. Imports must va
 Dexie holds source snapshots and career records in separate stores. A portable save contains its source snapshot as well as the career state, so restoration does not silently depend on a different starting database. A successful JSON parse is insufficient: the complete object and its relationships must pass validation.
 
 The bundled reference at `src/reference/snapshot.json` is parsed through the same boundary as user imports. Its 12 archival player identities have no club assignments or ratings. Four club identities support selection without claiming real squad membership. Unknown citizenship and outfield position familiarity are intentional gaps; the underlying source's country headings and broad D/M/F codes do not resolve them. `docs/data/source-extract.json` and adjacent CC0 licence copies preserve the audit trail.
+
+## Exhibition workspace and persistence
+
+`src/reference/exhibition-snapshot.json` adds a separate audited pool of 32 real archival identities, including five directly sourced goalkeepers. It has no clubs or current player assignments and does not overwrite the original 12-player snapshot. Its source extraction is retained in `docs/data/exhibition-source-extract.json`. Known user assessments can be reused by stable player ID without inventing missing factual detail.
+
+Home and Away selections are temporary match inputs. Assigning a formation slot is a coaching choice, not new evidence of a player's real position; unknown or unfamiliar positions remain modelled uncertainty. Starting condition and morale are scenario values, not verified real-world fitness. An explicit comparison option may fill only missing ratings with a uniform 10/20; known assessments remain unchanged. The selected assessment mode travels with match configuration and exports. Source snapshots, sourced facts and careers are not modified by these temporary inputs.
+
+Match archives use `format: "touchline-match"`, schema version 1 and engine version 1. They contain the initial configuration and accepted command log, not stored scores or independently trusted events. Import validates shape, versions and football relationships, then replays every command through the engine before writing. The same initial configuration, seed, command sequence and engine version reconstruct the same event stream and state.
+
+Dexie database `touchline-match-sessions` version 1 has a `sessions` store indexed by ID and update time. This is separate from the existing career database and does not upgrade its schema. A stored session ID cannot silently acquire a different initial configuration. Restoring a valid backup with the same ID and configuration can replace that session's progress. Archives are limited to 16 MiB and 1,000 commands; unsupported versions fail explicitly without an invented migration.
+
+Career export remains `touchline-save` version 1 and excludes exhibition sessions. The user must export a match separately to back it up. Local browser storage and exports belong to the user; neither is a tamper-proof record or a cloud backup service.
 
 ## Local runtime and deployment
 
@@ -85,11 +97,12 @@ Future static hosting and desktop packaging can reuse the domain core. Backend a
 | --- | --- |
 | A 2026/27 target does not establish verified current squads | Ship clearly labelled biographical reference data; require sourced roster data for current assignments |
 | Comprehensive attributes cannot be inferred reliably from public biography | Retain unknown ratings; accept separately labelled editorial or calibrated assessments with evidence |
-| Authentic squads and immediate simulated play compete with limited data rights | Prioritise truthful data and an importer; match simulation is outside Milestone 1 |
+| Authentic squads and immediate simulated play compete with limited data rights | Keep current rosters unknown; use explicit temporary exhibition selections and opt-in model inputs |
 | A deterministic engine can be undermined by UI randomness or timestamps | Commands supply inputs explicitly; keep runtime services outside transitions |
 | Local browser storage can be cleared or isolated by origin | Provide portable save export and restore; document browser storage limits |
-| Browser runtime compatibility is broader than a Linux build check | Keep actual macOS and M2 verification outstanding until tested on that hardware |
+| A passing synthetic batch can be mistaken for real football calibration | Document design targets and sensitivity checks separately from empirical validation |
+| Browser runtime compatibility is broader than a Linux build check | Preserve the user's Milestone 1 skin/font review; keep Milestone 2 macOS acceptance separate until tested |
 
 ## Validation boundaries
 
-Foundational checks cover data integrity, IDs and assignments, attribute ranges and role calculations, deterministic interfaces, version errors, financial and squad constraints, and save/import round trips. Match distribution, league table calculation and 380-match scheduling checks belong to the milestones that implement those systems. Do not substitute placeholder tests for absent gameplay.
+Foundational checks cover data integrity, IDs and assignments, attribute ranges and role calculations, deterministic interfaces, version errors, financial and squad constraints, and career save/import round trips. Milestone 2 adds match replay, event consistency, valid lineups, tactical and attribute sensitivity, substitutions, discipline, fatigue, match archives and synthetic batch design targets. League table calculation and 380-match scheduling checks belong to the season milestone. Do not substitute placeholder tests for absent gameplay.

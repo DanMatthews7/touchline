@@ -1,6 +1,6 @@
 {
   "name": "touchline",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -14,7 +14,8 @@
     "test:watch": "vitest",
     "test:browser": "playwright test",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview --host 127.0.0.1"
+    "preview": "vite preview --host 127.0.0.1",
+    "calibrate": "tsx scripts/calibrate.ts"
   },
   "dependencies": {
     "dexie": "4.4.6",
@@ -30,6 +31,7 @@
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.2",
     "fake-indexeddb": "6.2.5",
+    "tsx": "4.23.15",
     "typescript": "5.9.3",
     "vite": "8.3.4",
     "vitest": "5.0.5"
