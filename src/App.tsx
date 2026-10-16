@@ -143,7 +143,7 @@ export default function App() {
     } finally { operationRunning.current = false; }
   }
 
-  if (!ready) return <main style={{ padding: 32, color: '#193f2c' }} aria-live="polite">Opening Touchline’s local database…</main>;
+  if (!ready) return <main style={{ padding: 32, color: 'var(--ink)' }} aria-live="polite">Opening Touchline’s local database…</main>;
   const editingPlayer = snapshot.players.find(player => player.id === editingPlayerId);
   return <>
     <GameShell snapshot={snapshot} career={career} storageStatus={storageStatus} appNotice={notice}

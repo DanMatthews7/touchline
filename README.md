@@ -1,6 +1,6 @@
 # Touchline
 
-A local-first football management game foundation for modern browsers, targeting macOS on Apple Silicon. The interface uses an original compact green desktop style. The first milestone prepares real-data imports, player attributes and reliable career saves; the match engine follows after review.
+A local-first football management game foundation for modern browsers, targeting macOS on Apple Silicon. The interface uses a compact desktop skin with a subtly textured matte charcoal background, navy gradient menu bars and silver accents. The first milestone prepares real-data imports, player attributes and reliable career saves; the match engine follows after review.
 
 ## Run locally
 
@@ -32,6 +32,8 @@ The whole interface uses **Humanist 777 Black BT**, including headings, navigati
 
 No font binary is bundled or fetched. If the face is unavailable, the interface uses a system sans-serif fallback. The single Black face is used throughout; lighter font cuts are not supplied. Typography is controlled by `--font-game` in [src/ui/tokens.css](src/ui/tokens.css).
 
+The base skin is also defined in that token file. Its matte texture is drawn with subtle CSS gradients and requires no image downloads. Navy gradients distinguish navigation and panel bars; silver text, borders, selection markers and focus rings keep dense tables and attribute screens readable. Dialogs and native form controls follow the same dark palette.
+
 ## Scope and honest limitations
 
 Milestone 1 implements the application shell, club selection, player and squad inspection, typed domain models, explicit simulation interfaces, validated data import, local persistence and portable save infrastructure. A local attribute editor records original game assessments separately from sourced biography. The implementation is ready for foundation review; actual macOS/M2 acceptance remains outstanding.
@@ -60,6 +62,8 @@ On 15 October 2026, Linux x86-64 with Node 24.19.0 and Chromium 154 passed:
 - All four Playwright tests against both development and production servers: navigation, sorting/filtering, editorial role calculation, reload persistence, exact export/restore and invalid-import preservation.
 - Keyboard navigation and modal focus, no horizontal overflow at 1280 and 800 pixels wide, and nine automated accessibility scans with no serious or critical findings on the tested surfaces.
 - No uncaught browser errors or external gameplay requests in those workflows; `npm audit` reported no known dependency vulnerabilities at the time of the check.
+
+The 16 October 2026 matte charcoal/navy/silver skin refresh also passed type checking, all 57 foundational tests, the production build and all four browser tests. Fourteen accessibility scans, including assessed attributes, expanded assessment notes, the inbox and error states, reported no serious or critical issues. Cloud visual checks use the fallback font; the installed Humanist face was confirmed loading by the user on their Mac.
 
 See [the milestone review](docs/MILESTONE_1_REVIEW.md) for the review boundary and the remaining Mac check. These results do not establish Safari, macOS or Apple Silicon validation.
 

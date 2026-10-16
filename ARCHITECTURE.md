@@ -71,6 +71,8 @@ The bundled reference at `src/reference/snapshot.json` is parsed through the sam
 
 ## Local runtime and deployment
 
+The current presentation direction, requested on 16 October 2026, is a subtly textured matte charcoal canvas with navy gradient navigation and panel bars, plus silver text, borders and selection accents. It supersedes the green palette described in the preserved v0.3 master specification. Shared semantic tokens in `src/ui/tokens.css` control the skin, including dark native controls and keyboard focus. Fine CSS gradients supply the texture without image files or remote requests. Humanist 777 Black BT remains the shared locally resolved font; a system fallback supports machines without that face.
+
 Vite serves development; the production build consists of static local assets. IndexedDB belongs to a browser origin, so changing the port, host or browser creates a separate storage context. Export saves before moving between origins or clearing browser storage.
 
 No application backend, account, external gameplay API or client secret is required. Installing dependencies needs package-registry access; loading a source reference link is an explicit browser action. Offline reload or installable PWA behavior must only be claimed after a service worker and its update behavior have been implemented and verified.
