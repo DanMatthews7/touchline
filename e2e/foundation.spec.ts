@@ -97,8 +97,12 @@ test('club selection, every primary screen, sortable reference directory and all
     if (name === 'Dashboard') await expect(page.getByRole('heading', { level: 1, name: /Manager.s desk/ })).toBeVisible();
     else if (name === 'Squad') await expect(page.getByRole('heading', { level: 1, name: 'Squad & player directory' })).toBeVisible();
     else if (name === 'Player Profiles') await expect(page.getByRole('heading', { level: 1, name: 'Bukayo Saka' })).toBeVisible();
+    else if (name === 'Fixtures' || name === 'Competitions') {
+      await expect(page.getByRole('heading', { level: 1, name: 'Season preparation', exact: true })).toBeVisible();
+      await expect(page.getByRole('button', { name: 'Create league season', exact: true })).toBeDisabled();
+    }
     else await expect(page.getByRole('heading', { level: 1, name, exact: true })).toBeVisible();
-    if (['Tactics', 'Fixtures', 'Competitions', 'Transfers', 'Finances'].includes(name)) {
+    if (['Tactics', 'Transfers', 'Finances'].includes(name)) {
       await expect(page.getByText('Planned feature', { exact: true })).toBeVisible();
     }
   }

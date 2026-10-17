@@ -1,10 +1,20 @@
 # Touchline
 
-A local-first football management game for modern browsers, targeting macOS on Apple Silicon. The reviewed foundation uses a matte charcoal background, navy gradient bars and silver accents. Milestone 2 adds an attribute-driven exhibition Matchday workspace; competition and season play follow a separate review.
+A local-first football management game for modern browsers, targeting macOS on Apple Silicon. The reviewed foundation uses a matte charcoal background, navy gradient bars and silver accents. The exhibition workflow is implemented and reviewed; Milestone 3 season development is in progress.
+
+## Milestone 3 status
+
+**Verified current squads are required first.** The season foundation implements scheduling, managed matches, results, tables, calendar commands and portable season archives, but no verified, appropriately licensed 2026/27 twenty-club squad dataset has been established. Season creation remains disabled. Original roster allocations and archival identities cannot substitute for this gate; Milestone 3 is not complete.
+
+Open **Fixtures**, **Competitions**, or **Matchday → League season** to inspect roster readiness and **Import squad dataset**. A plain database import does not supply the required dated review manifest. Official main-site access now works, but current squads remain unverified and the reviewed terms require prior written approval for the intended database reuse; none has been established. [CURRENT_SQUAD_SOURCES.md](docs/data/CURRENT_SQUAD_SOURCES.md) records the actual evidence and remaining source/rights requirements.
+
+The generated game calendar has 38 weekly rounds and 380 fixtures. It is not the official Premier League fixture list; its dates and final table tie-break are original game rules. [SEASON_ENGINE.md](docs/SEASON_ENGINE.md) explains the implemented foundation. [The Milestone 3 review](docs/MILESTONE_3_REVIEW.md) distinguishes code checks from the unresolved data gate and unreviewed Mac workflow. Existing exhibitions remain under **Matchday → Exhibition**.
+
+The foundation passes TypeScript, all 211 unit/integration tests and the production build. All 14 browser workflows passed, including a complete 38-round season using labelled automated test fixtures and 20 accessibility scans without serious/critical findings. These checks do not supply or verify real current squads; the detailed review records the subsequent private-import permission check separately.
 
 ## Run locally
 
-On GitHub, choose branch **`milestone-2-match-engine`**, then **Code → Download ZIP**. Unzip it in Finder. This branch contains the match foundation; the Milestone 1 branch remains the earlier review checkpoint.
+For the work-in-progress season foundation, choose branch **`milestone-3-season-loop`** on GitHub, then **Code → Download ZIP**. Unzip it in Finder. The verified-roster gate remains in place on this branch. Branch `milestone-2-match-engine` preserves the earlier exhibition review checkpoint.
 
 Use Node.js `24.19.0` as pinned by `.nvmrc` (minimum supported version `22.12.0`). If you use nvm, run `nvm install` followed by `nvm use`. Open Terminal, type `cd ` including the space, drag the unzipped project folder into Terminal, and press Return. Run:
 
@@ -38,7 +48,7 @@ This measures original model design targets, not empirical calibration against a
 
 ## Review Matchday
 
-Open **Matchday** after choosing a reference club. Home and Away are temporary coach selections from sourced real identities, not verified current club squads.
+Open **Matchday → Exhibition** after choosing a reference club. Home and Away are temporary coach selections from sourced real identities, not verified current club squads. This exhibition mode does not populate the gated season workspace.
 
 1. Inspect the selected players, seed, condition, morale, formation and five instructions for each side. The separate exhibition pool has 32 authentic archival identities, including five sourced goalkeepers. Detailed outfield familiarity remains unknown. Default selections use 14 players per side: an XI and three substitutes, including a reserve goalkeeper.
 2. Supply complete assessments or explicitly accept **Use uniform 10/20 exhibition estimates** for missing values. This is an original comparison scenario, not an assessment of the named athletes. Existing known ratings are preserved; source records and the career are unchanged.
@@ -64,7 +74,9 @@ The bundled snapshot contains 12 archival real-player identities and four club i
 
 Unknown attributes display as unavailable. You may enter documented original assessments in the profile editor or import an appropriately sourced complete snapshot. Role scores need a compatible known position and every weighted attribute. For example, Jordan Pickford's sourced goalkeeper position permits a goalkeeper score after all eight required attributes have been assessed; entering outfield attributes alone cannot infer a detailed position. Biographies do not establish football ability.
 
-The exhibition engine is documented in [MATCH_ENGINE.md](docs/MATCH_ENGINE.md). Verified current squads, empirically calibrated player ratings, complete competition play, transfer AI and 2D matches remain outside scope. Career exports remain version 1 and exclude exhibition sessions. A service worker and installable PWA are not assumed.
+The exhibition engine is documented in [MATCH_ENGINE.md](docs/MATCH_ENGINE.md). Verified current squads are now a mandatory Milestone 3 prerequisite, still unresolved. Season code is a foundation, not a completed current-season game. Empirically calibrated ratings, transfers, AI squad management, injuries, repeated new seasons and 2D matches remain outside this milestone. A service worker and installable PWA are not assumed.
+
+Career-only exports remain `touchline-save` version 1. They exclude exhibition sessions and league progress. **Export season backup** includes its career, roster snapshot, review manifest and accepted decisions; **Export match** remains the independent exhibition backup. Once bound to a season, career date, managed club and source changes must go through validated season operations. Retain the current complete backup before importing an earlier one.
 
 ## Review the foundation
 
@@ -78,7 +90,7 @@ The [source audit](docs/data/source-extract.json) preserves exact extracted sour
 
 The new [exhibition source audit](docs/data/exhibition-source-extract.json) records the separate 32-player pool. It does not rewrite the original snapshot or establish current club assignments.
 
-## Current verification
+## Milestone 2 verification
 
 On 16 October 2026, cloud type checking, the production build, all 131 tests across 14 files and all nine production browser tests passed. The unit run included 6,400 synthetic matches across 16 scenarios, meeting all 14 internal design targets. A separate [7,680-match report](docs/calibration/milestone-2-engine-v1.json), using 480 spread seeds per scenario, also passed all 14 targets. Fifteen accessibility scans found no serious or critical issues on the tested surfaces; the tested workflows had no uncaught browser errors or external HTTP requests.
 
@@ -104,6 +116,8 @@ See [the original milestone review](docs/MILESTONE_1_REVIEW.md) for the historic
 - [DATA_POLICY.md](DATA_POLICY.md) — source rights, provenance, unknown data and import rules.
 - [MATCH_ENGINE.md](docs/MATCH_ENGINE.md) — version-1 football model, reproducibility and limits.
 - [MILESTONE_2_REVIEW.md](docs/MILESTONE_2_REVIEW.md) — review workflow, evidence and acceptance boundary.
+- [SEASON_ENGINE.md](docs/SEASON_ENGINE.md) — season foundation, source gate, original rules and archives.
+- [MILESTONE_3_REVIEW.md](docs/MILESTONE_3_REVIEW.md) — work-in-progress status and verification limits.
 - [ROADMAP.md](ROADMAP.md) — milestone boundaries and acceptance criteria.
 - [AGENTS.md](AGENTS.md) — short standing coding rules.
 

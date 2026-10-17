@@ -1,4 +1,4 @@
-import { lazy, Suspense, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import type { Club, DatabaseSnapshot, GameState } from '../domain/models';
 import { visiblePlayer } from '../domain/models';
 import { assessedCount, initials, readableDate } from './formatters';
@@ -6,8 +6,11 @@ import { Icon, type IconName } from './Icon';
 import { PlayerProfile } from './PlayerProfile';
 import { SquadTable } from './SquadTable';
 import styles from './GameShell.module.css';
+import type { SeasonWorkspaceProps } from './season/SeasonWorkspace';
 
 const MatchCentreEntry = lazy(() => import('./match/MatchCentreEntry'));
+const SeasonWorkspace = lazy(() => import('./season/SeasonWorkspace'));
+type SeasonController = Omit<SeasonWorkspaceProps, 'view' | 'clubs' | 'managedClubId' | 'currentDate' | 'onOpenMatchday'>;
 
 export type AppNotice = { kind: 'success' | 'error' | 'info'; text: string };
 export interface GameShellProps {
@@ -22,6 +25,7 @@ export interface GameShellProps {
   onNewCareer: () => void | Promise<void>;
   onSelectPlayer?: (playerId: string) => void;
   onEditPlayer?: (playerId: string) => void;
+  seasonController?: SeasonController;
 }
 
 type NavigationKey = 'dashboard' | 'inbox' | 'squad' | 'profiles' | 'tactics' | 'matchday' | 'fixtures' | 'competitions' | 'transfers' | 'finances';
@@ -34,8 +38,6 @@ const navigation: { key: NavigationKey; label: string; icon: IconName }[] = [
 ];
 const futureScreens = {
   tactics: { number: '02', title: 'Shape the exhibition.', description: 'Open Matchday to select one of five formations, set team instructions and make tactical changes at match checkpoints. Career-wide tactic presets will follow with season play.', features: ['4-4-2', '4-3-3', '4-2-3-1', '4-1-4-1', '3-5-2'] },
-  fixtures: { number: '03', title: 'The season is still ahead.', description: 'A season of fixtures, matchdays and results belongs to a later milestone. There are no scheduled matches in this foundation build.', features: ['No fixtures scheduled', 'No fabricated results'] },
-  competitions: { number: '03', title: 'Build the football world.', description: 'Leagues, cup competitions and tables will follow the foundation review. This reference database does not establish a current competition world.', features: ['Typed league & cup models', 'Source-aware competition data'] },
   transfers: { number: '04', title: 'The right player. The right deal.', description: 'Transfers, contracts, scouting and AI squad management are planned management systems. There are no live negotiations, invented valuations or transfer recommendations in this foundation build.', features: ['Planned management system', 'No live transfer market'] },
   finances: { number: '04', title: 'Every penny accounted for.', description: 'Track club income, wages and spending as your career develops. Budgets and balances are unknown in this reference database; financial management is planned for a later milestone.', features: ['Integer monetary values', 'Unknown budgets remain unknown'] },
 } as const;
@@ -96,8 +98,11 @@ function Inbox() {
   return <><div className={styles.pageHeader}><div><span className={styles.eyebrow}>Club communications</span><h1 className={styles.pageTitle}>Inbox</h1><p className={styles.pageSubtitle}>Foundation notes from Touchline. No simulated club correspondence.</p></div><span className={styles.chip}>3 system notes</span></div><section className={styles.panel}><header className={styles.panelHead}><h2 className={styles.panelTitle}>System messages</h2><span className={styles.panelAside}>Milestone 01</span></header><div className={styles.inboxLayout}><div className={styles.inboxList} role="group" aria-label="Inbox messages">{inboxMessages.map((item, index) => <button key={item.subject} className={`${styles.inboxItem} ${index === selected ? styles.inboxItemActive : ''}`} aria-pressed={index === selected} onClick={() => setSelected(index)}><span className={styles.inboxSender}>{item.sender}</span><span className={styles.inboxSubject}>{item.subject}</span></button>)}</div><article className={styles.inboxMessage} aria-live="polite"><span className={styles.messageTag}>{message.sender} · System note</span><h2>{message.title}</h2>{message.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</article></div></section></>;
 }
 
-export function GameShell({ snapshot, career, storageStatus, appNotice, onSelectClub, onImportDatabase, onImportSave, onExportSave, onNewCareer, onSelectPlayer, onEditPlayer }: GameShellProps) {
+export function GameShell({ snapshot, career, storageStatus, appNotice, onSelectClub, onImportDatabase, onImportSave, onExportSave, onNewCareer, onSelectPlayer, onEditPlayer, seasonController }: GameShellProps) {
   const [activeNav, setActiveNav] = useState<NavigationKey>('dashboard');
+  const [matchMode, setMatchMode] = useState<'season' | 'exhibition'>(seasonController?.season ? 'season' : 'exhibition');
+  const seasonId = seasonController?.season?.config.id;
+  useEffect(() => { setMatchMode(seasonId ? 'season' : 'exhibition'); }, [seasonId]);
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
   const club = snapshot.clubs.find(item => item.id === career?.managedClubId);
   const selectedPlayer = snapshot.players.find(player => player.id === selectedPlayerId) ?? snapshot.players[0];
@@ -105,22 +110,29 @@ export function GameShell({ snapshot, career, storageStatus, appNotice, onSelect
   function openPlayer(id: string) { setSelectedPlayerId(id); setActiveNav('profiles'); onSelectPlayer?.(id); }
   const future = activeNav in futureScreens ? futureScreens[activeNav as keyof typeof futureScreens] : null;
   const currentDate = career?.currentDate ?? snapshot.createdAt.slice(0, 10);
+  function openSeasonMatchday() { setMatchMode('season'); setActiveNav('matchday'); }
+  function seasonView(view: SeasonWorkspaceProps['view']) {
+    if (!career?.managedClubId || !seasonController) return null;
+    return <Suspense fallback={<p role="status">Opening the league workspace…</p>}><SeasonWorkspace {...seasonController} view={view} clubs={snapshot.clubs} managedClubId={career.managedClubId} currentDate={career.currentDate} onOpenMatchday={openSeasonMatchday} /></Suspense>;
+  }
   return <div className={styles.shell}>
     <div className={styles.brand} role="complementary" aria-label="Touchline brand"><span className={styles.brandMark} aria-hidden="true">t</span><div className={styles.brandWords}><span className={styles.brandTitle}>TOUCHLINE</span><span className={styles.brandSub}>FOOTBALL MANAGEMENT</span></div></div>
-    <header className={styles.topbar}><div className={styles.breadcrumb}><span>{club?.shortName ?? 'The manager’s office'}</span><span aria-hidden="true">/</span><strong>{career ? activeLabel : 'New career'}</strong></div><div className={styles.topMeta}><span><span className={styles.localDot} />LOCAL CAREER</span><span>{readableDate(currentDate).toUpperCase()}</span><span className={styles.buildTag}>MATCH FOUNDATION · 02</span></div></header>
+    <header className={styles.topbar}><div className={styles.breadcrumb}><span>{club?.shortName ?? 'The manager’s office'}</span><span aria-hidden="true">/</span><strong>{career ? activeLabel : 'New career'}</strong></div><div className={styles.topMeta}><span><span className={styles.localDot} />LOCAL CAREER</span><span>{readableDate(currentDate).toUpperCase()}</span><span className={styles.buildTag}>SEASON FOUNDATION · 03</span></div></header>
     <aside className={styles.sidebar}><div className={styles.sidebarLabel}>MANAGEMENT</div><nav className={styles.nav} aria-label="Primary navigation">{navigation.map(item => <button key={item.key} className={`${styles.navButton} ${item.key === activeNav ? styles.navButtonActive : ''}`} disabled={!career} aria-current={career && item.key === activeNav ? 'page' : undefined} title={!career ? 'Choose a club to begin' : item.label} onClick={() => setActiveNav(item.key)}><Icon name={item.icon} className={styles.navIcon} /><span className={styles.navText}>{item.label}</span>{item.key === 'inbox' && <span className={styles.navCount}>3</span>}</button>)}</nav><div className={styles.sidebarBottom}><div className={styles.clubMini}><span className={styles.miniCrest} aria-hidden="true">{initials(club?.shortName ?? 'Your club')}</span><span className={styles.miniTitle}>{club?.shortName ?? 'Your club awaits'}<span className={styles.miniSub}>{career ? 'LOCAL SAVE · V1' : 'A NEW BEGINNING'}</span></span></div></div></aside>
     <main className={styles.content} id="main-content">
       <div className={styles.notice}><Icon name="info" className={styles.noticeIcon} /><span><strong>{snapshot.validation.status === 'reference-only' ? 'Reference database • no verified 2026/27 squads' : `Imported database • ${snapshot.season}`}</strong><span> · {snapshot.validation.status === 'reference-only' ? 'Real identities. Unknown ratings stay unassessed.' : 'Source rights and factual accuracy remain the importer’s responsibility.'}</span></span></div>
       {appNotice && <div role={appNotice.kind === 'error' ? 'alert' : 'status'} className={`${styles.notice} ${appNotice.kind === 'error' ? styles.noticeError : appNotice.kind === 'success' ? styles.noticeSuccess : ''}`}><Icon name="info" className={styles.noticeIcon} /><span>{appNotice.text}</span></div>}
-      {career && <div className={styles.pageActions} style={{ marginBottom: 16 }}><FileButton label="Import database" icon="upload" onFile={onImportDatabase} /><FileButton label="Restore save" icon="upload" onFile={onImportSave} /><button className={styles.button} onClick={() => void onExportSave()}><Icon name="download" className={styles.buttonIcon} />Export save</button><button className={styles.button} onClick={() => { setActiveNav('dashboard'); void onNewCareer(); }}>Change club</button></div>}
+      {career && <div className={styles.pageActions} style={{ marginBottom: 16 }}><FileButton label="Import database" icon="upload" onFile={onImportDatabase} /><FileButton label="Restore save" icon="upload" onFile={onImportSave} /><button className={styles.button} onClick={() => void onExportSave()}><Icon name="download" className={styles.buttonIcon} />Export save</button><button className={styles.button} disabled={seasonController?.busy} onClick={() => { if (seasonController?.busy) return; setActiveNav('dashboard'); void onNewCareer(); }}>Change club</button></div>}
       {!career ? <ClubSelection key={snapshot.id} snapshot={snapshot} onSelectClub={onSelectClub} onImportDatabase={onImportDatabase} onImportSave={onImportSave} />
         : activeNav === 'dashboard' ? <Dashboard club={club} career={career} snapshot={snapshot} onNavigate={setActiveNav} onOpenPlayer={openPlayer} />
         : activeNav === 'inbox' ? <Inbox />
-        : activeNav === 'matchday' ? <Suspense fallback={<p role="status">Opening Matchday…</p>}><MatchCentreEntry careerPlayers={snapshot.players} /></Suspense>
+        : activeNav === 'fixtures' ? seasonView('fixtures')
+        : activeNav === 'competitions' ? seasonView('competitions')
+        : activeNav === 'matchday' ? <><div className={styles.pageActions} role="group" aria-label="Matchday mode" style={{ marginBottom: 16 }}><button className={styles.button} aria-pressed={matchMode === 'season'} onClick={() => setMatchMode('season')}>League season</button><button className={styles.button} aria-pressed={matchMode === 'exhibition'} onClick={() => setMatchMode('exhibition')}>Exhibition</button></div>{matchMode === 'season' ? seasonView('matchday') : <Suspense fallback={<p role="status">Opening Matchday…</p>}><MatchCentreEntry careerPlayers={snapshot.players} /></Suspense>}</>
         : activeNav === 'squad' ? <><div className={styles.pageHeader}><div><span className={styles.eyebrow}>Players & assessment</span><h1 className={styles.pageTitle}>Squad & player directory</h1><p className={styles.pageSubtitle}>Compact records. Individual attributes. A clearer view of every player.</p></div></div><SquadTable snapshot={snapshot} clubId={career.managedClubId} currentDate={career.currentDate} onSelectPlayer={openPlayer} /></>
         : activeNav === 'profiles' ? selectedPlayer ? <PlayerProfile key={selectedPlayer.id} player={visiblePlayer(selectedPlayer)} snapshot={snapshot} currentDate={career.currentDate} onBack={() => setActiveNav('squad')} onEditPlayer={onEditPlayer} /> : <section className={styles.panel}><div className={styles.empty}><h3>No player records available.</h3><p>Import a validated, appropriately licensed database to inspect player profiles.</p></div></section>
         : future ? <><div className={styles.pageHeader}><div><span className={styles.eyebrow}>The football world</span><h1 className={styles.pageTitle}>{activeLabel}</h1><p className={styles.pageSubtitle}>A prepared foundation. A later playable milestone.</p></div><span className={`${styles.chip} ${styles.mutedChip}`}>Planned feature</span></div><section className={`${styles.panel} ${styles.placeholderPanel}`}><div className={styles.placeholderNumber} aria-hidden="true">{future.number}</div><h2 className={styles.placeholderTitle}>{future.title}</h2><p>{future.description}</p><div className={styles.placeholderFooter}>{future.features.map(feature => <span className={`${styles.chip} ${styles.mutedChip}`} key={feature}>{feature}</span>)}</div></section></> : null}
     </main>
-    <footer className={styles.statusbar}><span className={styles.statusItem}><span className={styles.statusDot} />{storageStatus}</span><span>{snapshot.players.length} PLAYERS · {snapshot.clubs.length} CLUBS · DATABASE V{snapshot.schemaVersion}</span><span>TOUCHLINE / MILESTONE 02</span></footer>
+    <footer className={styles.statusbar}><span className={styles.statusItem}><span className={styles.statusDot} />{storageStatus}</span><span>{snapshot.players.length} PLAYERS · {snapshot.clubs.length} CLUBS · DATABASE V{snapshot.schemaVersion}</span><span>TOUCHLINE / MILESTONE 03</span></footer>
   </div>;
 }

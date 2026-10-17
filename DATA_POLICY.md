@@ -59,6 +59,20 @@ Any known rating also needs an `attributeAssessments` entry keyed by its attribu
 
 External credentials belong in secure developer or server-side tooling, never in Vite client variables or committed files. Gameplay must not require an external data API. Preserve source links for audit without fetching them automatically during play.
 
+## Mandatory current-squad gate for Milestone 3
+
+The user's instruction, **“Require verified current club squads first”**, supersedes original-roster comparison seasons. Current-season creation requires actual 2026/27 Premier League membership and complete current club squad coverage as of 16 October 2026, supported by dated authoritative evidence and permitted use. Original allocations, archival associations, synthetic players, a uniform ability baseline and self-declared verification flags cannot establish these facts. Existing exhibitions retain their separate labels and do not satisfy the gate.
+
+No qualifying current dataset is bundled or established. The exploratory archival season pool was removed from the application checkout; it is not a fallback season source. Current access and source findings are recorded in [CURRENT_SQUAD_SOURCES.md](docs/data/CURRENT_SQUAD_SOURCES.md). Official main-site responses are available, but the reviewed Premier League terms do not supply the required database permission; prior written approval or a suitably licensed alternative remains necessary. Successful HTTP access is not verification of a season, assignment, effective date or licence.
+
+The current importer accepts `touchline-squad-dataset` version 1, with `snapshot` and `manifest`. The manifest uses `touchline-current-squads` version 1 and binds its source snapshot, competition, season and cutoff to dated evidence. Evidence identifies authority (`official-league`, `official-club` or `licensed-provider`), claims, club/player IDs, publication/effective/capture dates and a captured-content hash, locator and excerpt. Reviews record who checked the capture and dates, when, and the scope/limitations.
+
+Each club needs complete roster coverage, explicit under-21 handling, reviewed loan/registration exclusions and an exact match between source assignments and reviewed player records. Player identity, external ID and source provenance must agree; goalkeeper positions need evidence. Current readiness requires twenty clubs and at least eleven supported players per club, including one sourced goalkeeper and ten outfield players. This minimum match size does not replace the separate completeness review.
+
+The private-import rights contract requires reviewed terms/evidence supporting local storage, in-app display and the owner's private backup/export. Public redistribution permission is not required for this private workflow. Publishing or bundling source data needs a separate rights review; a ready import does not authorize that use. A visible page or provider login alone does not meet the contract. Underlying rights evidence, review names and hashes are supplied assertions: the offline app validates consistency and required fields, not authenticity or legal permission independently. Actual source and rights review remains necessary outside the parser. Do not describe an imported attestation as independent web verification.
+
+After the gate is met, match selection is a coaching choice within verified club assignments. Missing ability attributes can use 10/20 only with separate explicit opt-in, preserving known assessments; this option cannot change membership or identity. Condition, morale, generated fixtures, results and table tie-breaks remain game-model inputs/outputs rather than official facts. Source snapshots stay immutable, and the season retains the supplied review manifest for audit.
+
 ## Versioning and backup
 
 Version starting snapshots separately from career saves. The initial supported format is version 1. Unknown versions fail with a useful error; do not silently reinterpret them. Before adding a future migration, define and test the old and new shapes, retain the original backup and validate the transformed result.
@@ -69,8 +83,10 @@ The save envelope has `format: "touchline-save"`, `schemaVersion: 1`, `exportedA
 
 Exhibition sessions have a separate `touchline-match` version-1 archive containing engine version, initial configuration and accepted commands. Import replays the commands and derives events and results instead of trusting imported scores. Match archives have a 16 MiB and 1,000-command limit. They live in the separate `touchline-match-sessions` IndexedDB database; career saves do not include them. Export both formats when both need backup. Restoring the same match ID and initial configuration can replace its local progress, so retain the current export before restoring an older checkpoint.
 
+Season archives use `touchline-season` version 1 and include both engine versions, career, exact source snapshot, current-squad review manifest, initial configuration and accepted commands. They are limited to 16 MiB and 5,000 commands. Import replays results/calendar and validates the source/career/date binding before an atomic write. The additive Dexie version-2 `seasons` store does not transform old career rows or change their version-1 JSON meaning. A career-only export excludes season progress; use **Export season backup** for the full bound record. Normal writes append progress; an explicit valid import can restore older matching progress, so keep the current backup first.
+
 ## Current limitations
 
-- A complete, licensed and verified 2026/27 English player database is not supplied by the specification and remains future data work.
+- A complete, appropriately permitted and verified 2026/27 current squad database has not been established; it is the mandatory first gate for Milestone 3, not an optional later enhancement.
 - Biographical references alone do not establish modern club rosters, positions, wages or football ability.
 - Broad database coverage, automatic provider refresh and calibrated match-ready player assessments require separate review.
