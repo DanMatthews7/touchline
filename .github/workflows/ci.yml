@@ -25,6 +25,8 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Check production browser workflows
         run: npm run test:browser
+      - name: Check isolated development season demo
+        run: npm run test:demo
       - name: Upload browser report and diagnostics
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v6
@@ -33,5 +35,7 @@ jobs:
           path: |
             playwright-report/
             test-results/
+            playwright-report-demo/
+            test-results-demo/
           if-no-files-found: ignore
           retention-days: 7

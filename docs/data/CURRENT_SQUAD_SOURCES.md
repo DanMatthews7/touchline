@@ -2,6 +2,8 @@
 
 ## Required gate and present status
 
+**Research paused at the user's request on 17 October 2026.** The user will research a downloadable database next week and has authorized continued development without it. Do not require a provider subscription or further source research to review the separate development-only season demo. The evidence/rights requirements below remain prerequisites for later real-data integration; no current squads have been verified by this deferral.
+
 The user's mandatory instruction is **“Require verified current club squads first.”** Milestone 3 must establish actual 2026/27 competition club membership and current player-to-club squad assignments **as of 16 October 2026**. Dated authoritative evidence, source access and applicable rights must be documented before these facts populate the current-season application.
 
 **Status: current squads remain unverified; Sportmonks is a documented candidate for permitted API-data use.** Provider documentation became accessible in the later 17 October 2026 review below. Its game-use/storage terms and Premier League coverage support considering a paid feed, but no account entitlement or actual current roster payload has been verified. The Premier League website remains a separate source: its page marker does not establish twenty-club membership or squads, and its database-reuse clause requires approval that has not been obtained. Current verified counts remain **zero memberships, zero squad publications and zero player-club assignments**.

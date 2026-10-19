@@ -33,7 +33,7 @@ In the initial snapshot, all player `clubId` values are `null` and all nationali
 
 Technical, mental, physical and goalkeeping ratings are game assessments. The 1–20 scale is an original game model, not a source fact. Non-null ratings require explicit assessment provenance, method and uncertainty; editorial overrides must remain identifiable. Public statistics do not uniquely establish mental ability, technique, personality or potential.
 
-The reference dataset must not silently generate ratings from a player's fame, date of birth or an arbitrary random seed. Synthetic complete players are permitted only in clearly identified automated test fixtures. The ordinary UI must communicate unavailable ratings without displaying a fabricated role score.
+The reference dataset must not silently generate ratings from a player's fame, date of birth or an arbitrary random seed. Synthetic complete players belong in clearly identified automated test fixtures, with the explicit development-demo exception below. The ordinary UI must communicate unavailable ratings without displaying a fabricated role score.
 
 The local profile editor lets the user supply original 1–20 assessments, confidence and a rationale without changing biographical facts. Every save creates a new immutable database revision, retaining the original reference. The separate `touchline-local-editorial` provenance record describes user-authored game estimates and requires review before redistribution. Hidden potential, personality and development values are not editable through this screen.
 
@@ -59,7 +59,15 @@ Any known rating also needs an `attributeAssessments` entry keyed by its attribu
 
 External credentials belong in secure developer or server-side tooling, never in Vite client variables or committed files. Gameplay must not require an external data API. Preserve source links for audit without fetching them automatically during play.
 
-## Mandatory current-squad gate for Milestone 3
+## Development while database research is deferred
+
+On 17 October 2026 the user asked to proceed without the database and return to it next week. The development-only `season-demo` entry may generate generic “Demo Club” and “Demo Player” labels to review season behavior. All demo attributes use the same original 10/20 comparison inputs; there are no real-player ability claims, fabricated biographies, official registrations or synthetic source-review attestations.
+
+The demo reuses the real season/match engines and controlled UI, but its scenario and accepted decisions live in the separate `touchline-season-demo` store and backup format. It does not import into career/reference snapshots or create a `touchline-current-squads` manifest. Normal career, exhibition and source-reviewed season formats remain unchanged. An ordinary production build excludes the demo entry and generated records. Development use of generic labels must never be described as verified current-season data.
+
+Database acquisition and provider research are paused until the user returns to them; no subscription or credential is necessary to review the development demo. Later database integration still requires appropriate provenance, dates, coverage and usage rights. Arbitrary downloaded game databases or proprietary ratings are not automatically acceptable imports.
+
+## Current-squad gate for real-data season integration
 
 The user's instruction, **“Require verified current club squads first”**, supersedes original-roster comparison seasons. Current-season creation requires actual 2026/27 Premier League membership and complete current club squad coverage as of 16 October 2026, supported by dated authoritative evidence and permitted use. Original allocations, archival associations, synthetic players, a uniform ability baseline and self-declared verification flags cannot establish these facts. Existing exhibitions retain their separate labels and do not satisfy the gate.
 
@@ -87,6 +95,6 @@ Season archives use `touchline-season` version 1 and include both engine version
 
 ## Current limitations
 
-- A complete, appropriately permitted and verified 2026/27 current squad database has not been established; it is the mandatory first gate for Milestone 3, not an optional later enhancement.
+- A complete, appropriately permitted and verified 2026/27 current squad database has not been established. The user has deferred acquisition; real-data season integration remains pending while development proceeds through the separate demo.
 - Biographical references alone do not establish modern club rosters, positions, wages or football ability.
 - Broad database coverage, automatic provider refresh and calibrated match-ready player assessments require separate review.

@@ -1,8 +1,8 @@
 # Milestone 3 review — work in progress
 
-The user authorized competition/season development, then required **verified current club squads first**. This instruction supersedes the original comparison-roster proposal. The mandatory gate is actual 2026/27 Premier League membership and complete squad assignments as of 16 October 2026, supported by dated authoritative evidence and permitted use.
+The user authorized competition/season development, then required verified current squads. On 17 October they asked to proceed without the database and return to source research next week. Independent development now includes an explicit generic season demo, separate from real-data careers. Real-data integration still requires actual 2026/27 Premier League membership and complete squad assignments as of 16 October 2026, supported by dated authoritative evidence and permitted use.
 
-**Milestone 3 is not complete.** No qualifying current dataset has been established. The source-gated foundation exists, but season creation remains disabled until the required evidence review is satisfied. Existing Milestone 2 exhibitions and their reported Mac checks remain separate; no Mac season review has occurred.
+**The real-data milestone is not complete.** No qualifying current dataset has been established. The source-gated foundation exists, with real-data season creation disabled pending review. The database-free development demo uses generic scenario inputs without creating roster evidence or changing ordinary saves. Existing Milestone 2 exhibitions and their reported Mac checks remain separate; no Mac season review has occurred.
 
 ## What is implemented
 
@@ -24,6 +24,8 @@ There is no original roster allocation or archival season pool wired into the cu
 The `touchline-squad-dataset` version-1 envelope contains the snapshot and required review manifest. The app validates the supplied review attestations, scope, dates, rights metadata and references. It does not independently authenticate source captures or live-check pages. A file claiming review is not evidence that the project has actually performed that review; actual external verification remains mandatory.
 
 ## Review available while blocked
+
+Database acquisition is paused at the user's request. For interactive development review, run `npm run dev:demo` and use the separate generic season. [DEVELOPMENT_DEMO.md](DEVELOPMENT_DEMO.md) records its launch steps, isolated storage/backup contract and actual validation. Demo results cannot establish current facts or finish the real-data acceptance checklist below.
 
 Run the `milestone-3-season-loop` branch using the README instructions. Choose a reference club and open Fixtures, Competitions or Matchday → League season. Confirm readiness explains missing current evidence and **Create league season** stays disabled. The existing reference identities must not be portrayed as verified current squads. The independent exhibition remains available under Matchday → Exhibition.
 
@@ -65,6 +67,14 @@ After the complete browser run, the private-import permission gate was narrowed 
 
 No Milestone 3 Mac or verified-current-data pass is claimed. The actual sourced twenty-club acceptance run remains outstanding even though the generic code and test-fixture season workflow pass.
 
+### Development-demo follow-up — 19 October 2026
+
+The user deferred database research and requested continued development. The separate development-only demo now has generic clubs/players, replay-validated automatic checkpoints and portable backups, shared fixtures/table/matchday views and explicit replacement confirmation. It creates no roster evidence or real-player facts and does not open ordinary career/exhibition storage. The standard production build excludes its entry and generated scenario. See [DEVELOPMENT_DEMO.md](DEVELOPMENT_DEMO.md) for the format and precise validation boundary.
+
+On Linux with Node 24.19.0 and Chromium 154, TypeScript, all 219 tests across twenty files and the production build passed. All fifteen production browser tests passed in 3.8 minutes, including the full 38-round/380-result workflow and a new check that query parameters do not enable the development demo. All five dedicated demo browser tests passed in 44.3 seconds, with two committed rounds, exact paused reload/fresh-browser backup restore, invalid-import preservation and confirmation before replacing progress. Eight additional demo accessibility scans at 1280/800 pixels found no serious/critical violations or page horizontal overflow; no external HTTP requests or uncaught errors occurred. Browser auditing confirmed only the dedicated demo database opened.
+
+The tested `npm run dev:demo` command starts the independent development entry. The build now splits the application through its lazy entry, producing no chunk-size warning. A compiled-asset check found no demo entry/database/scenario/club/start-button markers. Match/season engine files, original source snapshots and normal save formats are unchanged. These checks do not verify real squads, complete the real-data milestone or establish a Mac demo pass.
+
 ## Remaining scope
 
-The immediate blocker is a qualifying current squad dataset and rights review. Transfers, AI squad management, injuries, recovery/development, suspensions, official schedule import, promotion/relegation, repeated new seasons and 2D animation remain outside this milestone. The milestone cannot be marked complete merely because the generic simulation and storage tests pass.
+The user has deferred a qualifying current squad dataset and rights review; independent development and demo review can continue. Transfers, AI squad management, injuries, recovery/development, suspensions, official schedule import, promotion/relegation, repeated new seasons and 2D animation remain outside this milestone. Real-data integration cannot be marked complete merely because generic simulation, storage and demo checks pass.

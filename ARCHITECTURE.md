@@ -1,6 +1,6 @@
 # Architecture
 
-Touchline is a local-first, single-player browser application targeting modern macOS on Apple Silicon. Milestones 1 and 2 established typed data, reliable saves and the reviewed exhibition model. Milestone 3 adds a season foundation, with the user's mandatory verified-current-squad gate still unresolved. The full requirements remain in [GAME_SPEC.md](GAME_SPEC.md).
+Touchline is a local-first, single-player browser application targeting modern macOS on Apple Silicon. Milestones 1 and 2 established typed data, reliable saves and the reviewed exhibition model. Milestone 3 adds a season foundation. The user has deferred database acquisition until next week and authorized continued development through an isolated demo; real-data integration remains pending. The full requirements remain in [GAME_SPEC.md](GAME_SPEC.md).
 
 ## Current implementation plan
 
@@ -10,6 +10,7 @@ Touchline is a local-first, single-player browser application targeting modern m
 4. Bind season progress and career dates through replay-validated archives and transactional persistence, guarding old write paths against inconsistent updates.
 5. Validate the blocked state and independent core with automated fixtures; record actual integrated checks without claiming a verified current-season dataset or completed Milestone 3.
 6. Review the data-backed workflow before later career systems. Transfers, AI squad management, injuries and 2D presentation remain outside scope.
+7. While data acquisition is deferred, offer an explicit development-only season demo with generic labels, separate checkpoints/backups and no source-review claims. Reuse the deterministic core and presentation; exclude this entry from the ordinary production build.
 
 ## Boundaries
 
@@ -96,6 +97,8 @@ Managed matches retain fifteen-minute decisions. Completing a round simulates th
 Source/configuration/review bindings remain immutable per season ID. Normal progress is append-only; an explicit valid season import can restore an earlier matching backup. Legacy career writes cannot break a season's date, source or club binding. Career-only JSON and exhibition formats stay version 1 but exclude season progress. Use a season backup for the full bound state. [SEASON_ENGINE.md](docs/SEASON_ENGINE.md) documents exact APIs, seeds, limits and transitions.
 
 ## Local runtime and deployment
+
+`npm run dev:demo` selects the Vite `season-demo` development mode on port 5174. `src/main.tsx` loads `src/development/DemoApp.tsx` only when both the development flag and this explicit mode match. The ordinary build removes that branch. Demo scenarios regenerate generic clubs, players and uniform comparison attributes directly as `SeasonConfig`; they are not source snapshots and never go through real-roster evidence validation. The dedicated controller uses the shared fixture, table and matchday views, with a persistent development label. Its separate checkpoint store and `touchline-season-demo` backup reconstruct results from the accepted command log; ordinary career/exhibition databases and formats are not opened. See [DEVELOPMENT_DEMO.md](docs/DEVELOPMENT_DEMO.md).
 
 The current presentation direction, requested on 16 October 2026, is a subtly textured matte charcoal canvas with navy gradient navigation and panel bars, plus silver text, borders and selection accents. It supersedes the green palette described in the preserved v0.3 master specification. Shared semantic tokens in `src/ui/tokens.css` control the skin, including dark native controls and keyboard focus. Fine CSS gradients supply the texture without image files or remote requests. Humanist 777 Black BT remains the shared locally resolved font; a system fallback supports machines without that face.
 

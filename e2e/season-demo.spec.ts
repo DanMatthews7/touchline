@@ -1,0 +1,305 @@
+/** Generic development scenarios exercise the real engine without asserting current football facts. */
+import { readFile } from 'node:fs/promises';
+import AxeBuilder from '@axe-core/playwright';
+import { expect, test as base, type Locator, type Page } from '@playwright/test';
+
+const APP_URL = 'http://127.0.0.1:4181';
+
+type DemoBackup = {
+  format: 'touchline-season-demo';
+  schemaVersion: number;
+  commands: { type: string; command?: { type: string } }[];
+  [key: string]: unknown;
+};
+
+const test = base.extend<{ observe: (page: Page) => Promise<void> }>({
+  observe: [async ({ page }, use) => {
+    const runtimeErrors: string[] = [];
+    const externalRequests: string[] = [];
+    const observe = async (observed: Page) => {
+      observed.on('pageerror', error => runtimeErrors.push(error.message));
+      observed.on('request', request => {
+        if (/^https?:/.test(request.url()) && new URL(request.url()).origin !== APP_URL) externalRequests.push(request.url());
+      });
+      await observed.addInitScript(() => {
+        const opened: string[] = [];
+        Object.defineProperty(window, '__touchlineDemoOpenedDatabases', { value: opened });
+        const originalOpen = indexedDB.open.bind(indexedDB);
+        indexedDB.open = (name: string, version?: number) => {
+          opened.push(name);
+          return version === undefined ? originalOpen(name) : originalOpen(name, version);
+        };
+      });
+    };
+    await observe(page);
+    await use(observe);
+    expect.soft(runtimeErrors, 'No uncaught development-demo errors.').toEqual([]);
+    expect.soft(externalRequests, 'The development demo makes no external HTTP requests.').toEqual([]);
+  }, { auto: true }],
+});
+
+function workspace(page: Page): Locator {
+  return page.getByRole('main', { name: 'Development demo workspace', exact: true });
+}
+
+async function expectDemoStorageOnly(page: Page) {
+  const audit = await page.evaluate(async () => ({
+    opened: (window as unknown as { __touchlineDemoOpenedDatabases: string[] }).__touchlineDemoOpenedDatabases,
+    present: (await indexedDB.databases()).map(database => database.name),
+  }));
+  expect(audit.opened.length).toBeGreaterThan(0);
+  expect(audit.opened.every(name => name === 'touchline-season-demo'), 'Normal careers and exhibition storage must never be opened by the demo.').toBe(true);
+  expect(audit.present.every(name => name === 'touchline-season-demo')).toBe(true);
+}
+
+async function openView(page: Page, name: 'Fixtures' | 'League table' | 'Matchday') {
+  const button = page.getByRole('navigation', { name: 'Demo workspace views', exact: true }).getByRole('button', { name, exact: true });
+  await button.click();
+  await expect(button).toHaveAttribute('aria-pressed', 'true');
+}
+
+async function startDemo(page: Page) {
+  await page.goto(APP_URL);
+  await expect(workspace(page).getByRole('heading', { name: 'Start a demo season', exact: true })).toBeVisible();
+  await workspace(page).getByRole('spinbutton', { name: 'Demo seed', exact: true }).fill('12345');
+  await workspace(page).getByLabel('Demo start date', { exact: true }).fill('2026-10-16');
+  await workspace(page).getByLabel('First demo matchday', { exact: true }).fill('2026-10-17');
+  await workspace(page).getByRole('button', { name: 'Start demo season', exact: true }).click();
+  await expectProgress(page, 0);
+}
+
+async function expectProgress(page: Page, rounds: number) {
+  const progress = workspace(page).getByLabel('Demo season progress', { exact: true });
+  await expect(progress.getByText(`${rounds} / 38`, { exact: true })).toBeVisible();
+  await expect(progress.getByText(`${rounds * 10} / 380`, { exact: true })).toBeVisible();
+  await expect(workspace(page).getByRole('button', { name: 'Export demo backup', exact: true })).toBeEnabled();
+}
+
+async function demoAction(page: Page, action: Locator) {
+  await expect(action).toBeEnabled();
+  const before = await workspace(page).innerText();
+  await action.click();
+  await expect.poll(() => workspace(page).innerText(), { timeout: 15_000 }).not.toBe(before);
+  await expect(workspace(page).getByRole('button', { name: 'Export demo backup', exact: true })).toBeEnabled();
+}
+
+async function beginMatch(page: Page) {
+  await openView(page, 'Matchday');
+  await demoAction(page, workspace(page).getByRole('button', { name: 'Advance calendar to matchday', exact: true }));
+  await demoAction(page, workspace(page).getByRole('button', { name: 'Start league match', exact: true }));
+  await demoAction(page, workspace(page).getByRole('button', { name: 'Kick off league match · advance to 15′', exact: true }));
+  await expect(workspace(page).getByLabel('League match score', { exact: true })).toContainText('15′');
+  await expect(workspace(page).getByRole('region', { name: /^(Home|Away) match squad$/ })).toBeVisible();
+}
+
+async function downloadDemo(page: Page): Promise<DemoBackup> {
+  const downloadEvent = page.waitForEvent('download');
+  await workspace(page).getByRole('button', { name: 'Export demo backup', exact: true }).click();
+  const download = await downloadEvent;
+  const path = await download.path();
+  expect(path).toBeTruthy();
+  return JSON.parse(await readFile(path!, 'utf8')) as DemoBackup;
+}
+
+async function importDemo(page: Page, candidate: unknown) {
+  await workspace(page).locator('input[type="file"][aria-label="Import demo backup file"]').setInputFiles({
+    name: 'development-demo-backup.json', mimeType: 'application/json',
+    buffer: Buffer.from(typeof candidate === 'string' ? candidate : JSON.stringify(candidate)),
+  });
+}
+
+async function finishRound(page: Page, round: number) {
+  for (let decisions = 0; decisions < 48; decisions++) {
+    if (await workspace(page).getByLabel('Demo season progress', { exact: true }).getByText(`${round} / 38`, { exact: true }).isVisible()) return;
+    let action: Locator | undefined;
+    for (const name of ['Replay abandoned fixture', 'Advance calendar to matchday', 'Start league match', 'Kick off league match · advance to 15′', 'Complete round & advance league']) {
+      const candidate = workspace(page).getByRole('button', { name, exact: true });
+      if (await candidate.isVisible()) { action = candidate; break; }
+    }
+    if (!action) {
+      const advance = workspace(page).getByRole('button', { name: /^Advance league match to \d+′$/ });
+      if (await advance.isVisible()) action = advance;
+    }
+    expect(action, `A legal visible demo decision should progress round ${round}.`).toBeDefined();
+    await demoAction(page, action!);
+  }
+  throw new Error(`Demo round ${round} exceeded its bounded decision budget.`);
+}
+
+async function matchReport(page: Page) {
+  await workspace(page).getByRole('combobox', { name: 'League commentary filter', exact: true }).selectOption('all');
+  return {
+    score: await workspace(page).locator('[aria-label^="League score "]').getAttribute('aria-label'),
+    events: await workspace(page).getByRole('list', { name: 'League match events', exact: true }).getByRole('listitem').allTextContents(),
+    players: await workspace(page).getByRole('region', { name: /^(Home|Away) match squad$/ }).locator('tbody tr').allTextContents(),
+  };
+}
+
+async function expectAccessible(page: Page, label: string) {
+  const results = await new AxeBuilder({ page }).analyze();
+  const violations = results.violations.filter(item => item.impact === 'serious' || item.impact === 'critical').map(item => ({ id: item.id, nodes: item.nodes.map(node => ({ target: node.target, reason: node.failureSummary })) }));
+  expect.soft(violations, `No serious or critical accessibility violations: ${label}`).toEqual([]);
+  const widths = await page.evaluate(() => ({ viewport: document.documentElement.clientWidth, document: document.documentElement.scrollWidth, body: document.body.scrollWidth }));
+  expect(widths.document).toBeLessThanOrEqual(widths.viewport);
+  expect(widths.body).toBeLessThanOrEqual(widths.viewport);
+}
+
+test('explicit demo entry shows generic fixtures and a balanced calendar without opening normal saves', async ({ page }) => {
+  await startDemo(page);
+  await expect(page.getByRole('heading', { name: 'Development demo', exact: true })).toBeVisible();
+  await expect(page.getByText('Generic clubs and players · Uniform ability 10/20 · Real database deferred', { exact: true })).toBeVisible();
+  await openView(page, 'Fixtures');
+  const fixtures = workspace(page).getByRole('table', { name: 'Scheduled matches for round 1', exact: true });
+  await expect(fixtures.locator('tbody tr')).toHaveCount(10);
+  expect(await fixtures.locator('tbody tr td:nth-child(3)').allTextContents()).toEqual(Array(10).fill('—'));
+  await workspace(page).getByRole('button', { name: 'Calendar', exact: true }).click();
+  const calendar = workspace(page).getByRole('table', { name: 'All 38 weekly fixtures for the managed club', exact: true });
+  await expect(calendar.locator('tbody tr')).toHaveCount(38);
+  const venues = await calendar.locator('tbody tr td:nth-child(4)').allTextContents();
+  expect(venues.filter(venue => venue === 'Home')).toHaveLength(19);
+  expect(venues.filter(venue => venue === 'Away')).toHaveLength(19);
+  await openView(page, 'League table');
+  const table = workspace(page).getByRole('table', { name: 'League standings from committed full-time results', exact: true });
+  await expect(table.locator('tbody tr')).toHaveCount(20);
+  expect(await table.locator('tbody tr td:nth-child(3)').allTextContents()).toEqual(Array(20).fill('0'));
+  const backup = await downloadDemo(page);
+  expect(backup.format).toBe('touchline-season-demo');
+  expect(backup.commands).toEqual([]);
+  expect(backup).not.toHaveProperty('rosterManifest');
+  expect(backup).not.toHaveProperty('snapshot');
+  await expectDemoStorageOnly(page);
+});
+
+test('demo tactical decisions and two committed rounds replay after reload and isolated backup restore', async ({ page, browser, observe }) => {
+  test.setTimeout(120_000);
+  await startDemo(page);
+  await beginMatch(page);
+  const managed = workspace(page).getByRole('region', { name: /^(Home|Away) match squad$/ });
+  const label = (await managed.getAttribute('aria-label'))!.startsWith('Home') ? 'Home' : 'Away';
+  const side = label.toLowerCase();
+  await managed.getByText(`${label} touchline controls`, { exact: true }).click();
+  await managed.getByRole('combobox', { name: `${label} live formation`, exact: true }).selectOption('3-5-2');
+  await managed.getByRole('combobox', { name: `${label} live mentality`, exact: true }).selectOption('attacking');
+  await demoAction(page, managed.getByRole('button', { name: `Apply ${side} tactics`, exact: true }));
+  await expect(workspace(page).getByRole('list', { name: 'League match events', exact: true })).toContainText('TACTICS CHANGED');
+  await managed.getByText(`${label} touchline controls`, { exact: true }).click();
+  await demoAction(page, managed.getByRole('button', { name: `Confirm ${side} substitution`, exact: true }));
+  await expect(workspace(page).getByRole('list', { name: 'League match events', exact: true })).toContainText('SUBSTITUTION');
+  const pausedReport = await matchReport(page);
+  const paused = await downloadDemo(page);
+  expect(paused.commands.slice(-2).map(command => command.type === 'MATCH_COMMAND' ? command.command?.type : command.type)).toEqual(['CHANGE_TACTICS', 'SUBSTITUTE']);
+  await page.reload();
+  await expectProgress(page, 0);
+  await openView(page, 'Matchday');
+  expect(await matchReport(page)).toEqual(pausedReport);
+  expect(await downloadDemo(page)).toEqual(paused);
+  await finishRound(page, 1);
+  await finishRound(page, 2);
+  await expectProgress(page, 2);
+  await openView(page, 'League table');
+  const table = workspace(page).getByRole('table', { name: 'League standings from committed full-time results', exact: true });
+  expect(await table.locator('tbody tr td:nth-child(3)').allTextContents()).toEqual(Array(20).fill('2'));
+  const committedRows = await table.locator('tbody tr').allTextContents();
+  const committed = await downloadDemo(page);
+  await expectDemoStorageOnly(page);
+
+  const fresh = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  try {
+    const restored = await fresh.newPage();
+    await observe(restored);
+    await restored.goto(APP_URL);
+    await expect(workspace(restored).getByRole('heading', { name: 'Start a demo season', exact: true })).toBeVisible();
+    await importDemo(restored, committed);
+    await expectProgress(restored, 2);
+    await openView(restored, 'League table');
+    expect(await workspace(restored).getByRole('table', { name: 'League standings from committed full-time results', exact: true }).locator('tbody tr').allTextContents()).toEqual(committedRows);
+    expect(await downloadDemo(restored)).toEqual(committed);
+    await expectDemoStorageOnly(restored);
+  } finally { await fresh.close(); }
+});
+
+test('malformed, unsupported and normal-season backups preserve the current demo', async ({ page }) => {
+  await startDemo(page);
+  await beginMatch(page);
+  const before = await downloadDemo(page);
+  for (const invalid of [
+    '{invalid demo JSON',
+    { ...before, schemaVersion: 999 },
+    { ...before, format: 'touchline-season' },
+    { ...before, rosterManifest: { status: 'verified' } },
+  ]) {
+    await importDemo(page, invalid);
+    await expect(workspace(page).getByRole('alert')).toBeVisible();
+    await expectProgress(page, 0);
+    expect(await downloadDemo(page)).toEqual(before);
+  }
+  await page.reload();
+  await expectProgress(page, 0);
+  expect(await downloadDemo(page)).toEqual(before);
+  await expectDemoStorageOnly(page);
+});
+
+test('same-day defaults start directly and replacing a saved demo requires an explicit choice', async ({ page }) => {
+  await page.goto(APP_URL);
+  await expect(workspace(page).getByRole('heading', { name: 'Start a demo season', exact: true })).toBeVisible();
+  await workspace(page).getByRole('button', { name: 'Start demo season', exact: true }).click();
+  await expectProgress(page, 0);
+  await openView(page, 'Matchday');
+  await expect(workspace(page).getByRole('button', { name: 'Advance calendar to matchday', exact: true })).toHaveCount(0);
+  await demoAction(page, workspace(page).getByRole('button', { name: 'Start league match', exact: true }));
+  await demoAction(page, workspace(page).getByRole('button', { name: 'Kick off league match · advance to 15′', exact: true }));
+  await expect(workspace(page).getByLabel('League match score', { exact: true })).toContainText('15′');
+  const original = await downloadDemo(page);
+  await workspace(page).getByRole('button', { name: 'New demo season', exact: true }).click();
+  const consent = workspace(page).getByRole('checkbox', { name: 'Replace this saved demo when I start the new season', exact: true });
+  await expect(consent).not.toBeChecked();
+  await expect(workspace(page).getByRole('button', { name: 'Start demo season', exact: true })).toBeDisabled();
+  await workspace(page).getByRole('button', { name: 'Keep current demo', exact: true }).click();
+  expect(await downloadDemo(page)).toEqual(original);
+  await expect(workspace(page).getByLabel('League match score', { exact: true })).toContainText('15′');
+
+  await workspace(page).getByRole('button', { name: 'New demo season', exact: true }).click();
+  await workspace(page).getByRole('combobox', { name: 'Managed demo club', exact: true }).selectOption('demo-club-02');
+  await workspace(page).getByRole('spinbutton', { name: 'Demo seed', exact: true }).fill('777');
+  await expect(workspace(page).getByRole('button', { name: 'Start demo season', exact: true })).toBeDisabled();
+  expect(await downloadDemo(page)).toEqual(original);
+  await consent.check();
+  await workspace(page).getByRole('button', { name: 'Start demo season', exact: true }).click();
+  await expectProgress(page, 0);
+  const replacement = await downloadDemo(page);
+  expect(replacement.id).not.toEqual(original.id);
+  expect(replacement.scenario).toMatchObject({ managedClubId: 'demo-club-02', seed: 777 });
+  expect(replacement.commands).toEqual([]);
+  await page.reload();
+  await expectProgress(page, 0);
+  expect(await downloadDemo(page)).toEqual(replacement);
+  await expectDemoStorageOnly(page);
+});
+
+test('demo setup, fixtures, standings and live match remain accessible at desktop and compact widths', async ({ page }, testInfo) => {
+  test.setTimeout(90_000);
+  await page.goto(APP_URL);
+  await expect(workspace(page).getByRole('heading', { name: 'Start a demo season', exact: true })).toBeVisible();
+  for (const width of [1280, 800]) {
+    await page.setViewportSize({ width, height: 800 });
+    await expectAccessible(page, `demo setup ${width}px`);
+  }
+  await startDemo(page);
+  for (const view of ['Fixtures', 'League table'] as const) {
+    await openView(page, view);
+    for (const width of [1280, 800]) {
+      await page.setViewportSize({ width, height: 800 });
+      await expectAccessible(page, `demo ${view} ${width}px`);
+    }
+  }
+  await beginMatch(page);
+  for (const width of [1280, 800]) {
+    await page.setViewportSize({ width, height: 800 });
+    await expect(workspace(page).getByLabel('League match score', { exact: true })).toContainText('15′');
+    await expectAccessible(page, `demo live match ${width}px`);
+  }
+  await page.setViewportSize({ width: 1280, height: 1100 });
+  await expect(workspace(page).getByLabel('League match score', { exact: true })).toContainText('15′');
+  await page.screenshot({ path: testInfo.outputPath('touchline-development-demo-matchday.png'), fullPage: false });
+  await expectDemoStorageOnly(page);
+});

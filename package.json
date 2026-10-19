@@ -9,10 +9,12 @@
   "packageManager": "npm@11.9.0",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
+    "dev:demo": "vite --host 127.0.0.1 --mode season-demo --port 5174 --strictPort",
     "check": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:browser": "playwright test",
+    "test:demo": "playwright test --config playwright.demo.config.ts",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "calibrate": "tsx scripts/calibrate.ts"

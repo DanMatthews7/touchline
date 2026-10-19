@@ -89,6 +89,18 @@ async function expectAccessible(page: Page) {
   expect.soft(violations, 'No serious or critical axe accessibility violations.').toEqual([]);
 }
 
+test('production entry keeps the real-data workflow when demo query parameters are supplied', async ({ page }) => {
+  await page.goto(`${APP_URL}/?demo=1&mode=season-demo`);
+  await expect(page.getByRole('heading', { name: 'Choose your club', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Development demo', exact: true })).toHaveCount(0);
+  await page.getByRole('button', { name: /Arsenal FC.*England/ }).click();
+  await page.getByRole('button', { name: 'Begin career', exact: true }).click();
+  await navigate(page, 'Fixtures');
+  await expect(page.getByRole('heading', { name: 'Verified roster readiness', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Create league season', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Start demo season', exact: true })).toHaveCount(0);
+});
+
 test('club selection, every primary screen, sortable reference directory and all unknown attributes', async ({ page }, testInfo) => {
   await beginCareer(page);
   await expect(page.getByRole('status')).toContainText('Career created and saved locally');

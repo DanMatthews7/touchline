@@ -4,13 +4,13 @@ A local-first football management game for modern browsers, targeting macOS on A
 
 ## Milestone 3 status
 
-**Verified current squads are required first.** The season foundation implements scheduling, managed matches, results, tables, calendar commands and portable season archives, but no verified, appropriately licensed 2026/27 twenty-club squad dataset has been established. Season creation remains disabled. Original roster allocations and archival identities cannot substitute for this gate; Milestone 3 is not complete.
+**Database research is deferred at the user's request.** Continue reviewing the season through the separate development demo described below. The foundation implements scheduling, managed matches, results, tables, calendar commands and portable archives. No verified, appropriately licensed 2026/27 twenty-club squad dataset has been established, so real-data season creation remains disabled. Original roster allocations and archival identities cannot substitute for that review; the real-data milestone is not complete.
 
 Open **Fixtures**, **Competitions**, or **Matchday → League season** to inspect roster readiness and **Import squad dataset**. A plain database import does not supply the required dated review manifest. Official main-site access now works, but current squads remain unverified and the reviewed terms require prior written approval for the intended database reuse; none has been established. [CURRENT_SQUAD_SOURCES.md](docs/data/CURRENT_SQUAD_SOURCES.md) records the actual evidence and remaining source/rights requirements.
 
 The generated game calendar has 38 weekly rounds and 380 fixtures. It is not the official Premier League fixture list; its dates and final table tie-break are original game rules. [SEASON_ENGINE.md](docs/SEASON_ENGINE.md) explains the implemented foundation. [The Milestone 3 review](docs/MILESTONE_3_REVIEW.md) distinguishes code checks from the unresolved data gate and unreviewed Mac workflow. Existing exhibitions remain under **Matchday → Exhibition**.
 
-The foundation passes TypeScript, all 211 unit/integration tests and the production build. All 14 browser workflows passed, including a complete 38-round season using labelled automated test fixtures and 20 accessibility scans without serious/critical findings. These checks do not supply or verify real current squads; the detailed review records the subsequent private-import permission check separately.
+The current build passes TypeScript and all 219 unit/integration tests across 20 files. All fifteen ordinary production browser workflows pass, including the complete 38-round season and a check that query parameters cannot enable the demo. All five development-demo browser workflows also pass, including tactics/substitutions, two completed rounds, exact reload/backup restore, invalid-import preservation and confirmation before replacing a demo. Eight demo accessibility scans found no serious/critical issues. These checks do not supply or verify real current squads. Detailed evidence is in the development-demo and Milestone 3 reviews.
 
 ## Run locally
 
@@ -25,6 +25,21 @@ npm run dev
 
 Open the local URL printed by Vite. Keep Terminal running while using the app; press Control-C there when finished. No application backend, account, API credential or subscription is required. Installing dependencies needs internet access; gameplay uses local assets.
 
+## Review a season without a database
+
+The user has postponed real database research until next week. To review the season systems now, use the same branch and project folder, then run:
+
+```sh
+npm ci
+npm run dev:demo
+```
+
+Open the URL printed by Terminal (the demo uses port 5174). Choose a demo club and **Start demo season**. Use **Fixtures**, **League table** and **Matchday** to inspect the 38-round calendar, progress matches, change tactics/substitutions and commit rounds. All twenty clubs and their players have generic demo labels and the same 10/20 comparison attributes. These are development scenarios, not real squads or player ratings.
+
+Demo decisions save locally and resume at the same URL. **Export demo backup** makes a portable replay backup; **Import demo backup** validates and restores one. Export before starting another demo or restoring an older checkpoint. Demo saves stay separate from ordinary careers and exhibitions and are not converted into real-data careers later.
+
+The demo runs only through the explicit development command. `npm run dev` and the ordinary production build retain the real-data workflow and its source-review requirement. The production build contains no demo entry or generated demo records. [DEVELOPMENT_DEMO.md](docs/DEVELOPMENT_DEMO.md) describes the boundary and verification.
+
 To check and preview the production build:
 
 ```sh
@@ -36,6 +51,8 @@ npm run preview
 
 Browser checks use Playwright against the production build. Install its Chromium browser once with `npx playwright install chromium`, then run `npm run build` followed by `npm run test:browser`. Playwright starts the preview server itself. Linux may also require the browser's documented system dependencies; macOS uses its native Chromium bundle. Reports and per-test screenshots are written inside `playwright-report/` and `test-results/`; failed tests also retain traces. GitHub Actions uploads these directories for diagnosis and uses Ubuntu 24.04 with Node 24-compatible actions.
 
+Run `npm run test:demo` for the separate development-demo browser suite. It starts its own Vite demo server on port 4181 and writes to `playwright-report-demo/` and `test-results-demo/`. The ordinary production suite excludes these development-only tests.
+
 Use the exact URL printed by each command. Browser storage is scoped to its origin: a development URL and a preview URL can have separate saves. Export before changing origin, browser or profile, or clearing website data.
 
 The deterministic synthetic batch report runs separately:
@@ -44,7 +61,7 @@ The deterministic synthetic batch report runs separately:
 npm run calibrate -- --output calibration-report.json
 ```
 
-This measures original model design targets, not empirical calibration against a real league. [MATCH_ENGINE.md](docs/MATCH_ENGINE.md) explains options and interpretation. No synthetic fixtures enter the application bundle.
+This measures original model design targets, not empirical calibration against a real league. [MATCH_ENGINE.md](docs/MATCH_ENGINE.md) explains options and interpretation. No synthetic fixtures enter the ordinary production bundle; the explicit development demo is separate.
 
 ## Review Matchday
 
@@ -74,7 +91,7 @@ The bundled snapshot contains 12 archival real-player identities and four club i
 
 Unknown attributes display as unavailable. You may enter documented original assessments in the profile editor or import an appropriately sourced complete snapshot. Role scores need a compatible known position and every weighted attribute. For example, Jordan Pickford's sourced goalkeeper position permits a goalkeeper score after all eight required attributes have been assessed; entering outfield attributes alone cannot infer a detailed position. Biographies do not establish football ability.
 
-The exhibition engine is documented in [MATCH_ENGINE.md](docs/MATCH_ENGINE.md). Verified current squads are now a mandatory Milestone 3 prerequisite, still unresolved. Season code is a foundation, not a completed current-season game. Empirically calibrated ratings, transfers, AI squad management, injuries, repeated new seasons and 2D matches remain outside this milestone. A service worker and installable PWA are not assumed.
+The exhibition engine is documented in [MATCH_ENGINE.md](docs/MATCH_ENGINE.md). The user has deferred real database acquisition. Verified current squads remain necessary for real-data integration, while the separate development demo permits season review now. Season code is a foundation, not a completed current-season game. Empirically calibrated ratings, transfers, AI squad management, injuries, repeated new seasons and 2D matches remain outside this milestone. A service worker and installable PWA are not assumed.
 
 Career-only exports remain `touchline-save` version 1. They exclude exhibition sessions and league progress. **Export season backup** includes its career, roster snapshot, review manifest and accepted decisions; **Export match** remains the independent exhibition backup. Once bound to a season, career date, managed club and source changes must go through validated season operations. Retain the current complete backup before importing an earlier one.
 
@@ -118,6 +135,7 @@ See [the original milestone review](docs/MILESTONE_1_REVIEW.md) for the historic
 - [MILESTONE_2_REVIEW.md](docs/MILESTONE_2_REVIEW.md) — review workflow, evidence and acceptance boundary.
 - [SEASON_ENGINE.md](docs/SEASON_ENGINE.md) — season foundation, source gate, original rules and archives.
 - [MILESTONE_3_REVIEW.md](docs/MILESTONE_3_REVIEW.md) — work-in-progress status and verification limits.
+- [DEVELOPMENT_DEMO.md](docs/DEVELOPMENT_DEMO.md) — database-free season review and separate saves.
 - [ROADMAP.md](ROADMAP.md) — milestone boundaries and acceptance criteria.
 - [AGENTS.md](AGENTS.md) — short standing coding rules.
 
