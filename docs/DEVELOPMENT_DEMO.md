@@ -61,4 +61,6 @@ Scenario version 1 fixes the generator's generic identities, attributes and init
 
 After the local Terminal setup, the user reported successfully starting a demo season, changing tactics and starting to play a match, with no issues showing so far. This is an initial user-reported Mac workflow check; the browser/version and exact match minute were not specified.
 
-Match completion to 90 minutes, a demo substitution, round commitment/table updates and demo backup/reload/import have not yet been reported on the Mac. Next review: finish the match, choose **Complete round & advance league**, inspect **League table**, then export a demo backup and verify reload/import restores the same progress. These pending checks are distinct from the earlier successful Mac exhibition review and automated Linux results.
+The user subsequently confirmed match completion, results recorded in the table, and successful demo backup export/import. Together with the earlier season start and tactical changes, this reviews the first core demo season workflow on their Mac.
+
+A substitution in this demo, refresh-only restoration, browser/version and a multi-round or full-season Mac run were not explicitly confirmed. The earlier successful Mac exhibition review and automated Linux checks remain separate evidence; this report does not establish verified current squads or broad macOS browser compatibility.

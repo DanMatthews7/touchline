@@ -32,6 +32,8 @@ Pure scheduling, results, table, calendar and persistence work may continue inde
 
 Integrate the real-data workflow only with evidence that meets the gate. The overall real-data milestone is not complete while required membership or squads remain unverified; the user can now review generic season behavior without waiting for source acquisition.
 
+On 20 October 2026 the user confirmed the core database-free demo loop on their Mac: season creation, tactical changes, match completion, table updates and backup export/import. This is a review checkpoint for the generic season workflow; it does not verify real squads or constitute a full-season Mac run. Detailed evidence and remaining limits are in [the development demo review](docs/DEVELOPMENT_DEMO.md).
+
 Generate and test a 20-team double round-robin schedule with 380 fixtures and 38 appearances per club, including 19 home and 19 away. Document points, tie-breaks, round dates and conflict rules. Results must come from the existing deterministic match engine; table and calendar transitions must follow accepted results, not separately fabricated scores. Keep managed match decisions and other scheduled results reproducible from the initial configuration, seed, engine versions and commands.
 
 Preserve original source snapshots, existing career exports and exhibition archives. Add a career-bound season archive and validated atomic career/calendar updates without silently changing old save meanings. Verify restore/replay, invalid-import preservation, scheduling/table invariants and the complete first-season workflow before claiming completion. Detailed API and format documentation will follow the stable implementation; no Milestone 3 data verification, test or platform pass is claimed yet.

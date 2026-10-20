@@ -77,6 +77,6 @@ The tested `npm run dev:demo` command starts the independent development entry. 
 
 ## Remaining scope
 
-On 20 October 2026 the user reported creating a demo season, changing tactics and starting match play on their Mac, with no issues showing so far. Browser/version, full-time completion, demo substitutions, round/table updates and demo backup restoration have not yet been reported. [The demo review](DEVELOPMENT_DEMO.md#initial-mac-review--20-october-2026) separates this initial user feedback from completed automated checks.
+On 20 October 2026 the user confirmed creating a demo season, changing tactics, completing a match, recording results in the table and successfully exporting/importing a demo backup on their Mac. This reviews the first core demo loop. Browser/version, a demo substitution, refresh-only restoration and a multi-round/full-season Mac run were not explicitly confirmed. [The demo review](DEVELOPMENT_DEMO.md#initial-mac-review--20-october-2026) separates these user observations from completed automated checks.
 
 The user has deferred a qualifying current squad dataset and rights review; independent development and demo review can continue. Transfers, AI squad management, injuries, recovery/development, suspensions, official schedule import, promotion/relegation, repeated new seasons and 2D animation remain outside this milestone. Real-data integration cannot be marked complete merely because generic simulation, storage and demo checks pass.
