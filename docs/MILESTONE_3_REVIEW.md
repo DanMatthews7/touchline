@@ -77,6 +77,8 @@ The tested `npm run dev:demo` command starts the independent development entry. 
 
 ## Remaining scope
 
+The 20 October club/player navigation follow-up adds Club, Squad and read-only player profiles to the development demo. All 222 unit/integration tests, seven demo browser tests, fourteen demo accessibility scans and a targeted production-boundary browser check pass. Existing demo backups remain version 1 and restore without a reset; browsing adds no saved commands. The production build retains the same entry/assets. [The detailed follow-up](DEVELOPMENT_DEMO.md#clubplayer-navigation-follow-up--20-october-2026) records coverage and keeps review of the new screens on the Mac pending.
+
 On 20 October 2026 the user confirmed creating a demo season, changing tactics, completing a match, recording results in the table and successfully exporting/importing a demo backup on their Mac. This reviews the first core demo loop. Browser/version, a demo substitution, refresh-only restoration and a multi-round/full-season Mac run were not explicitly confirmed. [The demo review](DEVELOPMENT_DEMO.md#initial-mac-review--20-october-2026) separates these user observations from completed automated checks.
 
 The user has deferred a qualifying current squad dataset and rights review; independent development and demo review can continue. Transfers, AI squad management, injuries, recovery/development, suspensions, official schedule import, promotion/relegation, repeated new seasons and 2D animation remain outside this milestone. Real-data integration cannot be marked complete merely because generic simulation, storage and demo checks pass.

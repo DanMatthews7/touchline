@@ -10,7 +10,7 @@ Open **Fixtures**, **Competitions**, or **Matchday → League season** to inspec
 
 The generated game calendar has 38 weekly rounds and 380 fixtures. It is not the official Premier League fixture list; its dates and final table tie-break are original game rules. [SEASON_ENGINE.md](docs/SEASON_ENGINE.md) explains the implemented foundation. [The Milestone 3 review](docs/MILESTONE_3_REVIEW.md) distinguishes code checks from the unresolved data gate and unreviewed Mac workflow. Existing exhibitions remain under **Matchday → Exhibition**.
 
-The current build passes TypeScript and all 219 unit/integration tests across 20 files. All fifteen ordinary production browser workflows pass, including the complete 38-round season and a check that query parameters cannot enable the demo. All five development-demo browser workflows also pass, including tactics/substitutions, two completed rounds, exact reload/backup restore, invalid-import preservation and confirmation before replacing a demo. Eight demo accessibility scans found no serious/critical issues. These checks do not supply or verify real current squads. Detailed evidence is in the development-demo and Milestone 3 reviews.
+The current build passes TypeScript and all 222 unit/integration tests across 21 files. All seven development-demo browser workflows pass, including club/player navigation, existing backup compatibility, tactics/substitutions, two completed rounds, exact reload/backup restore and invalid-import preservation. Fourteen demo accessibility scans found no serious/critical issues. The last full production browser run passed all fifteen workflows, including the complete 38-round season; this demo-only update produces the same production entry/assets and passes a fresh production-boundary browser check. These checks do not supply or verify real current squads. Detailed evidence is in the development-demo and Milestone 3 reviews.
 
 ## Run locally
 
@@ -34,9 +34,13 @@ npm ci
 npm run dev:demo
 ```
 
-Open the URL printed by Terminal (the demo uses port 5174). Choose a demo club and **Start demo season**. Use **Fixtures**, **League table** and **Matchday** to inspect the 38-round calendar, progress matches, change tactics/substitutions and commit rounds. All twenty clubs and their players have generic demo labels and the same 10/20 comparison attributes. These are development scenarios, not real squads or player ratings.
+Open the URL printed by Terminal (the demo uses port 5174). Choose a demo club and **Start demo season**, or continue the saved demo. **Club** opens your managed club overview; **Squad** lists its sixteen players. Click a player name to open all 45 attributes, position/role information and condition/morale, then choose **Back to squad** to return. These views inspect the current season without changing its saved decisions.
+
+Use **Fixtures**, **League table** and **Matchday** to inspect the 38-round calendar, progress matches, change tactics/substitutions and commit rounds. All twenty clubs and their players have generic demo labels and the same 10/20 comparison attributes. These are development scenarios, not real squads or player ratings.
 
 Demo decisions save locally and resume at the same URL. **Export demo backup** makes a portable replay backup; **Import demo backup** validates and restores one. Export before starting another demo or restoring an older checkpoint. Demo saves stay separate from ordinary careers and exhibitions and are not converted into real-data careers later.
+
+When updating from a downloaded ZIP, export a demo backup first, stop the old server with Control-C, then open Terminal in the newly unzipped project folder and run `npm ci` followed by `npm run dev:demo`. Keep the same browser and local URL to resume local progress, or use **Import demo backup**. Existing version-1 demo backups remain supported; adding club/player views does not reset a season or change the backup format.
 
 The demo runs only through the explicit development command. `npm run dev` and the ordinary production build retain the real-data workflow and its source-review requirement. The production build contains no demo entry or generated demo records. [DEVELOPMENT_DEMO.md](docs/DEVELOPMENT_DEMO.md) describes the boundary and verification.
 

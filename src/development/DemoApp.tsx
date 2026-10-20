@@ -7,9 +7,12 @@ import { SeasonStandings } from '../ui/season/SeasonStandings';
 import type { DemoSession } from './archive';
 import { DemoRepository } from './repository';
 import { defaultDemoScenario, DEMO_CLUBS, type DemoScenario } from './scenario';
+import { DemoClub } from './DemoClub';
+import { DemoSquad } from './DemoSquad';
+import { DemoPlayerProfile } from './DemoPlayerProfile';
 import styles from './DemoApp.module.css';
 
-type View = 'fixtures' | 'table' | 'matchday';
+type View = 'club' | 'squad' | 'player' | 'fixtures' | 'table' | 'matchday';
 type Notice = { kind: 'success' | 'error' | 'info'; text: string };
 
 function errorMessage(error: unknown): string {
@@ -47,15 +50,30 @@ function DemoWorkspace() {
   const operationRunning = useRef(false);
   const sessionRef = useRef<DemoSession | null>(null);
   const importInput = useRef<HTMLInputElement>(null);
+  const workspace = useRef<HTMLDivElement>(null);
+  const focusViewHeading = useRef(false);
   const [session, setSession] = useState<DemoSession | null>(null);
   const [opening, setOpening] = useState(true);
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<Notice | null>(null);
-  const [view, setView] = useState<View>('fixtures');
+  const [view, setView] = useState<View>('club');
+  const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
   const [showSetup, setShowSetup] = useState(true);
   const [replacementRequired, setReplacementRequired] = useState(false);
   const [replacementConfirmed, setReplacementConfirmed] = useState(false);
   const [scenario, setScenario] = useState<DemoScenario>(defaultDemoScenario);
+
+  useEffect(() => {
+    if (!focusViewHeading.current) return;
+    focusViewHeading.current = false;
+    const heading = workspace.current?.querySelector<HTMLElement>('h2');
+    if (heading) { heading.tabIndex = -1; heading.focus(); }
+  }, [view, selectedPlayerId]);
+
+  function openView(next: View): void {
+    focusViewHeading.current = true;
+    setView(next);
+  }
 
   useEffect(() => {
     const current = new DemoRepository();
@@ -83,6 +101,7 @@ function DemoWorkspace() {
   }, []);
 
   function acceptSession(next: DemoSession): void {
+    if (sessionRef.current?.archive.id !== next.archive.id) setSelectedPlayerId(null);
     sessionRef.current = next;
     setSession(next);
     setReplacementRequired(true);
@@ -112,8 +131,8 @@ function DemoWorkspace() {
       acceptSession(next);
       setShowSetup(false);
       setReplacementConfirmed(false);
-      setView('fixtures');
-      setNotice({ kind: 'success', text: 'Demo season started. Open Matchday to play your first fixture.' });
+      setView('club');
+      setNotice({ kind: 'success', text: 'Demo season started. Open Squad to inspect your players, or Matchday to play your first fixture.' });
     });
   }
 
@@ -135,7 +154,7 @@ function DemoWorkspace() {
       acceptSession(next);
       setShowSetup(false);
       setReplacementConfirmed(false);
-      setView('fixtures');
+      setView('club');
       setNotice({ kind: 'success', text: 'Demo backup restored. Its saved progress is ready to continue.' });
     });
   }
@@ -163,6 +182,11 @@ function DemoWorkspace() {
   const nextFixture = season?.fixtures.find(fixture => fixture.round === season.roundIndex + 1 && (fixture.homeClubId === season.config.managedClubId || fixture.awayClubId === season.config.managedClubId));
   const nextOpponentId = nextFixture?.homeClubId === season?.config.managedClubId ? nextFixture?.awayClubId : nextFixture?.homeClubId;
   const nextOpponent = season?.config.teams.find(team => team.id === nextOpponentId)?.name;
+  function openPlayer(playerId: string): void {
+    if (!season?.config.teams.find(team => team.id === season.config.managedClubId)?.players.some(player => player.id === playerId)) return;
+    setSelectedPlayerId(playerId);
+    openView('player');
+  }
 
   return <div className={styles.app}>
     <a className={styles.skipLink} href="#demo-content">Skip to demo workspace</a>
@@ -172,7 +196,7 @@ function DemoWorkspace() {
     </header>
     <main className={styles.main} id="demo-content" tabIndex={-1} aria-label="Development demo workspace">
       <div className={styles.heading}>
-        <div><span className={styles.eyebrow}>Play and review while the database is deferred</span><h1>Development demo</h1><p>{season ? `${season.config.name} · Managing ${managedName}` : 'A separate practice season for exploring fixtures, tactics and match progression.'}</p></div>
+        <div><span className={styles.eyebrow}>Play and review while the database is deferred</span><h1>Development demo</h1><p>{season ? `${season.config.name} · Managing ${managedName}` : 'A separate practice season for exploring your club, players, tactics and match progression.'}</p></div>
         <div className={styles.actions}>
           <button className={styles.button} disabled={disabled} onClick={() => importInput.current?.click()}>Import demo backup</button>
           <input ref={importInput} className={styles.hidden} tabIndex={-1} type="file" accept=".json,application/json" aria-label="Import demo backup file" onChange={event => { const file = event.target.files?.[0]; event.target.value = ''; if (file) void importBackup(file); }} />
@@ -217,9 +241,17 @@ function DemoWorkspace() {
             <div><span>Results committed</span><strong>{season.results.length} / 380</strong></div>
             <div><span>{season.status === 'finished' ? 'Season status' : 'Next opponent'}</span><strong>{season.status === 'finished' ? 'Complete' : nextOpponent ?? 'Round in progress'}</strong></div>
           </div>
-          <nav className={styles.navigation} aria-label="Demo workspace views">{([['fixtures', 'Fixtures'], ['table', 'League table'], ['matchday', 'Matchday']] as const).map(([item, label]) => <button key={item} className={`${styles.navButton} ${view === item ? styles.navActive : ''}`} aria-pressed={view === item} onClick={() => setView(item)}>{label}</button>)}<span>{season.status === 'finished' ? '38 matchweeks completed' : `Matchweek ${season.roundIndex + 1} / 38`}</span></nav>
-          <div className={styles.workspace} aria-busy={busy}>
-            {view === 'fixtures' ? <SeasonFixtures key={season.config.id} season={season} busy={disabled || showSetup} onOpenMatchday={() => setView('matchday')} /> : view === 'table' ? <SeasonStandings season={season} /> : <SeasonMatchday season={season} busy={disabled || showSetup} onCommand={command} context="demo" />}
+          <nav className={styles.navigation} aria-label="Demo workspace views">{([['club', 'Club'], ['squad', 'Squad'], ['fixtures', 'Fixtures'], ['table', 'League table'], ['matchday', 'Matchday']] as const).map(([item, label]) => {
+            const active = view === item || (item === 'squad' && view === 'player');
+            return <button key={item} className={`${styles.navButton} ${active ? styles.navActive : ''}`} aria-pressed={active} onClick={() => setView(item)}>{label}</button>;
+          })}<span>{season.status === 'finished' ? '38 matchweeks completed' : `Matchweek ${season.roundIndex + 1} / 38`}</span></nav>
+          <div ref={workspace} className={styles.workspace} aria-busy={busy}>
+            {view === 'club' ? <DemoClub season={season} onOpenSquad={() => openView('squad')} onOpenMatchday={() => openView('matchday')} />
+              : view === 'squad' ? <DemoSquad key={season.config.id} season={season} onOpenPlayer={openPlayer} />
+              : view === 'player' && selectedPlayerId ? <DemoPlayerProfile key={`${season.config.id}-${selectedPlayerId}`} season={season} playerId={selectedPlayerId} onBack={() => openView('squad')} />
+              : view === 'fixtures' ? <SeasonFixtures key={season.config.id} season={season} busy={disabled || showSetup} onOpenMatchday={() => openView('matchday')} />
+              : view === 'table' ? <SeasonStandings season={season} />
+              : <SeasonMatchday season={season} busy={disabled || showSetup} onCommand={command} context="demo" />}
           </div>
         </section>}
       </>}
