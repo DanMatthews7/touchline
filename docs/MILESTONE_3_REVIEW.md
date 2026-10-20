@@ -2,7 +2,7 @@
 
 The user authorized competition/season development, then required verified current squads. On 17 October they asked to proceed without the database and return to source research next week. Independent development now includes an explicit generic season demo, separate from real-data careers. Real-data integration still requires actual 2026/27 Premier League membership and complete squad assignments as of 16 October 2026, supported by dated authoritative evidence and permitted use.
 
-**The real-data milestone is not complete.** No qualifying current dataset has been established. The source-gated foundation exists, with real-data season creation disabled pending review. The database-free development demo uses generic scenario inputs without creating roster evidence or changing ordinary saves. Existing Milestone 2 exhibitions and their reported Mac checks remain separate; no Mac season review has occurred.
+**The real-data milestone is not complete.** No qualifying current dataset has been established. The source-gated foundation exists, with real-data season creation disabled pending review. The database-free development demo uses generic scenario inputs without creating roster evidence or changing ordinary saves. Existing Milestone 2 exhibitions and their reported Mac checks remain separate. Initial Mac demo observations are recorded below; real-data season acceptance remains pending.
 
 ## What is implemented
 
@@ -76,5 +76,7 @@ On Linux with Node 24.19.0 and Chromium 154, TypeScript, all 219 tests across tw
 The tested `npm run dev:demo` command starts the independent development entry. The build now splits the application through its lazy entry, producing no chunk-size warning. A compiled-asset check found no demo entry/database/scenario/club/start-button markers. Match/season engine files, original source snapshots and normal save formats are unchanged. These checks do not verify real squads, complete the real-data milestone or establish a Mac demo pass.
 
 ## Remaining scope
+
+On 20 October 2026 the user reported creating a demo season, changing tactics and starting match play on their Mac, with no issues showing so far. Browser/version, full-time completion, demo substitutions, round/table updates and demo backup restoration have not yet been reported. [The demo review](DEVELOPMENT_DEMO.md#initial-mac-review--20-october-2026) separates this initial user feedback from completed automated checks.
 
 The user has deferred a qualifying current squad dataset and rights review; independent development and demo review can continue. Transfers, AI squad management, injuries, recovery/development, suspensions, official schedule import, promotion/relegation, repeated new seasons and 2D animation remain outside this milestone. Real-data integration cannot be marked complete merely because generic simulation, storage and demo checks pass.

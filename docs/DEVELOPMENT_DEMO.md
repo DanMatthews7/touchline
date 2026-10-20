@@ -53,6 +53,12 @@ The following checks passed on 19 October 2026 in Linux, Node 24.19.0 and system
 
 `npm run test:demo` uses a dedicated Playwright configuration and development server. Its reports are `playwright-report-demo/` and `test-results-demo/`, separate from ordinary production reports. The CI workflow runs both suites and retains both sets of diagnostics.
 
-The pure match and season engine files, original source snapshots and normal save formats are unchanged. The full 38-round core/source-gated workflow is covered by the existing season checks; the new browser demo checks cover two rounds rather than claiming a separate 38-round demo browser run. No Mac demo run, current-data verification, provider entitlement or completed real-data milestone is claimed.
+The pure match and season engine files, original source snapshots and normal save formats are unchanged. The full 38-round core/source-gated workflow is covered by the existing season checks; the new browser demo checks cover two rounds rather than claiming a separate 38-round demo browser run. These automated checks do not establish Mac compatibility, current-data verification, provider entitlement or a completed real-data milestone. The user's separate Mac observations are recorded below.
 
 Scenario version 1 fixes the generator's generic identities, attributes and initial coaching selections for replay. A future generator change needs explicit version compatibility rather than silently reinterpreting existing demo backups. Browser storage remains local to the origin; no cloud backup or service-worker offline behavior is claimed.
+
+## Initial Mac review — 20 October 2026
+
+After the local Terminal setup, the user reported successfully starting a demo season, changing tactics and starting to play a match, with no issues showing so far. This is an initial user-reported Mac workflow check; the browser/version and exact match minute were not specified.
+
+Match completion to 90 minutes, a demo substitution, round commitment/table updates and demo backup/reload/import have not yet been reported on the Mac. Next review: finish the match, choose **Complete round & advance league**, inspect **League table**, then export a demo backup and verify reload/import restores the same progress. These pending checks are distinct from the earlier successful Mac exhibition review and automated Linux results.
