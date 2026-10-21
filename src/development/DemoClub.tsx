@@ -1,16 +1,21 @@
 import type { SeasonState } from '../simulation/season';
+import { getClubFinancialSummary, type CareerFinanceState } from '../simulation/career';
 import { readableDate } from '../ui/formatters';
 import { getDemoClubView } from './club-view';
+import { formatDemoMoney } from './finance-format';
 import styles from './DemoPlayers.module.css';
 
-export function DemoClub({ season, onOpenSquad, onOpenMatchday }: {
+export function DemoClub({ season, onOpenSquad, onOpenMatchday, finances = null, onOpenFinances }: {
   season: SeasonState;
   onOpenSquad: () => void;
   onOpenMatchday: () => void;
+  finances?: CareerFinanceState | null;
+  onOpenFinances?: () => void;
 }) {
   const { team, players, selection, standing, nextFixture, basis } = getDemoClubView(season);
   const opponentId = nextFixture?.homeClubId === team.id ? nextFixture.awayClubId : nextFixture?.homeClubId;
   const opponent = season.config.teams.find(club => club.id === opponentId);
+  const financialSummary = finances ? getClubFinancialSummary(finances, team.id) : null;
   return <section aria-label="Demo club overview" className={styles.view}>
     <header className={styles.viewHeading}><div><span className={styles.eyebrow}>Managed demo club</span><h2>My club</h2><p>{team.name} · Development Demo League</p></div><button className={styles.button} onClick={onOpenSquad}>Open squad</button></header>
     <div className={styles.metrics} aria-label="Managed demo club statistics">
@@ -30,6 +35,10 @@ export function DemoClub({ season, onOpenSquad, onOpenMatchday }: {
       </div></section>
     </div>
     <section className={styles.panel} aria-labelledby="demo-club-record-title"><header className={styles.panelHead}><h3 id="demo-club-record-title">League record</h3><span>Committed results only</span></header><div className={styles.record}><div><span>Won</span><strong>{standing.won}</strong></div><div><span>Drawn</span><strong>{standing.drawn}</strong></div><div><span>Lost</span><strong>{standing.lost}</strong></div><div><span>Goals for</span><strong>{standing.goalsFor}</strong></div><div><span>Goals against</span><strong>{standing.goalsAgainst}</strong></div><div><span>Goal difference</span><strong>{standing.goalDifference > 0 ? '+' : ''}{standing.goalDifference}</strong></div></div></section>
-    <p className={styles.note}>Generic demo club. Fixtures, standings, positions and player values describe this practice scenario; no real club information or financial figures are supplied.</p>
+    <section className={styles.panel} aria-labelledby="demo-club-finances-title"><header className={styles.panelHead}><h3 id="demo-club-finances-title">Club finances</h3><span>Original demo figures · GBP</span></header><div className={styles.panelBody}>
+      {financialSummary ? <dl className={styles.facts}><div><dt>Balance</dt><dd>{formatDemoMoney(financialSummary.balanceMinor)}</dd></div><div><dt>Weekly wage commitments</dt><dd>{formatDemoMoney(financialSummary.weeklyWagesMinor)}</dd></div><div><dt>Wage budget remaining</dt><dd>{formatDemoMoney(financialSummary.remainingWageBudgetMinor)}</dd></div></dl> : <p className={styles.note}>Career management can add demo contracts and finances to this saved season without changing match progress.</p>}
+      {onOpenFinances && <button className={`${styles.button} ${styles.spaced}`} onClick={onOpenFinances}>Open finances</button>}
+    </div></section>
+    <p className={styles.note}>Generic demo club. Fixtures, standings, contracts and financial figures describe this practice scenario; no real club information is asserted.</p>
   </section>;
 }

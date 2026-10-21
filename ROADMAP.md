@@ -42,6 +42,14 @@ This milestone does not add transfers, AI squad management, injuries, player dev
 
 ## Milestone 4 — Sustainable careers
 
+The user authorized the first career-management slice on 20 October 2026 after confirming demo squad/player access. Implement contracts, weekly wage commitments, club balance/transfer planning budget/wage budget, calendar-driven payments, a financial ledger and transparent contract renewals. Use labelled generic demo figures while real database research is deferred; no real wages, valuations or club finances are inferred.
+
+This slice uses an independent pure finance/contract engine alongside the unchanged season engine. All clubs obey the same wage, income and affordability rules. Fixed original home-fixture income is credited only when a round's full-time results commit. Wage accrual, paydays and renewal timing must replay without duplicate charges or floating-point accounting errors.
+
+Existing demo version-1 backups remain readable and unchanged until explicit career activation. New career-enabled demos use version 2 with a finance-engine version and recorded activation command boundary; old football progress is preserved and financial history starts at its current date. Calendar/financial decisions save atomically and portable restoration reconstructs both histories. Review contracts, an affordable/refused renewal, a calendar payday, ledger and full backup restoration before calling this first slice ready.
+
+Transfers, offers, valuations, fees, AI contract negotiations, scouting, injuries, suspensions, player development, promotion/relegation and repeated new seasons are not added by this slice. Player profiles should make transfer availability clear. These remaining systems need later implementation and acceptance checks; the first slice does not complete all of Milestone 4.
+
 Incrementally add contracts, finances, transfers, scouting, injuries, suspensions, development and AI management under the same rules as the human manager. Add promotions, relegations and season histories. Use long-run invariants to verify at least ten seasons without inconsistent money, rosters or competitions.
 
 ## Later extensions

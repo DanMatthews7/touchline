@@ -55,9 +55,11 @@ describe('isolated database-free development scenario', () => {
     expect(session.state.results).toHaveLength(10);
     expect(getSeasonTable(session.state).every(row => row.played === 1)).toBe(true);
     const serialized = await repository.export();
-    expect(Object.keys(JSON.parse(serialized) as object)).toEqual(['format', 'schemaVersion', 'engineVersion', 'matchEngineVersion', 'id', 'updatedAt', 'scenario', 'commands']);
+    expect(Object.keys(JSON.parse(serialized) as object)).toEqual(['format', 'schemaVersion', 'engineVersion', 'matchEngineVersion', 'careerEngineVersion', 'id', 'updatedAt', 'scenario', 'careerStartCommandIndex', 'commands']);
     expect(importDemoArchive(serialized)).toEqual(session);
-    expect(session.state).toEqual(replaySeason(createDemoConfig(session.archive.scenario, session.archive.id), session.archive.commands));
+    const footballCommands: SeasonCommand[] = [];
+    for (const command of session.archive.commands) if (command.type !== 'RENEW_CONTRACT') footballCommands.push(command);
+    expect(session.state).toEqual(replaySeason(createDemoConfig(session.archive.scenario, session.archive.id), footballCommands));
     const restoration = new DemoRepository(`${name}-restored`);
     try {
       expect(await restoration.import(serialized)).toEqual(session);
@@ -72,7 +74,7 @@ describe('isolated database-free development scenario', () => {
     const exported = await repository.export();
     for (const changed of [
       { ...session.archive, format: 'touchline-season' },
-      { ...session.archive, schemaVersion: 2 },
+      { ...session.archive, schemaVersion: 999 },
       { ...session.archive, engineVersion: 2 },
       { ...session.archive, matchEngineVersion: 2 },
       { ...session.archive, results: [{ score: 99 }] },

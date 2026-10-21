@@ -67,6 +67,12 @@ The demo reuses the real season/match engines and controlled UI, but its scenari
 
 Database acquisition and provider research are paused until the user returns to them; no subscription or credential is necessary to review the development demo. Later database integration still requires appropriate provenance, dates, coverage and usage rights. Arbitrary downloaded game databases or proprietary ratings are not automatically acceptable imports.
 
+## Development career-management figures
+
+The authorized first Milestone 4 slice adds contracts and finances only to the generic development demo. Per-club opening cash of £5 million, a £1 million transfer planning budget, an £80,000 weekly wage budget, initial wages of £1,000 per player per week and £25,000 per committed home fixture are original scenario inputs. They are not sourced real-world wages, contract terms, club accounts, player valuations or transfer funds that can currently be spent. Contract dates, renewals and ledger transactions are generated game records for generic identities.
+
+New career-enabled demo backups use version 2 and replay the accepted football and financial command history. Version-1 demo backups remain football-only unless explicitly activated at their saved current date, without retroactive wage charges or home-fixture credits. Derived balances and ledger are reconstructed rather than accepted as source facts. This extension stays in the separate development entry/store; normal career/exhibition/real-data formats and the current-squad evidence requirement remain unchanged. See [CAREER_MANAGEMENT.md](docs/CAREER_MANAGEMENT.md) for exact model and compatibility rules.
+
 ## Current-squad gate for real-data season integration
 
 The user's instruction, **“Require verified current club squads first”**, supersedes original-roster comparison seasons. Current-season creation requires actual 2026/27 Premier League membership and complete current club squad coverage as of 16 October 2026, supported by dated authoritative evidence and permitted use. Original allocations, archival associations, synthetic players, a uniform ability baseline and self-declared verification flags cannot establish these facts. Existing exhibitions retain their separate labels and do not satisfy the gate.

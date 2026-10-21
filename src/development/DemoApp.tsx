@@ -1,18 +1,19 @@
 import { Component, useEffect, useRef, useState, type ReactNode } from 'react';
-import type { SeasonCommand } from '../simulation/season';
 import { readableDate } from '../ui/formatters';
 import { SeasonFixtures } from '../ui/season/SeasonFixtures';
 import { SeasonMatchday } from '../ui/season/SeasonMatchday';
 import { SeasonStandings } from '../ui/season/SeasonStandings';
-import type { DemoSession } from './archive';
+import type { DemoCommand, DemoSession } from './archive';
 import { DemoRepository } from './repository';
 import { defaultDemoScenario, DEMO_CLUBS, type DemoScenario } from './scenario';
 import { DemoClub } from './DemoClub';
 import { DemoSquad } from './DemoSquad';
 import { DemoPlayerProfile } from './DemoPlayerProfile';
+import { DemoFinances } from './DemoFinances';
+import type { DemoContractRenewalInput } from './finance-format';
 import styles from './DemoApp.module.css';
 
-type View = 'club' | 'squad' | 'player' | 'fixtures' | 'table' | 'matchday';
+type View = 'club' | 'squad' | 'player' | 'finances' | 'fixtures' | 'table' | 'matchday';
 type Notice = { kind: 'success' | 'error' | 'info'; text: string };
 
 function errorMessage(error: unknown): string {
@@ -136,14 +137,30 @@ function DemoWorkspace() {
     });
   }
 
-  async function command(command: SeasonCommand): Promise<void> {
+  async function command(command: DemoCommand): Promise<void> {
     await operate(async current => {
       const previous = sessionRef.current;
       if (!previous) throw new Error('Start or import a demo season first.');
-      const next = await current.commit(command, new Date().toISOString(), previous.state.commands);
+      const next = await current.commit(command, new Date().toISOString(), previous.archive.commands);
       if (repository.current !== current) return;
       acceptSession(next);
+      if (command.type === 'RENEW_CONTRACT') setNotice({ kind: 'success', text: 'Contract renewed and saved. Future wages now use the agreed weekly amount.' });
     });
+  }
+
+  async function enableCareer(): Promise<void> {
+    await operate(async current => {
+      const previous = sessionRef.current;
+      if (!previous) throw new Error('Start or import a demo season first.');
+      const next = await current.enableCareer(new Date().toISOString(), previous.archive.commands);
+      if (repository.current !== current) return;
+      acceptSession(next);
+      setNotice({ kind: 'success', text: 'Career management enabled from the current date. Your match progress is preserved; earlier wages and income have not been charged or credited.' });
+    });
+  }
+
+  async function renewContract(input: DemoContractRenewalInput): Promise<void> {
+    await command({ type: 'RENEW_CONTRACT', ...input });
   }
 
   async function importBackup(file: File): Promise<void> {
@@ -178,6 +195,7 @@ function DemoWorkspace() {
 
   const disabled = opening || busy;
   const season = session?.state ?? null;
+  const finances = session?.finances ?? null;
   const managedName = season?.config.teams.find(team => team.id === season.config.managedClubId)?.name;
   const nextFixture = season?.fixtures.find(fixture => fixture.round === season.roundIndex + 1 && (fixture.homeClubId === season.config.managedClubId || fixture.awayClubId === season.config.managedClubId));
   const nextOpponentId = nextFixture?.homeClubId === season?.config.managedClubId ? nextFixture?.awayClubId : nextFixture?.homeClubId;
@@ -192,7 +210,7 @@ function DemoWorkspace() {
     <a className={styles.skipLink} href="#demo-content">Skip to demo workspace</a>
     <header className={styles.topbar}>
       <div className={styles.brand}><span className={styles.brandMark} aria-hidden="true">T</span><div><strong>TOUCHLINE</strong><span>Football management / development build</span></div></div>
-      <span className={styles.buildLabel}>Season &amp; match systems</span>
+      <span className={styles.buildLabel}>Career &amp; match systems</span>
     </header>
     <main className={styles.main} id="demo-content" tabIndex={-1} aria-label="Development demo workspace">
       <div className={styles.heading}>
@@ -206,7 +224,7 @@ function DemoWorkspace() {
 
       <aside className={styles.banner} aria-label="Development demo data notice">
         <span className={styles.demoBadge}>Development demo</span>
-        <div><strong>Generic clubs and players · Uniform ability 10/20 · Real database deferred</strong><p>This practice league contains no real club squads or player facts. Its fixtures and results are simulated. Your main game and its saves stay separate.</p></div>
+        <div><strong>Generic clubs and players · Uniform ability 10/20 · Real database deferred</strong><p>This practice league contains no real club squads or player facts. Its fixtures and results are simulated. {finances && 'Contracts, wages and budgets are original demo figures. '}Your main game and its saves stay separate.</p></div>
       </aside>
 
       {notice && <div className={`${styles.notice} ${notice.kind === 'error' ? styles.error : notice.kind === 'success' ? styles.success : ''}`} role={notice.kind === 'error' ? 'alert' : 'status'}>{notice.text}</div>}
@@ -241,14 +259,15 @@ function DemoWorkspace() {
             <div><span>Results committed</span><strong>{season.results.length} / 380</strong></div>
             <div><span>{season.status === 'finished' ? 'Season status' : 'Next opponent'}</span><strong>{season.status === 'finished' ? 'Complete' : nextOpponent ?? 'Round in progress'}</strong></div>
           </div>
-          <nav className={styles.navigation} aria-label="Demo workspace views">{([['club', 'Club'], ['squad', 'Squad'], ['fixtures', 'Fixtures'], ['table', 'League table'], ['matchday', 'Matchday']] as const).map(([item, label]) => {
+          <nav className={styles.navigation} aria-label="Demo workspace views">{([['club', 'Club'], ['squad', 'Squad'], ['finances', 'Finances'], ['fixtures', 'Fixtures'], ['table', 'League table'], ['matchday', 'Matchday']] as const).map(([item, label]) => {
             const active = view === item || (item === 'squad' && view === 'player');
             return <button key={item} className={`${styles.navButton} ${active ? styles.navActive : ''}`} aria-pressed={active} onClick={() => setView(item)}>{label}</button>;
           })}<span>{season.status === 'finished' ? '38 matchweeks completed' : `Matchweek ${season.roundIndex + 1} / 38`}</span></nav>
           <div ref={workspace} className={styles.workspace} aria-busy={busy}>
-            {view === 'club' ? <DemoClub season={season} onOpenSquad={() => openView('squad')} onOpenMatchday={() => openView('matchday')} />
-              : view === 'squad' ? <DemoSquad key={season.config.id} season={season} onOpenPlayer={openPlayer} />
-              : view === 'player' && selectedPlayerId ? <DemoPlayerProfile key={`${season.config.id}-${selectedPlayerId}`} season={season} playerId={selectedPlayerId} onBack={() => openView('squad')} />
+            {view === 'club' ? <DemoClub season={season} finances={finances} onOpenFinances={() => openView('finances')} onOpenSquad={() => openView('squad')} onOpenMatchday={() => openView('matchday')} />
+              : view === 'squad' ? <DemoSquad key={season.config.id} season={season} finances={finances} onOpenPlayer={openPlayer} />
+              : view === 'player' && selectedPlayerId ? <DemoPlayerProfile key={`${season.config.id}-${selectedPlayerId}`} season={season} finances={finances} busy={disabled || showSetup} onRenewContract={renewContract} onEnableCareer={enableCareer} playerId={selectedPlayerId} onBack={() => openView('squad')} />
+              : view === 'finances' ? <DemoFinances season={season} finances={finances} busy={disabled || showSetup} onEnableCareer={enableCareer} />
               : view === 'fixtures' ? <SeasonFixtures key={season.config.id} season={season} busy={disabled || showSetup} onOpenMatchday={() => openView('matchday')} />
               : view === 'table' ? <SeasonStandings season={season} />
               : <SeasonMatchday season={season} busy={disabled || showSetup} onCommand={command} context="demo" />}

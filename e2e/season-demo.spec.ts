@@ -177,6 +177,13 @@ test('explicit demo entry shows generic fixtures and a balanced calendar without
   expect(await table.locator('tbody tr td:nth-child(3)').allTextContents()).toEqual(Array(20).fill('0'));
   const backup = await downloadDemo(page);
   expect(backup.format).toBe('touchline-season-demo');
+  expect(backup.schemaVersion).toBe(2);
+  expect(backup.careerEngineVersion).toBe(1);
+  expect(backup.careerStartCommandIndex).toBe(0);
+  expect(Object.keys(backup).sort()).toEqual([
+    'format', 'schemaVersion', 'engineVersion', 'matchEngineVersion', 'careerEngineVersion',
+    'id', 'updatedAt', 'scenario', 'careerStartCommandIndex', 'commands',
+  ].sort());
   expect(backup.commands).toEqual([]);
   expect(backup).not.toHaveProperty('rosterManifest');
   expect(backup).not.toHaveProperty('snapshot');
@@ -305,7 +312,8 @@ test('club, squad and public player attributes can be explored by keyboard witho
   await expect(workspace(page).getByRole('heading', { name: 'Demo 01 Player 01', exact: true })).toBeVisible();
   await expect(workspace(page).getByText('Demo ability: uniform 10/20', { exact: true })).toBeVisible();
   await expect(workspace(page).locator('[aria-label$=": 10 out of 20, original game estimate"]')).toHaveCount(45);
-  expect(await workspace(page).innerText()).not.toMatch(/\b(?:potential|personality|date of birth|nationality|transfer value|weekly wage)\b/i);
+  // Contract wages are explicit demo game inputs; biographical and hidden data remain absent.
+  expect(await workspace(page).innerText()).not.toMatch(/\b(?:potential|personality|date of birth|nationality|transfer value)\b/i);
   await expect(workspace(page).getByRole('button', { name: /edit attributes|original assessment|editorial override/i })).toHaveCount(0);
   await page.setViewportSize({ width: 1280, height: 1100 });
   await page.screenshot({ path: testInfo.outputPath('touchline-development-demo-player.png'), fullPage: false });

@@ -1,6 +1,6 @@
 # Architecture
 
-Touchline is a local-first, single-player browser application targeting modern macOS on Apple Silicon. Milestones 1 and 2 established typed data, reliable saves and the reviewed exhibition model. Milestone 3 adds a season foundation. The user has deferred database acquisition until next week and authorized continued development through an isolated demo; real-data integration remains pending. The full requirements remain in [GAME_SPEC.md](GAME_SPEC.md).
+Touchline is a local-first, single-player browser application targeting modern macOS on Apple Silicon. Milestones 1 and 2 established typed data, reliable saves and the reviewed exhibition model. Milestone 3 adds a season foundation; Milestone 4's first slice adds contracts and finances to the isolated demo. The user has deferred database acquisition until next week and authorized continued demo development; real-data integration remains pending. The full requirements remain in [GAME_SPEC.md](GAME_SPEC.md).
 
 ## Current implementation plan
 
@@ -9,8 +9,9 @@ Touchline is a local-first, single-player browser application targeting modern m
 3. Build pure scheduling, calendar commands and tables around the same authoritative match engine, with deterministic fixtures and atomic round results.
 4. Bind season progress and career dates through replay-validated archives and transactional persistence, guarding old write paths against inconsistent updates.
 5. Validate the blocked state and independent core with automated fixtures; record actual integrated checks without claiming a verified current-season dataset or completed Milestone 3.
-6. Review the data-backed workflow before later career systems. Transfers, AI squad management, injuries and 2D presentation remain outside scope.
+6. Review the data-backed workflow when a qualifying database is available. The later 20 October authorization permits the first contracts/finances slice through the isolated demo while data acquisition remains deferred. Transfers, AI squad management, injuries and 2D presentation remain later work.
 7. While data acquisition is deferred, offer an explicit development-only season demo with generic labels, separate checkpoints/backups and no source-review claims. Reuse the deterministic core and presentation; exclude this entry from the ordinary production build.
+8. Milestone 4 slice 1, authorized on 20 October, adds a separate pure contract/finance engine and integrates it through the demo's accepted decision timeline. Preserve old football progress, atomic saves and source boundaries while adding original model wages, budgets, paydays, income and renewals.
 
 ## Boundaries
 
@@ -97,6 +98,18 @@ Managed matches retain fifteen-minute decisions. Completing a round simulates th
 Source/configuration/review bindings remain immutable per season ID. Normal progress is append-only; an explicit valid season import can restore an earlier matching backup. Legacy career writes cannot break a season's date, source or club binding. Career-only JSON and exhibition formats stay version 1 but exclude season progress. Use a season backup for the full bound state. [SEASON_ENGINE.md](docs/SEASON_ENGINE.md) documents exact APIs, seeds, limits and transitions.
 
 ## Local runtime and deployment
+
+### Career management slice 1
+
+`src/simulation/career/` owns version-1 contract and finance rules independently of React, storage and wall-clock time. Currency is GBP in safe integer minor units. All clubs use the same rules: weekly wage payments with exact daily accrual, configured home-match income after committed fixtures, and transparent renewal checks for wages, end dates, budget and cash. No real-world financial facts or proprietary ratings are generated.
+
+The development wrapper applies the existing season command first, advances finance time only when its accepted calendar date changes, and credits income only for newly committed full-time fixtures. A renewal changes the finance/contract state at the current date without rewriting prior accrual or football events. One accepted mixed timeline reconstructs both states; the repository writes one checkpoint atomically after validating the complete decision.
+
+Demo backup version 1 remains a football-only format. Version 2 adds `careerEngineVersion`, `careerStartCommandIndex` and mixed season/renewal commands. It regenerates original demo finances at that recorded boundary during replay rather than trusting balances, contracts or a serialized ledger. New demos enable finances from the start. Enabling an existing version-1 demo is explicit: its earlier football commands replay unchanged, finance starts at its current date, and there are no retrospective charges or income. See [CAREER_MANAGEMENT.md](docs/CAREER_MANAGEMENT.md) and [the slice review](docs/MILESTONE_4_REVIEW.md).
+
+Initial demo contract expiry is beyond the generated season. Release/free agency, transfer offers and valuations, negotiations by AI clubs, injuries/development and season rollover remain later slices; this change does not silently add those outcomes to the season engine.
+
+### Application entry and source separation
 
 `npm run dev:demo` selects the Vite `season-demo` development mode on port 5174. `src/main.tsx` loads `src/development/DemoApp.tsx` only when both the development flag and this explicit mode match. The ordinary build removes that branch. Demo scenarios regenerate generic clubs, players and uniform comparison attributes directly as `SeasonConfig`; they are not source snapshots and never go through real-roster evidence validation. The dedicated controller uses the shared fixture, table and matchday views, with a persistent development label. Its separate checkpoint store and `touchline-season-demo` backup reconstruct results from the accepted command log; ordinary career/exhibition databases and formats are not opened. See [DEVELOPMENT_DEMO.md](docs/DEVELOPMENT_DEMO.md).
 
