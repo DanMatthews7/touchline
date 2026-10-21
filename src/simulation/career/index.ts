@@ -5,6 +5,7 @@ export const CAREER_FINANCE_ENGINE_VERSION = 1 as const;
 export const MAX_CAREER_MONEY_MINOR = 1_000_000_000_000_000;
 export const MAX_WEEKLY_WAGE_MINOR = 1_000_000_000;
 export const MAX_FINANCE_ADVANCE_DAYS = 3_653;
+export const CAREER_CONTRACT_NEGOTIATION_VERSION = 1 as const;
 
 export interface CareerContract {
   playerId: string;
@@ -12,6 +13,8 @@ export interface CareerContract {
   startDate: string;
   endDate: string;
   weeklyWageMinor: number;
+  /** Created by versioned negotiation decisions, never supplied by an initial config. */
+  negotiation?: { referenceWeeklyWageMinor: number; sequence: number };
 }
 export interface CareerClubFinanceConfig {
   clubId: string;
@@ -37,10 +40,11 @@ export interface CareerFinanceTransaction {
   id: string;
   date: string;
   clubId: string;
-  kind: 'wages' | 'matchday-income';
+  kind: 'wages' | 'matchday-income' | 'signing-bonus';
   amountMinor: number;
   balanceAfterMinor: number;
   fixtureId: string | null;
+  playerId?: string;
 }
 export interface CareerFinanceState {
   engineVersion: typeof CAREER_FINANCE_ENGINE_VERSION;
@@ -63,6 +67,7 @@ export interface ClubFinancialSummary {
   remainingWageBudgetMinor: number;
   totalIncomeMinor: number;
   totalSpendingMinor: number;
+  totalBonusesMinor: number;
   accruedWagesMinor: number;
   nextPayDate: string;
 }
@@ -73,6 +78,22 @@ export interface CareerContractRenewal {
   endDate: string;
 }
 export interface CareerMatchdayIncome { clubId: string; fixtureId: string; date: string }
+export interface CareerContractOffer extends CareerContractRenewal {
+  negotiationVersion: typeof CAREER_CONTRACT_NEGOTIATION_VERSION;
+  signingBonusMinor: number;
+}
+/** Trusted career/source context; unknown birth dates must stay null. */
+export interface CareerNegotiationContext { birthDate: string | null }
+export interface CareerContractOfferAssessment {
+  accepted: boolean;
+  explanation: string;
+  ageYears: number | null;
+  financialPressure: boolean;
+  concessionPercent: number;
+  minimumWeeklyWageMinor: number;
+  requiredSigningBonusMinor: number;
+  projectedWeeklyWagesMinor: number;
+}
 
 const identifier = z.string().min(1).max(180).regex(/^[A-Za-z0-9][A-Za-z0-9:._-]*$/)
   .refine(value => !['__proto__', 'constructor', 'prototype'].includes(value), 'Unsupported identifier.');
@@ -167,6 +188,7 @@ export function advanceCareerFinances(state: CareerFinanceState, toDateInput: st
   if (days > MAX_FINANCE_ADVANCE_DAYS) throw new Error('A single financial calendar decision cannot exceed ten years.');
   const next = structuredClone(state);
   const contracts = Object.values(next.contracts);
+  const bonusTotals = Object.fromEntries(Object.keys(next.clubs).map(clubId => [clubId, next.ledger.reduce((total, entry) => entry.clubId === clubId && entry.kind === 'signing-bonus' ? safeAmount(total - entry.amountMinor) : total, 0)]));
   while (next.currentDate < toDate) {
     for (const contract of contracts) {
       if (!active(contract, next.currentDate)) continue;
@@ -178,6 +200,7 @@ export function advanceCareerFinances(state: CareerFinanceState, toDateInput: st
       for (const club of Object.values(next.clubs)) {
         const amount = Math.floor(club.accruedWageNumerator / 7);
         if (amount > 0) {
+          safeAmount(club.wagesPaidMinor + amount + bonusTotals[club.clubId]!);
           club.balanceMinor = safeAmount(club.balanceMinor - amount);
           club.wagesPaidMinor = safeAmount(club.wagesPaidMinor + amount);
           next.ledger.push({
@@ -207,7 +230,92 @@ export function renewCareerContract(state: CareerFinanceState, input: CareerCont
   const commitment = safeAmount(weeklyWages(state, renewal.clubId) - previousWage + renewal.weeklyWageMinor);
   if (commitment > club.weeklyWageBudgetMinor) throw new Error('The renewal exceeds the club\'s weekly wage budget.');
   if (club.balanceMinor < commitment) throw new Error('The club cannot fund one full week of the proposed wage commitments.');
-  return { ...state, contracts: { ...state.contracts, [renewal.playerId]: { ...contract, weeklyWageMinor: renewal.weeklyWageMinor, endDate: renewal.endDate } } };
+  return { ...state, contracts: { ...state.contracts, [renewal.playerId]: {
+    ...contract, weeklyWageMinor: renewal.weeklyWageMinor, endDate: renewal.endDate,
+    ...(contract.negotiation ? { negotiation: { ...contract.negotiation, referenceWeeklyWageMinor: Math.max(contract.negotiation.referenceWeeklyWageMinor, renewal.weeklyWageMinor) } } : {}),
+  } } };
+}
+
+const offerSchema = z.object({
+  negotiationVersion: z.literal(CAREER_CONTRACT_NEGOTIATION_VERSION), clubId: identifier, playerId: identifier,
+  weeklyWageMinor: wage, endDate: date, signingBonusMinor: positiveMoney,
+}).strict();
+const negotiationContextSchema = z.object({ birthDate: date.nullable() }).strict();
+
+function daysBetween(from: string, to: string): number {
+  return (Date.parse(`${to}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 86_400_000;
+}
+function ageOn(birthDate: string | null, currentDate: string): number | null {
+  if (birthDate === null) return null;
+  if (birthDate > currentDate) throw new Error('A player birth date cannot follow the current career date.');
+  const years = Number(currentDate.slice(0, 4)) - Number(birthDate.slice(0, 4));
+  const age = years - (currentDate.slice(5) < birthDate.slice(5) ? 1 : 0);
+  if (age > 120) throw new Error('The player birth date is outside the supported negotiation range.');
+  return age;
+}
+
+/** Version-1 original negotiation policy; a manager cannot declare a circumstance. */
+export function assessCareerContractOffer(state: CareerFinanceState, input: CareerContractOffer, contextInput: CareerNegotiationContext): CareerContractOfferAssessment {
+  const offer = offerSchema.parse(input);
+  const context = negotiationContextSchema.parse(contextInput);
+  const club = requireClub(state, offer.clubId);
+  const contract = Object.hasOwn(state.contracts, offer.playerId) ? state.contracts[offer.playerId] : undefined;
+  if (!contract || contract.clubId !== offer.clubId) throw new Error('Negotiate only with a player contracted to this club.');
+  const ageYears = ageOn(context.birthDate, state.currentDate);
+  const currentBill = weeklyWages(state, offer.clubId);
+  const financialPressure = currentBill > 0 && BigInt(club.balanceMinor) < BigInt(currentBill) * 13n;
+  const extensionDays = daysBetween(contract.endDate, offer.endDate);
+  const ageConcession = ageYears !== null && ageYears >= 35 ? 20 : ageYears !== null && ageYears >= 32 ? 10 : 0;
+  const concessionPercent = extensionDays >= 365 ? Math.max(ageConcession, financialPressure ? 10 : 0) : 0;
+  const reference = Math.max(contract.weeklyWageMinor, contract.negotiation?.referenceWeeklyWageMinor ?? contract.weeklyWageMinor);
+  const minimumWeeklyWageMinor = Number((BigInt(reference) * BigInt(100 - concessionPercent) + 99n) / 100n);
+  const previousWage = active(contract, state.currentDate) ? contract.weeklyWageMinor : 0;
+  const projectedWeeklyWagesMinor = safeAmount(currentBill - previousWage + offer.weeklyWageMinor);
+  const shortfall = offer.weeklyWageMinor < contract.weeklyWageMinor ? Math.max(0, minimumWeeklyWageMinor - offer.weeklyWageMinor) : 0;
+  const contractDays = Math.max(0, daysBetween(state.currentDate, offer.endDate) + 1);
+  const requiredSigningBonusMinor = safeAmount(Number((BigInt(shortfall) * BigInt(contractDays) + 6n) / 7n));
+  const result: CareerContractOfferAssessment = {
+    accepted: false, explanation: '', ageYears, financialPressure, concessionPercent,
+    minimumWeeklyWageMinor, requiredSigningBonusMinor, projectedWeeklyWagesMinor,
+  };
+  const refuse = (explanation: string): CareerContractOfferAssessment => ({ ...result, explanation });
+  if (state.currentDate < contract.startDate) return refuse('A contract cannot be negotiated before its start date.');
+  if (offer.endDate <= contract.endDate || offer.endDate <= state.currentDate) return refuse('The offer must extend the existing contract expiry.');
+  if (offer.endDate > fiveYearsAfter(state.currentDate)) return refuse('The offered contract cannot extend beyond five years from today.');
+  if (projectedWeeklyWagesMinor > club.weeklyWageBudgetMinor) return refuse('The offer exceeds the club\'s weekly wage budget.');
+  if (offer.signingBonusMinor < requiredSigningBonusMinor) {
+    const circumstances = concessionPercent > 0 ? `The available ${concessionPercent}% concession does not cover this wage reduction.` : 'No supported age or financial circumstance permits an uncompensated wage reduction.';
+    return refuse(`Player declined. ${circumstances} Increase the weekly wage or fund the guaranteed signing bonus shown for the full offered term.`);
+  }
+  safeAmount(getClubFinancialSummary(state, offer.clubId).totalSpendingMinor + offer.signingBonusMinor);
+  if (BigInt(club.balanceMinor) - BigInt(offer.signingBonusMinor) < BigInt(projectedWeeklyWagesMinor)) return refuse('The club cannot fund the signing bonus and one full week of the proposed wage commitments.');
+  const reason = offer.weeklyWageMinor < contract.weeklyWageMinor
+    ? requiredSigningBonusMinor > 0 ? 'the guaranteed signing bonus compensates the remaining wage reduction over the full offered term'
+      : ageConcession >= concessionPercent && ageConcession > 0 ? `the known player age supports up to a ${concessionPercent}% concession in exchange for at least one extra contract year`
+        : 'the club has less than thirteen weeks of payroll in cash and the extra contract year supports a limited concession'
+    : 'the proposed guaranteed terms meet the player and club requirements';
+  return { ...result, accepted: true, explanation: `Player accepts: ${reason}.` };
+}
+
+/** Apply an accepted offer and its real upfront cost atomically as one transition. */
+export function negotiateCareerContract(state: CareerFinanceState, input: CareerContractOffer, context: CareerNegotiationContext): CareerFinanceState {
+  const offer = offerSchema.parse(input);
+  const assessment = assessCareerContractOffer(state, offer, context);
+  if (!assessment.accepted) throw new Error(assessment.explanation);
+  const club = requireClub(state, offer.clubId);
+  const contract = state.contracts[offer.playerId]!;
+  const sequence = (contract.negotiation?.sequence ?? 0) + 1;
+  if (!Number.isSafeInteger(sequence)) throw new Error('The contract negotiation sequence exceeds the supported range.');
+  const referenceWeeklyWageMinor = Math.max(contract.weeklyWageMinor, contract.negotiation?.referenceWeeklyWageMinor ?? 0, offer.weeklyWageMinor);
+  const balanceMinor = safeAmount(club.balanceMinor - offer.signingBonusMinor);
+  const id = `signing-bonus:${offer.clubId}:${offer.playerId}:${sequence}`;
+  if (offer.signingBonusMinor > 0 && state.ledger.some(entry => entry.id === id)) throw new Error('This contract negotiation already has a signing-bonus receipt.');
+  return {
+    ...state,
+    contracts: { ...state.contracts, [offer.playerId]: { ...contract, weeklyWageMinor: offer.weeklyWageMinor, endDate: offer.endDate, negotiation: { referenceWeeklyWageMinor, sequence } } },
+    clubs: offer.signingBonusMinor > 0 ? { ...state.clubs, [offer.clubId]: { ...club, balanceMinor } } : state.clubs,
+    ledger: offer.signingBonusMinor > 0 ? [...state.ledger, { id, date: state.currentDate, clubId: offer.clubId, kind: 'signing-bonus', amountMinor: -offer.signingBonusMinor, balanceAfterMinor: balanceMinor, fixtureId: null, playerId: offer.playerId }] : state.ledger,
+  };
 }
 
 /** Credit one configured home-fixture receipt, after that fixture is committed. */
@@ -234,11 +342,12 @@ export function recordCareerMatchdayIncome(state: CareerFinanceState, input: Car
 export function getClubFinancialSummary(state: CareerFinanceState, clubId: string): ClubFinancialSummary {
   const club = requireClub(state, clubId);
   const wages = weeklyWages(state, clubId);
+  const totalBonusesMinor = state.ledger.reduce((total, entry) => entry.clubId === clubId && entry.kind === 'signing-bonus' ? safeAmount(total - entry.amountMinor) : total, 0);
   return {
     clubId, currency: state.currency, balanceMinor: club.balanceMinor, transferBudgetMinor: club.transferBudgetMinor,
     weeklyWageBudgetMinor: club.weeklyWageBudgetMinor, weeklyWagesMinor: wages,
     remainingWageBudgetMinor: safeAmount(club.weeklyWageBudgetMinor - wages),
-    totalIncomeMinor: club.incomeReceivedMinor, totalSpendingMinor: club.wagesPaidMinor,
+    totalIncomeMinor: club.incomeReceivedMinor, totalSpendingMinor: safeAmount(club.wagesPaidMinor + totalBonusesMinor), totalBonusesMinor,
     accruedWagesMinor: Math.floor(club.accruedWageNumerator / 7), nextPayDate: state.nextPayDate,
   };
 }

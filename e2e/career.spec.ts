@@ -179,7 +179,7 @@ test('generic contracts renew within the wage budget and an unaffordable offer p
   await expect(workspace(page).getByLabel('Contract expiry', { exact: true })).toContainText('2029');
   const renewed = await downloadArchive(page);
   expect(renewed.commands).toHaveLength(initial.commands.length + 1);
-  expect(renewed.commands.at(-1)).toMatchObject({ type: 'RENEW_CONTRACT', playerId: 'demo-player-01-01', weeklyWageMinor: 120_000, endDate: '2029-10-16' });
+  expect(renewed.commands.at(-1)).toMatchObject({ type: 'NEGOTIATE_CONTRACT', negotiationVersion: 1, playerId: 'demo-player-01-01', weeklyWageMinor: 120_000, endDate: '2029-10-16', signingBonusMinor: 0 });
   await openView(page, 'Finances');
   await expectMoney(page, 'Weekly wage commitments', 16_200);
   await expectMoney(page, 'Wage budget remaining', 63_800);
@@ -198,6 +198,59 @@ test('generic contracts renew within the wage budget and an unaffordable offer p
   await expectMoney(page, 'Weekly wage', 1_200);
   await expect(workspace(page).getByLabel('Contract expiry', { exact: true })).toContainText('2029');
   expect(await downloadArchive(page)).toEqual(renewed);
+  await expectIsolatedStorage(page);
+});
+
+test('a lower wage needs accepted circumstances and a funded signing bonus survives repeated restore without duplicate payment', async ({ page, browser, observe }) => {
+  test.setTimeout(90_000);
+  await startCareer(page);
+  const initial = await downloadArchive(page);
+  await openPlayer(page);
+  const renewal = workspace(page).getByRole('form', { name: 'Renew player contract', exact: true });
+  await renewal.getByRole('textbox', { name: 'New weekly wage (£)', exact: true }).fill('900');
+  await renewal.getByLabel('New contract expiry', { exact: true }).fill('2029-10-16');
+  await renewal.getByRole('textbox', { name: 'Guaranteed signing bonus (£)', exact: true }).fill('0');
+  await renewal.getByRole('button', { name: 'Renew contract', exact: true }).click();
+  await expect(workspace(page).getByRole('alert')).toBeVisible();
+  await expectMoney(page, 'Weekly wage', 1_000);
+  expect(await downloadArchive(page)).toEqual(initial);
+  // The manager cannot simply label a healthy club as distressed or invent a player age.
+  await expect(renewal.getByRole('checkbox')).toHaveCount(0);
+  await renewal.getByRole('textbox', { name: 'Guaranteed signing bonus (£)', exact: true }).fill('20000');
+  await renewal.getByRole('button', { name: 'Renew contract', exact: true }).click();
+  await expectMoney(page, 'Weekly wage', 900);
+  const accepted = await downloadArchive(page);
+  expect(accepted.commands.at(-1)).toMatchObject({ type: 'NEGOTIATE_CONTRACT', negotiationVersion: 1, playerId: 'demo-player-01-01', weeklyWageMinor: 90_000, endDate: '2029-10-16', signingBonusMinor: 2_000_000 });
+  await openView(page, 'Finances');
+  await expectMoney(page, 'Club balance', 4_980_000);
+  await expectMoney(page, 'Weekly wage commitments', 15_900);
+  await expectMoney(page, 'Spending paid', 20_000);
+  await expectMoney(page, 'Signing bonuses paid', 20_000);
+  await expect(ledger(page).getByRole('cell', { name: 'Signing bonus', exact: true })).toHaveCount(1);
+  const movements = await ledger(page).locator('tbody tr').allTextContents();
+  await page.reload();
+  await expectProgress(page, 0);
+  await openView(page, 'Finances');
+  await expectMoney(page, 'Club balance', 4_980_000);
+  expect(await ledger(page).locator('tbody tr').allTextContents()).toEqual(movements);
+  expect(await downloadArchive(page)).toEqual(accepted);
+  const fresh = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  try {
+    const restored = await fresh.newPage();
+    await observe(restored);
+    await restored.goto(APP_URL);
+    await expect(workspace(restored).getByRole('heading', { name: 'Start a demo season', exact: true })).toBeVisible();
+    for (let restores = 0; restores < 2; restores++) {
+      await importArchive(restored, accepted);
+      await expectProgress(restored, 0);
+      await openView(restored, 'Finances');
+      await expectMoney(restored, 'Club balance', 4_980_000);
+      await expectMoney(restored, 'Signing bonuses paid', 20_000);
+      expect(await ledger(restored).locator('tbody tr').allTextContents()).toEqual(movements);
+      expect(await downloadArchive(restored)).toEqual(accepted);
+    }
+    await expectIsolatedStorage(restored);
+  } finally { await fresh.close(); }
   await expectIsolatedStorage(page);
 });
 

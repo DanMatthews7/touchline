@@ -144,7 +144,7 @@ function DemoWorkspace() {
       const next = await current.commit(command, new Date().toISOString(), previous.archive.commands);
       if (repository.current !== current) return;
       acceptSession(next);
-      if (command.type === 'RENEW_CONTRACT') setNotice({ kind: 'success', text: 'Contract renewed and saved. Future wages now use the agreed weekly amount.' });
+      if (command.type === 'RENEW_CONTRACT' || command.type === 'NEGOTIATE_CONTRACT') setNotice({ kind: 'success', text: 'Contract offer accepted and saved. Future wages now use the agreed weekly amount.' });
     });
   }
 
@@ -160,7 +160,7 @@ function DemoWorkspace() {
   }
 
   async function renewContract(input: DemoContractRenewalInput): Promise<void> {
-    await command({ type: 'RENEW_CONTRACT', ...input });
+    await command({ type: 'NEGOTIATE_CONTRACT', negotiationVersion: 1, ...input });
   }
 
   async function importBackup(file: File): Promise<void> {

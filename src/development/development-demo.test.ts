@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ALL_ATTRIBUTE_PATHS, getAttributeValue } from '../domain/attributes';
 import { getSeasonTable, replaySeason, type SeasonCommand } from '../simulation/season';
 import * as seasonEngine from '../simulation/season';
-import { createDemoArchive, importDemoArchive, MAX_DEMO_ARCHIVE_BYTES, MAX_DEMO_COMMANDS } from './archive';
+import { createDemoArchive, importDemoArchive, isDemoFinanceCommand, MAX_DEMO_ARCHIVE_BYTES, MAX_DEMO_COMMANDS } from './archive';
 import { DEMO_CLUBS, createDemoConfig, defaultDemoScenario, parseDemoScenario } from './scenario';
 import { DEMO_DATABASE_NAME, DemoConflictError, DemoRepository } from './repository';
 
@@ -58,7 +58,7 @@ describe('isolated database-free development scenario', () => {
     expect(Object.keys(JSON.parse(serialized) as object)).toEqual(['format', 'schemaVersion', 'engineVersion', 'matchEngineVersion', 'careerEngineVersion', 'id', 'updatedAt', 'scenario', 'careerStartCommandIndex', 'commands']);
     expect(importDemoArchive(serialized)).toEqual(session);
     const footballCommands: SeasonCommand[] = [];
-    for (const command of session.archive.commands) if (command.type !== 'RENEW_CONTRACT') footballCommands.push(command);
+    for (const command of session.archive.commands) if (!isDemoFinanceCommand(command)) footballCommands.push(command);
     expect(session.state).toEqual(replaySeason(createDemoConfig(session.archive.scenario, session.archive.id), footballCommands));
     const restoration = new DemoRepository(`${name}-restored`);
     try {

@@ -4,7 +4,9 @@ A local-first football management game for modern browsers, targeting macOS on A
 
 ## Milestone 4 — contracts and finances
 
-The development demo now includes player contract dates, weekly wages and renewals, club cash and budgets, automatic weekly wage payments, fixed home-match income and transaction history. **Squad** shows wages/expiry; open a player for **Contract**, or choose **Finances** for the club accounts. All figures are original generic demo inputs. Transfers, offers and valuations are a later slice.
+The development demo now includes player contract dates, weekly wages and negotiated renewals, club cash and budgets, automatic weekly wage payments, fixed home-match income and transaction history. **Squad** shows wages/expiry; open a player for **Contract**, or choose **Finances** for the club accounts. All figures are original generic demo inputs. Transfer offers and valuations are a later slice.
+
+Lower-wage offers are assessed against the player's circumstances and guaranteed package. A funded **Guaranteed signing bonus (£)** can compensate for a lower weekly wage; the preview shows the required amount and explains acceptance or refusal. Genuine financial pressure can support a limited concession with a longer contract. The pure policy also supports known older ages, but demo ages remain unknown. Bonuses debit cash immediately and appear in Finances; performance bonuses are later work. Historical renewals and saved match progress retain their meaning.
 
 Existing demo saves keep their football progress. Open **Finances → Enable career management** to start financial history at the saved current date without retroactive wages or income. New demo seasons enable these systems automatically. Export a backup before updating or importing an earlier checkpoint. [CAREER_MANAGEMENT.md](docs/CAREER_MANAGEMENT.md) describes the model; [MILESTONE_4_REVIEW.md](docs/MILESTONE_4_REVIEW.md) records checks and the Mac review steps.
 
@@ -16,7 +18,7 @@ Open **Fixtures**, **Competitions**, or **Matchday → League season** to inspec
 
 The generated game calendar has 38 weekly rounds and 380 fixtures. It is not the official Premier League fixture list; its dates and final table tie-break are original game rules. [SEASON_ENGINE.md](docs/SEASON_ENGINE.md) explains the implemented foundation. [The Milestone 3 review](docs/MILESTONE_3_REVIEW.md) distinguishes code checks from the unresolved data gate and unreviewed Mac workflow. Existing exhibitions remain under **Matchday → Exhibition**.
 
-The contracts/finances slice passes TypeScript, all 243 unit/integration tests across 24 files, and the production build. All twelve demo browser workflows pass, including renewals, payroll, legacy activation and financial backup restoration; eighteen accessibility scans found no serious/critical issues. A fresh production-boundary check passes, and production assets remain identical to the earlier build. The last full production browser run passed all fifteen workflows, including the complete 38-round season. [The Milestone 4 review](docs/MILESTONE_4_REVIEW.md) records exact dates and coverage. These checks do not supply or verify real current squads.
+The conditional-wage update passes TypeScript, all 257 unit/integration tests across 26 files, and the production build. All thirteen demo browser workflows pass, including refused/funded wage cuts, bonus accounting, payroll, legacy activation and financial backup restoration; eighteen accessibility scans found no serious/critical issues. A fresh production-boundary check passes, and production assets remain identical to the earlier build. The last full production browser run passed all fifteen workflows, including the complete 38-round season. [The Milestone 4 review](docs/MILESTONE_4_REVIEW.md) records exact dates and coverage. These checks do not supply or verify real current squads.
 
 ## Run locally
 

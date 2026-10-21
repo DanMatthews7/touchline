@@ -1,9 +1,9 @@
 import {
   CAREER_FINANCE_ENGINE_VERSION, MAX_FINANCE_ADVANCE_DAYS, advanceCareerFinances, createCareerFinances,
-  recordCareerMatchdayIncome, renewCareerContract, type CareerFinanceState,
+  negotiateCareerContract, recordCareerMatchdayIncome, renewCareerContract, type CareerFinanceState,
 } from '../simulation/career';
 import { addSeasonDays, applySeasonCommand, type SeasonState } from '../simulation/season';
-import type { DemoCommand } from './commands';
+import { isDemoFinanceCommand, type DemoCommand } from './commands';
 
 /** Version-1 career inputs for generic demo clubs only, never real financial facts. */
 export const DEMO_CAREER_INPUTS = Object.freeze({
@@ -48,12 +48,11 @@ export function createDemoFinances(season: SeasonState): CareerFinanceState {
 
 /** Football and finance changes are prepared together before a checkpoint write. */
 export function applyDemoDecision(state: SeasonState, finances: CareerFinanceState | null, command: DemoCommand): { state: SeasonState; finances: CareerFinanceState | null } {
-  if (command.type === 'RENEW_CONTRACT') {
+  if (isDemoFinanceCommand(command)) {
     if (!finances) throw new Error('Enable career management before renewing a demo contract.');
-    const next = renewCareerContract(finances, {
-      clubId: state.config.managedClubId, playerId: command.playerId,
-      weeklyWageMinor: command.weeklyWageMinor, endDate: command.endDate,
-    });
+    const terms = { clubId: state.config.managedClubId, playerId: command.playerId, weeklyWageMinor: command.weeklyWageMinor, endDate: command.endDate };
+    const next = command.type === 'RENEW_CONTRACT' ? renewCareerContract(finances, terms)
+      : negotiateCareerContract(finances, { ...terms, negotiationVersion: command.negotiationVersion, signingBonusMinor: command.signingBonusMinor }, { birthDate: null });
     return { state, finances: next };
   }
   const result = applySeasonCommand(state, command);

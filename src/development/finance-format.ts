@@ -2,6 +2,7 @@ export interface DemoContractRenewalInput {
   playerId: string;
   weeklyWageMinor: number;
   endDate: string;
+  signingBonusMinor: number;
 }
 
 const poundsFormatter = new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', minimumFractionDigits: 0, maximumFractionDigits: 0 });
@@ -13,12 +14,12 @@ export function formatDemoMoney(amountMinor: number): string {
 }
 
 /** Parse typed pounds without floating-point multiplication or permissive exponents. */
-export function parseDemoMoneyInput(input: string): number {
+export function parseDemoMoneyInput(input: string, field: 'weekly wage' | 'signing bonus' = 'weekly wage'): number {
   const value = input.trim();
-  if (!/^\d+(?:\.\d{1,2})?$/.test(value)) throw new Error('Enter a weekly wage in pounds, with at most two decimal places.');
+  if (!/^\d+(?:\.\d{1,2})?$/.test(value)) throw new Error(`Enter a ${field} in pounds, with at most two decimal places.`);
   const [pounds, pennies = ''] = value.split('.');
   const amount = BigInt(pounds!) * 100n + BigInt(pennies.padEnd(2, '0'));
-  if (amount > BigInt(Number.MAX_SAFE_INTEGER)) throw new Error('This wage is too large.');
+  if (amount > BigInt(Number.MAX_SAFE_INTEGER)) throw new Error(`This ${field} is too large.`);
   return Number(amount);
 }
 

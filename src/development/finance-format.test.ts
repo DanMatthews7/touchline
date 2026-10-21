@@ -16,6 +16,12 @@ describe('contract money input', () => {
     }
   });
 
+  it('reports signing bonus input errors using the correct field name', () => {
+    expect(parseDemoMoneyInput('12000.50', 'signing bonus')).toBe(1200050);
+    expect(() => parseDemoMoneyInput('12.345', 'signing bonus')).toThrow('Enter a signing bonus');
+    expect(() => parseDemoMoneyInput('90071992547409.92', 'signing bonus')).toThrow('This signing bonus is too large.');
+  });
+
   it('displays exact pennies for balances, including negative and very large values', () => {
     expect(formatDemoMoney(120050)).toBe('£1,200.50');
     expect(formatDemoMoney(-1)).toBe('-£0.01');

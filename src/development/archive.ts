@@ -5,8 +5,8 @@ import { CAREER_FINANCE_ENGINE_VERSION, type CareerFinanceState } from '../simul
 import { createDemoConfig, parseDemoScenario, type DemoScenario } from './scenario';
 import { assertPlainDemoData } from './validation';
 import { applyDemoDecision, createDemoFinances } from './career-session';
-import { parseDemoCommand, type DemoCommand } from './commands';
-export { parseDemoCommand, type DemoCommand, type DemoContractRenewal } from './commands';
+import { isDemoFinanceCommand, parseDemoCommand, type DemoCommand } from './commands';
+export { parseDemoCommand, isDemoFinanceCommand, type DemoCommand, type DemoContractRenewal, type DemoNegotiatedContract } from './commands';
 
 export const DEMO_ARCHIVE_FORMAT = 'touchline-season-demo' as const;
 export const MAX_DEMO_ARCHIVE_BYTES = 16 * 1024 * 1024;
@@ -65,7 +65,7 @@ export function parseDemoArchiveEnvelope(input: unknown): DemoArchive {
   } else {
     const commands = parseDemoCommands(fields.commands);
     if (fields.careerStartCommandIndex > commands.length) throw new Error('Career activation cannot follow the end of the demo command log.');
-    if (commands.slice(0, fields.careerStartCommandIndex).some(command => command.type === 'RENEW_CONTRACT')) throw new Error('A contract renewal cannot precede career activation.');
+    if (commands.slice(0, fields.careerStartCommandIndex).some(isDemoFinanceCommand)) throw new Error('A contract decision cannot precede career activation.');
     archive = { format: base.format, schemaVersion: 2, engineVersion: base.engineVersion, matchEngineVersion: base.matchEngineVersion, careerEngineVersion: CAREER_FINANCE_ENGINE_VERSION, id: base.id, updatedAt: base.updatedAt, scenario: base.scenario, careerStartCommandIndex: fields.careerStartCommandIndex, commands };
   }
   assertDemoArchiveSize(archive);

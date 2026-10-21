@@ -3,7 +3,7 @@ import { CAREER_FINANCE_ENGINE_VERSION } from '../simulation/career';
 import {
   createCareerDemoArchive, assertDemoArchiveSize, exportDemoArchive, importDemoArchive,
   MAX_DEMO_COMMANDS, parseDemoCommand, parseDemoCommands, parseDemoTimestamp, replayDemoArchive,
-  type DemoArchive, type DemoCommand, type DemoSession,
+  isDemoFinanceCommand, type DemoArchive, type DemoCommand, type DemoSession,
 } from './archive';
 import { applyDemoDecision, createDemoFinances } from './career-session';
 import type { DemoScenario } from './scenario';
@@ -76,7 +76,7 @@ export class DemoRepository {
     const result = applyDemoDecision(base.state, base.finances, command);
     let archive: DemoArchive;
     if (base.archive.schemaVersion === 1) {
-      if (command.type === 'RENEW_CONTRACT') throw new Error('Enable career management before renewing a demo contract.');
+      if (isDemoFinanceCommand(command)) throw new Error('Enable career management before renewing a demo contract.');
       archive = { ...base.archive, updatedAt, commands: [...base.archive.commands, structuredClone(command)] };
     } else archive = { ...base.archive, updatedAt, commands: [...base.archive.commands, structuredClone(command)] };
     return this.writePrepared(stored, { archive, state: result.state, finances: result.finances });
